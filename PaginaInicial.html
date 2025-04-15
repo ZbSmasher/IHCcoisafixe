@@ -3,9 +3,154 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presidência da República</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        <li><a href="#">Administrações</a></li>
+                        <li><a href="#">Presidente</a></li>
+                        <li><a href="#">Eleições</a></li>                        
+</ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#">Notícias</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        
+    </header>
+    
+    <section class="hero-carousel">
+        <section class="hero-carousel">
+            <div class="carousel">
+                <div class="slide active" style="background-image: url('photos/photo1.jpg');">
+                    <div class="hero-content">
+                        <h1>O Coração da Democracia</h1>
+                        <p>Onde as decisões que moldam o país ganham voz e forma</p>
+                        <a href="#" class="btn">Saber Mais</a>
+                    </div>
+                </div>
+            </div>        
+            <div class="slide" style="background-image: url('photos/photo2.jpg');">
+                <div class="hero-content">
+                    <h1>Liderança e Representação</h1>
+                    <p>O papel dos nossos representantes na construção do futuro</p>
+                    <a href="#" class="btn">Ver Mais</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('photos/photo3.png');">
+                <div class="hero-content">
+                    <h1>O Poder do Voto</h1>
+                    <p>A base da democracia começa na sua escolha</p>
+                    <a href="#" class="btn">Saiba como Votar</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('photos/photo4.jpg');">
+                <div class="hero-content">
+                    <h1>Notícias</h1>
+                    <p>Fique a par dos acontecimentos mais relevantes</p>
+                    <a href="#" class="btn">Ver Mais</a>
+                </div>
+            </div>
+            
+    
+            <!-- Botões -->
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </section>
+    
+    
+    <main class="container">
+        <h2 class="section-title">Últimas Notícias</h2>
+        
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="news-content">
+                    <div class="news-date">15 Junho 2023</div>
+                    <h3 class="news-title">Presidente Anuncia Nova Iniciativa</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.</p>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="news-content">
+                    <div class="news-date">12 Junho 2023</div>
+                    <h3 class="news-title">Reunião de Conselho de Ministros</h3>
+                    <p>Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula.</p>
+                </div>
+            </div>
+            
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://via.placeholder.com/400x300');"></div>
+                <div class="news-content">
+                    <div class="news-date">8 Junho 2023</div>
+                    <h3 class="news-title">Resultados da Cimeira Internacional</h3>
+                    <p>Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
+            </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-</body>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            let current = 0;
+    
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) slide.classList.add('active');
+                });
+            }
+    
+            prevBtn.addEventListener('click', () => {
+                current = (current - 1 + slides.length) % slides.length;
+                showSlide(current);
+            });
+    
+            nextBtn.addEventListener('click', () => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            });
+    
+            // Auto-slide (opcional)
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }, 7000); // muda a cada 7 segundos
+        });
+    </script>
 </html>
