@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesa de Voto - Inscrição</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+
+        .card-img {
+            width: 90%;
+            height: 350px;
+            object-fit: cover;
+            padding: 40px 0px 60px 60px;
+        }
+
+
+        /* Animações adicionais */
+        .fade-in {
+            animation: fadeIn 2s ease forwards;
+            opacity: 0;
+        }
+
+        .slide-up {
+            animation: slideUp 1s ease forwards;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .icon-bounce {
+            animation: bounce 2s infinite;
+            margin-left: 10px;
+            font-size: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        
+                        <a href="#" id="admin-btn" data-lucide="menu" class="logo">MenuImage</a>            
+                    
+                    </ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" data-lucide="languages" >Notícias</a></li>
+                        <li><a href="#" data-lucide="search" >Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" style="background: var(--light-gray); height: auto; padding: 60px 20px; text-align: center;">
+            <div class="container fade-in">
+
+
+                <h1 class="slide-up" style="font-size: 2.8rem; margin-bottom: 20px;">Junta-te à Mesa de Voto</h1>
+
+                <p class="fade-in" style="font-size: 1.2rem; margin-bottom: 40px; color: var(--dark-gray);">
+                    Participa ativamente na construção da democracia. Sê parte da história, sê parte da mudança!
+                </p>
+
+                <form id="inscricao-form" class="slide-up" style="max-width: 500px; margin: 0 auto;">
+                    <input type="email" id="email" name="email" placeholder="Insere o teu email" required
+                        style="width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid var(--medium-gray); border-radius: 5px; font-size: 1rem;">
+                    
+                    <button type="submit" class="btn pulse" style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                        Enviar Inscrição
+                        <span class="icon-bounce">📧</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <img src="photos/mesa-voto.jpg" alt="Mesa de Voto" class="card-img">
+
+        <section class="faq-section" style="background: var(--white); padding: 60px 5px;">
+            <div class="container">
+                <h2 class="section-title slide-up">Perguntas Frequentes (FAQ)</h2>
+
+                <div class="faq-item fade-in" style="margin-top: 30px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">-> Quem pode inscrever-se para a mesa de voto?</h3>
+                    <p style="color: var(--dark-gray);">
+                        Qualquer cidadão português recenseado e maior de idade pode candidatar-se para participar como membro de mesa de voto.
+                    </p>
+                </div>
+
+                <div class="faq-item fade-in" style="margin-top: 30px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">-> Quais são as responsabilidades de um membro da mesa?</h3>
+                    <p style="color: var(--dark-gray);">
+                        Garantir a regularidade do processo eleitoral, ajudar na identificação dos votantes e no apuramento dos votos.
+                    </p>
+                </div>
+
+                <div class="faq-item fade-in" style="margin-top: 30px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">-> Recebo algum benefício?</h3>
+                    <p style="color: var(--dark-gray);">
+                        Sim! Além de contribuires para a democracia, tens direito a uma pequena compensação monetária e justificação de falta no trabalho.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
+            </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        lucide.createIcons(); // --> chama logo no carregamento da página
+    
+        const form = document.getElementById('inscricao-form');
+    
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('email').value;
+    
+            if (emailInput.includes('@')) {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+    
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Inscrição enviada!',
+                    text: 'Obrigado pela tua inscrição! Em breve receberás mais informações no teu email.',
+                    confirmButtonColor: '#0066CC'
+                });
+    
+                form.reset();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email inválido',
+                    text: 'Por favor, insere um email válido contendo "@" para fazer a inscrição.',
+                    confirmButtonColor: '#CC0000'
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
