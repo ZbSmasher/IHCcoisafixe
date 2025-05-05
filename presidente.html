@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presidente da República Portuguesa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        #admin-btn {
+    font-size: 24px; /* Tamanho do ícone */
+    color: #333; /* Cor do ícone */
+  
+}
+
+        /* Shortcuts Section */
+        .shortcuts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .shortcut-btn {
+            padding: 12px 20px;
+            background-color: var(--blue);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .shortcut-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Hero Section */
+        .president-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 500px;
+            overflow: hidden;
+        }
+        
+        .president-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        .president-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .president-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        /* Info Sections */
+        .president-section {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-gray);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--blue);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        /* Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            aspect-ratio: 4/3;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Timeline - Versão Corrigida */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: var(--blue);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    z-index: 1;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+/* Círculos - Versão Corrigida */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border: 4px solid var(--blue);
+    top: 15px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* Itens à esquerda - círculo à direita */
+.timeline-item.left::after {
+    right: -12px;
+}
+
+/* Itens à direita - círculo à esquerda */
+.timeline-item.right::after {
+    left: -12px;
+}
+
+/* Conteúdo da Timeline */
+.timeline-content {
+    padding: 20px 30px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    left: 50%;
+}
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        /* Perfil Aprimorado */
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .detail-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .detail-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .detail-card h3 {
+            color: var(--blue);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* Linha do Tempo Aprimorada */
+        .timeline-item {
+            margin-bottom: 30px;
+        }
+        
+        .timeline-content {
+            position: relative;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .timeline-content h3 {
+            margin-top: 10px;
+            color: var(--dark-gray);
+        }
+        
+        .timeline-content p {
+            margin-bottom: 10px;
+        }
+        
+        .timeline-image {
+            margin-top: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .timeline-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+        
+        .timeline-image:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+     <style>
+        
+        .menu {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffffcb;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinha à esquerda */
+    padding-left: 20vw; /* Empurra o menu mais para o centro */
+    transition: all 0.3s ease;
+    z-index: 1000;
+    position: relative;
+}
+
+        /* Menu Principal */
+        .main-menu {
+    width: 200px;
+    padding-top: 20px;
+    padding-left: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    border-right: 1px solid #ddd;
+}
+
+.submenu-container {
+    position: absolute;
+    left: calc(20vw + 200px); /* 20vw padding + 200px menu */
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    flex-direction: column;
+    padding-top: 20px;
+    z-index: 999;
+    justify-content: center;
+    border-left: 1px solid #ddd;
+}
+        .menu a {
+            color: #333; /* Texto escuro */
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #eee; /* Cor de fundo ao passar o mouse */
+        }
+
+        .menu .submenu {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .menu .submenu a {
+            padding-left: 30px;
+        }
+
+        .menu .menu-item.active .submenu {
+            display: block;
+        }
+
+        .menu-item {
+            cursor: pointer;
+        }
+
+        /* Submenu à Direita */
+
+
+        .submenu-container a {
+            padding-left: 30px;
+        }
+
+        .submenu-container.open {
+            display: flex;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-menu {
+                width: 200px;
+            }
+
+            .submenu-container {
+                left: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <a href="#" id="admin-btn" class="logo">
+                        <i class="fas fa-bars"></i> <!-- Ícone de três traços (hambúrguer) -->
+                    </a>
+                </nav>
+        
+                <div class="logo-container">
+                    <a href="PaginaInicial.html"> <!-- Substitua "index.html" pela URL desejada -->
+                        <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                    </a>
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" data-lucide="languages" >Notícias</a></li>
+                        <li><a href="#" data-lucide="search" >Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Lateral -->
+    <div class="menu" id="menu" style="display: none;">
+        <div class="main-menu">
+            <div class="menu-item" id="menu-item-1">
+                <a href="#">Novidades</a>
+                <div class="submenu">
+                    <a href="#">Subopção 1.1</a>
+                    <a href="#">Subopção 1.2</a>
+                    <a href="#">Subopção 1.3</a>
+                </div>
+            </div>
+            <div class="menu-item" id="menu-item-2">
+                <a href="#">Opção 2</a>
+                <div class="submenu">
+                    <a href="#">Subopção 2.1</a>
+                    <a href="#">Subopção 2.2</a>
+                </div>
+            </div>
+            <div class="menu-item" id="menu-item-3">
+                <a href="#">Eleições</a>
+                <div class="submenu">
+                    <a href="#">Próximas Eleições</a>
+                    <a href="#">Como votar</a>
+                    <a href="#">Resultados Eleitorais</a>
+                    <a href="#">Mesa de Voto</a>
+                </div>
+            </div>
+            <div class="menu-item" id="menu-item-4">
+                <a href="#">Forum</a>
+            </div>
+        </div>
+
+        <!-- Submenu à Direita -->
+        <div class="submenu-container" id="submenu-container">
+            <!-- Aqui vão as sub-opções que aparecem à direita -->
+        </div>
+    </div>
+
+    <!-- Hero Video Section -->
+       <!-- Hero Video Section -->
+       <section class="president-hero" style="position: relative; height: 100vh; width: 100%; overflow: hidden;">
+        <img src="photos/marcelo.png" alt="Marcelo Rebelo de Sousa" 
+             style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+        <div class="president-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+             background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; 
+             text-align: center; color: white; z-index: 2;">
+            <div>
+                <h1 class="president-title" style="font-size: 3.5rem; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">
+                    Marcelo Rebelo de Sousa
+                </h1>
+                <p style="font-size: 1.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">
+                    20.º Presidente da República Portuguesa
+                </p>
+            </div>
+        </div>
+    </section>
+   <!-- Shortcuts Section -->
+   <div class="shortcuts">
+    <a href="#biografia" class="shortcut-btn">Biografia</a>
+    <a href="#galeria" class="shortcut-btn">Galeria</a>
+    <a href="#mandato" class="shortcut-btn">Mandato</a>
+    <a href="#discursos" class="shortcut-btn">Discursos</a>
+</div>
+    <section id="biografia" class="president-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Biografia Detalhada</h2>
+            </div>
+            
+            <div class="biography-content" style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 50px;">
+                <div style="flex: 1;">
+                    <img src="photos/pres.png" alt="Marcelo Rebelo de Sousa" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                </div>
+                <div style="flex: 2;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px;">Marcelo Rebelo de Sousa</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
+                        Nascido em Lisboa a 12 de dezembro de 1948, Marcelo Nuno Duarte Rebelo de Sousa é filho de Baltasar Rebelo de Sousa, médico e ministro do Estado Novo, e de Maria das Neves Fernandes Duarte. Desde cedo demonstrou vocação para as letras e política, formando-se em Direito pela Universidade de Lisboa, onde se tornou professor catedrático.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        Antes da Presidência, destacou-se como jurista, comentador político e líder partidário. Foi fundador do PSD e ministro dos Assuntos Parlamentares. Como académico, publicou obras de referência em Direito Constitucional. O seu estilo comunicativo e proximidade com os cidadãos marcam o seu perfil político único.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-card">
+                    <h3><i class="fas fa-graduation-cap"></i> Formação Académica</h3>
+                    <ul>
+                        <li>Licenciatura em Direito - Universidade de Lisboa (1971)</li>
+                        <li>Doutoramento em Ciências Jurídico-Políticas</li>
+                        <li>Agregação em Direito Constitucional</li>
+                        <li>Professor Catedrático Jubilado</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3><i class="fas fa-briefcase"></i> Carreira Política</h3>
+                    <ul>
+                        <li>Fundador e líder do PSD (1996-1999)</li>
+                        <li>Ministro dos Assuntos Parlamentares (1982-1983)</li>
+                        <li>Deputado na Assembleia da República</li>
+                        <li>Presidente da República desde 2016</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3><i class="fas fa-book"></i> Obras Publicadas</h3>
+                    <ul>
+                        <li>Governo de Presidente (1986)</li>
+                        <li>O Sistema de Governo Português (1984)</li>
+                        <li>Direito Constitucional (1991)</li>
+                        <li>+20 livros e centenas de artigos</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3><i class="fas fa-heart"></i> Vida Pessoal</h3>
+                    <ul>
+                        <li>Casado (divorciado), dois filhos</li>
+                        <li>Residente no Palácio de Belém</li>
+                        <li>Pratica ativamente desporto</li>
+                        <li>Fã de futebol (benfiquista)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Galeria Section -->
+    <section id="galeria" class="president-section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Galeria</h2>
+            </div>
+            <div class="photo-gallery">
+                <div class="gallery-item">
+                    <img src="photos/presidente-1.jpg" alt="Presidente em evento oficial">
+                </div>
+                <div class="gallery-item">
+                    <img src="photos/presidente-2.jpg" alt="Visita de Estado">
+                </div>
+                <div class="gallery-item">
+                    <img src="photos/presidente-3.jpeg" alt="Reunião com jovens">
+                </div>
+                <div class="gallery-item">
+                    <img src="photos/presidente-4.jpg" alt="Cerimónia oficial">
+                </div>
+                <div class="gallery-item">
+                    <img src="photos/presidente-5.jpg" alt="Presidente com cidadãos">
+                </div>
+                <div class="gallery-item">
+                    <img src="photos/presidente-6.webp" alt="Discurso na ONU">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+   <!-- Linha do Tempo Presidencial Atualizada (2025-2016) -->
+<section id="mandato" class="president-section" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="section-header">
+            <h2>Linha do Tempo Presidencial</h2>
+        </div>
+        
+        <div class="timeline">
+            <!-- 2025 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-year">2025</span>
+                    <h3>Presidência do Conselho da UE</h3>
+                    <p>Liderança da presidência portuguesa do Conselho da União Europeia, com foco em:</p>
+                    <ul>
+                        <li>Transição digital</li>
+                        <li>Coesão social</li>
+                        <li>Pacto Ecológico Europeu</li>
+                    </ul>
+                    <div class="timeline-image">
+                        <img src="photos/timeline-2025.webp" alt="Marcelo na UE 2025">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2024 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-year">2024</span>
+                    <h3>Reforma do Sistema de Saúde</h3>
+                    <p>Iniciativa presidencial para modernização do SNS, destacando:</p>
+                    <ul>
+                        <li>Novos hospitais regionais</li>
+                        <li>Plano nacional de combate às listas de espera</li>
+                        <li>Digitalização de processos clínicos</li>
+                    </ul>
+                    <div class="timeline-image">
+                        <img src="photos/timeline-2024.webp" alt="Reforma Saúde 2024">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2023 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-year">2023</span>
+                    <h3>Visita de Estado ao Brasil</h3>
+                    <p>Reforço das relações bilaterais com:</p>
+                    <ul>
+                        <li>5 acordos económicos assinados</li>
+                        <li>Programa de intercâmbio cultural</li>
+                        <li>Cooperação em energias renováveis</li>
+                    </ul>
+                    <div class="timeline-image">
+                        <img src="photos/timeline-2023.jpg" alt="Visita ao Brasil 2023">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2022 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-year">2022</span>
+                    <h3>Mediação na Crise Política</h3>
+                    <p>Intervenção decisiva na crise governamental:</p>
+                    <ul>
+                        <li>12 reuniões com partidos</li>
+                        <li>Conselho de Estado extraordinário</li>
+                        <li>Dissolução da Assembleia da República</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 2021 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-year">2021</span>
+                    <h3>Reeleição Presidencial</h3>
+                    <p>Vitória eleitoral com:</p>
+                    <ul>
+                        <li>60.7% dos votos</li>
+                        <li>Maioria em todos os distritos</li>
+                        <li>Participação de 39.4%</li>
+                    </ul>
+                    <div class="timeline-image">
+                        <img src="photos/timeline-2021.jpg" alt="Reeleição 2021">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 2020 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-year">2020</span>
+                    <h3>Liderança na Pandemia</h3>
+                    <p>Ações destacadas:</p>
+                    <ul>
+                        <li>32 mensagens à nação</li>
+                        <li>Visitas a 15 hospitais</li>
+                        <li>Plano de apoio económico</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 2019 -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="timeline-year">2019</span>
+                    <h3>Tour Nacional</h3>
+                    <p>Roteiro presidencial completo:</p>
+                    <ul>
+                        <li>18 distritos visitados</li>
+                        <li>142 municípios</li>
+                        <li>Regiões Autónomas incluídas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 2016 -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="timeline-year">2016</span>
+                    <h3>Tomada de Posse</h3>
+                    <p>Inauguração do primeiro mandato:</p>
+                    <ul>
+                        <li>Discurso histórico no Parlamento</li>
+                        <li>Promessa de "presidência de proximidade"</li>
+                        <li>Primeira visita a Belém</li>
+                    </ul>
+                    <div class="timeline-image">
+                        <img src="photos/timeline-2016.jpg" alt="Posse 2016">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  
+<section id="discursos" class="president-section" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="section-header">
+            <h2>Discursos Marcantes</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 30px;">
+            <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                            src="https://youtu.be/1VIcZBWRZVk" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+                <div style="padding: 20px;">
+                    <h3 style="margin-bottom: 10px; color: var(--dark-gray);">Discurso no Dia de Portugal</h3>
+                    <p style="color: #666; margin-bottom: 8px;">10 de junho de 2021</p>
+                    <p style="color: #555; font-size: 0.9rem;">"Dia de Portugal: Marcelo diz que é tempo de fazer mudanças com coragem"</p>
+                </div>
+            </div>
+
+            <!-- Discurso 2023 -->
+            <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                            src="https://youtu.be/MsCTHMD9L50" 
+                            frameborder="0" 
+                            allowfullscreen></iframe>
+                </div>
+                <div style="padding: 20px;">
+                    <h3 style="margin-bottom: 10px; color: var(--dark-gray);">O discurso da terceira dissolução de Marcelo
+                    </h3>
+        
+                </div>
+            </div>
+
+            <!-- Discurso Posse 2016 -->
+            <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                            src="https://youtu.be/SK2BncSafoo" 
+                            frameborder="0" 
+                            allowfullscreen></iframe>
+                </div>
+                <div style="padding: 20px;">
+                    <h3 style="margin-bottom: 10px; color: var(--dark-gray);">Discurso de Posse</h3>
+                    <p style="color: #666; margin-bottom: 8px;">9 de março de 2016 - Assembleia da República</p>
+                    <p style="color: #555; font-size: 0.9rem;">"Uma presidência de proximidade com os portugueses"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer (manter igual ao index.html) -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
+            </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const adminBtn = document.getElementById('admin-btn');
+            const menu = document.getElementById('menu');
+            const mainContent = document.getElementById('main-content');
+
+            adminBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (menu.style.display === 'flex') {
+                    menu.style.display = 'none';
+                } else {
+                    menu.style.display = 'flex';
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // SCRIPTS DO MENU
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const submenuContainer = document.getElementById('submenu-container');
+
+            menuItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    // Verificar se o submenu já está visível
+                    const submenu = this.querySelector('.submenu');
+                    const subMenuLinks = submenu ? submenu.querySelectorAll('a') : [];
+                    
+                    // Adicionar ou remover a classe 'active' para exibir/ocultar o submenu
+                    if (submenu) {
+                        submenu.classList.toggle('active');
+                    }
+
+                    // Criar sub-menu à direita
+                    submenuContainer.innerHTML = ''; // Limpar conteúdo anterior
+                    subMenuLinks.forEach(function (link) {
+                        const submenuLink = document.createElement('a');
+                        submenuLink.href = '#';
+                        submenuLink.textContent = link.textContent;
+                        submenuContainer.appendChild(submenuLink);
+                    });
+
+                    // Tornar o submenu à direita visível
+                    submenuContainer.classList.add('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
