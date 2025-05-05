@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partidos Políticos Portugueses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        
+        .menu {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffffcb;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinha à esquerda */
+    padding-left: 20vw; /* Empurra o menu mais para o centro */
+    transition: all 0.3s ease;
+    z-index: 1000;
+    position: relative;
+}
+
+        /* Menu Principal */
+        .main-menu {
+    width: 200px;
+    padding-top: 20px;
+    padding-left: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    border-right: 1px solid #ddd;
+}
+
+.submenu-container {
+    position: absolute;
+    left: calc(20vw + 200px); /* 20vw padding + 200px menu */
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    flex-direction: column;
+    padding-top: 20px;
+    z-index: 999;
+    justify-content: center;
+    border-left: 1px solid #ddd;
+}
+        .menu a {
+            color: #333; /* Texto escuro */
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #eee; /* Cor de fundo ao passar o mouse */
+        }
+
+        .menu .submenu {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .menu .submenu a {
+            padding-left: 30px;
+        }
+
+        .menu .menu-item.active .submenu {
+            display: block;
+        }
+
+        .menu-item {
+            cursor: pointer;
+        }
+
+        /* Submenu à Direita */
+
+
+        .submenu-container a {
+            padding-left: 30px;
+        }
+
+        .submenu-container.open {
+            display: flex;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-menu {
+                width: 200px;
+            }
+
+            .submenu-container {
+                left: 200px;
+            }
+        }
+    </style>
+    <style>
+        /* Estilos específicos para partidos.html */
+        .partidos-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .partidos-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .partido-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .partido-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .partido-img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain; /* Alterado para conter */
+            padding: 15px;
+            background: white;
+            border-bottom: 3px solid var(--partido-color);
+        }
+        
+        .partido-content {
+            padding: 15px;
+        }
+        
+        .partido-nome {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+        
+        .partido-lider {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .partido-info {
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+            font-size: 0.8rem;
+            padding: 0 10px;
+        }
+        
+        /* Cores específicas por partido */
+        .ps { --partido-color: #FF0000; }
+        .psd { --partido-color: #FF9900; }
+        .be { --partido-color: #990000; }
+        .pcp { --partido-color: #006600; }
+        .pan { --partido-color: #00AA00; }
+        .il { --partido-color: #00AEEF; }
+        .chega { --partido-color: #0000FF; }
+        .livre { --partido-color: #800080; }
+        
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .partidos-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .partidos-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .partido-img {
+                height: 140px;
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .partidos-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        
+                        <a href="#" id="admin-btn" data-lucide="menu" class="logo">MenuImage</a>            
+                    
+                    </ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" data-lucide="languages" >Notícias</a></li>
+                        <li><a href="#" data-lucide="search" >Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção de Partidos -->
+    <section class="partidos-section">
+        <div class="container">
+            <h2 class="section-title">Partidos com Assento Parlamentar</h2>
+            <p style="text-align: center;">Conheça os partidos políticos representados na Assembleia da República</p>
+            
+            <div class="partidos-container">
+                <!-- PS -->
+                <a href="partido-ps.html" class="partido-card ps">
+                    <img src="photos/ps.png" alt="Partido Socialista" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">PS</h3>
+                        <p class="partido-lider">Pedro Nuno Santos</p>
+                        <div class="partido-info">
+                            <span>78 deputados</span>
+                            <span>1973</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- PSD -->
+                <a href="partido-psd.html" class="partido-card psd">
+                    <img src="photos/psd.png" alt="Partido Social Democrata" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">PSD</h3>
+                        <p class="partido-lider">Luís Montenegro</p>
+                        <div class="partido-info">
+                            <span>78 deputados</span>
+                            <span>1974</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- CHEGA -->
+                <a href="partido-chega.html" class="partido-card chega">
+                    <img src="photos/Símbolo_principal_do_CHEGA.png" alt="CHEGA" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">CHEGA</h3>
+                        <p class="partido-lider">André Ventura</p>
+                        <div class="partido-info">
+                            <span>49 deputados</span>
+                            <span>2019</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Iniciativa Liberal -->
+                <a href="partido-il.html" class="partido-card il">
+                    <img src="photos/il.png" alt="Iniciativa Liberal" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">IL</h3>
+                        <p class="partido-lider">Rui Rocha</p>
+                        <div class="partido-info">
+                            <span>8 deputados</span>
+                            <span>2017</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- BE -->
+                <a href="partido-be.html" class="partido-card be">
+                    <img src="photos/be.jpg" alt="Bloco de Esquerda" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">BE</h3>
+                        <p class="partido-lider">Mariana Mortágua</p>
+                        <div class="partido-info">
+                            <span>5 deputados</span>
+                            <span>1999</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- PCP -->
+                <a href="partido-pcp.html" class="partido-card pcp">
+                    <img src="photos/pcp.png" alt="PCP" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">PCP</h3>
+                        <p class="partido-lider">Paulo Raimundo</p>
+                        <div class="partido-info">
+                            <span>4 deputados</span>
+                            <span>1921</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- CDS-PP -->
+            <a href="partido-cds.html" class="partido-card" style="--partido-color: #000080;">
+                <img src="photos/cds.png" alt="CDS - Partido Popular" class="partido-img">
+                <div class="partido-content">
+                    <h3 class="partido-nome">CDS-PP</h3>
+                    <p class="partido-lider">Nuno Melo</p>
+                    <div class="partido-info">
+                        <span>1 deputados</span> <!-- Atualize conforme a situação atual -->
+                        <span>1974</span>
+                    </div>
+                </div>
+            </a>
+                
+                <!-- LIVRE -->
+                <a href="partido-livre.html" class="partido-card livre">
+                    <img src="photos/livre.png" alt="LIVRE" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">LIVRE</h3>
+                        <p class="partido-lider">Rui Tavares</p>
+                        <div class="partido-info">
+                            <span>4 deputados</span>
+                            <span>2014</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- PAN -->
+                <a href="partido-pan.html" class="partido-card pan">
+                    <img src="photos/pan.jpeg" alt="PAN" class="partido-img">
+                    <div class="partido-content">
+                        <h3 class="partido-nome">PAN</h3>
+                        <p class="partido-lider">Inês Sousa Real</p>
+                        <div class="partido-info">
+                            <span>1 deputado</span>
+                            <span>2009</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
+            </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const adminBtn = document.getElementById('admin-btn');
+            const menu = document.getElementById('menu');
+            const mainContent = document.getElementById('main-content');
+    
+            adminBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.style.display = 'flex';        // Mostrar o menu
+                mainContent.style.display = 'none'; // Esconder conteúdo principal
+            });
+        });
+    </script>
+    
+    <script>
+        // SCRIPTS DO MENU
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const submenuContainer = document.getElementById('submenu-container');
+    
+            menuItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    // Verificar se o submenu já está visível
+                    const submenu = this.querySelector('.submenu');
+                    const subMenuLinks = submenu ? submenu.querySelectorAll('a') : [];
+                    
+                    // Adicionar ou remover a classe 'active' para exibir/ocultar o submenu
+                    if (submenu) {
+                        submenu.classList.toggle('active');
+                    }
+    
+                    // Criar sub-menu à direita
+                    submenuContainer.innerHTML = ''; // Limpar conteúdo anterior
+                    subMenuLinks.forEach(function (link) {
+                        const submenuLink = document.createElement('a');
+                        submenuLink.href = '#';
+                        submenuLink.textContent = link.textContent;
+                        submenuContainer.appendChild(submenuLink);
+                    });
+    
+                    // Tornar o submenu à direita visível
+                    submenuContainer.classList.add('open');
+                });
+            });
+        });
+    </script>
+    <script>
+        lucide.createIcons();
+    </script>
+    
+</body>
+</html>
