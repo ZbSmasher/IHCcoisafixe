@@ -3,197 +3,976 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesa de Voto - Inscrição</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+    <title>Comparador Avançado - Eleições 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-
-        .card-img {
-            width: 90%;
-            height: 350px;
-            object-fit: cover;
-            padding: 40px 0px 60px 60px;
+        :root {
+            --ps: #FF0000;
+            --psd: #FF9900;
+            --chega: #0000FF;
+            --il: #00FFFF;
+            --be: #FF00FF;
+            --pan: #00FF00;
+            --livre: #66FF66;
+            --cds: #000080;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #4cc9f0;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-
-        /* Animações adicionais */
-        .fade-in {
-            animation: fadeIn 2s ease forwards;
-            opacity: 0;
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        .slide-up {
-            animation: slideUp 1s ease forwards;
-            transform: translateY(50px);
-            opacity: 0;
+        .category-container {
+            margin-bottom: 3rem;
         }
-
-        .pulse {
-            animation: pulse 2s infinite;
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
         }
-
-        .icon-bounce {
-            animation: bounce 2s infinite;
-            margin-left: 10px;
-            font-size: 1.5rem;
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
-
+        
+        /* Header Moderno */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1.5rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .election-date {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Comparador Moderno */
+        .comparator-container {
+            padding: 4rem 0;
+        }
+        
+        .comparator-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .comparator-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .comparator-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .party-selector {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .select-container {
+            position: relative;
+            min-width: 300px;
+        }
+        
+        .select-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .styled-select {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            font-size: 1rem;
+            background-color: white;
+            appearance: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .styled-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+        }
+        
+        .select-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(20%);
+            pointer-events: none;
+            color: #666;
+        }
+        
+        .compare-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-end;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .compare-btn:hover {
+            background-color: #3ab7d8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.3);
+        }
+        
+        /* Resultados da Comparação */
+        .comparison-result {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
         @keyframes fadeIn {
-            to {
-                opacity: 1;
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+        
+        .party-card {
+            flex: 1;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .party-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .party-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background-color: white;
+            padding: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .party-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .party-leader {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--dark);
+        }
+        .policies-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .category-title i {
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+        
+        .policies-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .policy-column {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        
+        .policy-item {
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .policy-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+        
+        .versus {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .versus:before, .versus:after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e0e0e0);
+        }
+        
+        .versus:after {
+            background: linear-gradient(90deg, #e0e0e0, transparent);
+        }
+        
+        .versus span {
+            padding: 0 1rem;
+        }
+        
+        /* Seção de Vídeos */
+        .videos-section {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .videos-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        
+        .videos-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .video-player {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+        }
+        
+        .video-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .video-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Botão Nova Comparação */
+        .new-comparison {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .new-comparison-btn {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .new-comparison-btn:hover {
+            background-color: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.3);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .policies-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .videos-container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
             }
         }
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .party-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .select-container {
+                width: 100%;
+            }
+            
+            .compare-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
-
+        
+        /* Animações */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+        
+        .pulse {
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
-
 <body>
-
     <header>
-        <div class="main-nav">
-            <div class="container">
-                <nav class="nav-left">
-                    <ul>
-                        
-                        <a href="#" id="admin-btn" data-lucide="menu" class="logo">MenuImage</a>            
-                    
-                    </ul>
-                </nav>
-        
-                <div class="logo-container">
-                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
-                </div>
-        
-                <nav class="nav-right">
-                    <ul>
-                        <li><a href="#" data-lucide="languages" >Notícias</a></li>
-                        <li><a href="#" data-lucide="search" >Search</a></li>
-                    </ul>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República">
+                    <span>Eleições 2025</span>
+                </a>
+                <nav>
+                    <!-- Adicione seu menu aqui -->
                 </nav>
             </div>
         </div>
     </header>
 
-    <main>
-        <section class="hero" style="background: var(--light-gray); height: auto; padding: 60px 20px; text-align: center;">
-            <div class="container fade-in">
-
-
-                <h1 class="slide-up" style="font-size: 2.8rem; margin-bottom: 20px;">Junta-te à Mesa de Voto</h1>
-
-                <p class="fade-in" style="font-size: 1.2rem; margin-bottom: 40px; color: var(--dark-gray);">
-                    Participa ativamente na construção da democracia. Sê parte da história, sê parte da mudança!
-                </p>
-
-                <form id="inscricao-form" class="slide-up" style="max-width: 500px; margin: 0 auto;">
-                    <input type="email" id="email" name="email" placeholder="Insere o teu email" required
-                        style="width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid var(--medium-gray); border-radius: 5px; font-size: 1rem;">
-                    
-                    <button type="submit" class="btn pulse" style="width: 100%; display: flex; align-items: center; justify-content: center;">
-                        Enviar Inscrição
-                        <span class="icon-bounce">📧</span>
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <img src="photos/mesa-voto.jpg" alt="Mesa de Voto" class="card-img">
-
-        <section class="faq-section" style="background: var(--white); padding: 60px 5px;">
-            <div class="container">
-                <h2 class="section-title slide-up">Perguntas Frequentes (FAQ)</h2>
-
-                <div class="faq-item fade-in" style="margin-top: 30px;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">-> Quem pode inscrever-se para a mesa de voto?</h3>
-                    <p style="color: var(--dark-gray);">
-                        Qualquer cidadão português recenseado e maior de idade pode candidatar-se para participar como membro de mesa de voto.
-                    </p>
-                </div>
-
-                <div class="faq-item fade-in" style="margin-top: 30px;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">-> Quais são as responsabilidades de um membro da mesa?</h3>
-                    <p style="color: var(--dark-gray);">
-                        Garantir a regularidade do processo eleitoral, ajudar na identificação dos votantes e no apuramento dos votos.
-                    </p>
-                </div>
-
-                <div class="faq-item fade-in" style="margin-top: 30px;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">-> Recebo algum benefício?</h3>
-                    <p style="color: var(--dark-gray);">
-                        Sim! Além de contribuires para a democracia, tens direito a uma pequena compensação monetária e justificação de falta no trabalho.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
+    <section class="hero">
         <div class="container">
-            <div class="footer-links">
-                <a href="#">Política de Privacidade</a>
-                <a href="#">Acessibilidade</a>
-                <a href="#">Informação de Copyright</a>
-                <a href="#">Contactos</a>
-            </div>
-            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+            <h1>Compare as Propostas dos Partidos</h1>
+            <p>Descubra as diferenças entre os programas eleitorais para as Eleições Legislativas de 2025</p>
+            <div class="election-date">30 de Setembro de 2025</div>
         </div>
-    </footer>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <section class="comparator-container">
+        <div class="container">
+            <div class="comparator-header">
+                <h2>Comparador de Partidos Políticos</h2>
+                <p>Selecione dois partidos para comparar suas propostas em diferentes áreas políticas</p>
+            </div>
+            
+            <div class="party-selector">
+                <div class="select-container">
+                    <label for="party1">Primeiro Partido</label>
+                    <select id="party1" class="styled-select">
+                        <option value="">Selecione um partido</option>
+                        <option value="ps">Partido Socialista (PS)</option>
+                        <option value="psd">Partido Social Democrata (PSD)</option>
+                        <option value="chega">CHEGA</option>
+                        <option value="il">Iniciativa Liberal (IL)</option>
+                        <option value="be">Bloco de Esquerda (BE)</option>
+                        <option value="pan">PAN</option>
+                        <option value="livre">LIVRE</option>
+                        <option value="cds">CDS-PP</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-icon"></i>
+                </div>
+                
+                <div class="select-container">
+                    <label for="party2">Segundo Partido</label>
+                    <select id="party2" class="styled-select">
+                        <option value="">Selecione um partido</option>
+                        <option value="ps">Partido Socialista (PS)</option>
+                        <option value="psd">Partido Social Democrata (PSD)</option>
+                        <option value="chega">CHEGA</option>
+                        <option value="il">Iniciativa Liberal (IL)</option>
+                        <option value="be">Bloco de Esquerda (BE)</option>
+                        <option value="pan">PAN</option>
+                        <option value="livre">LIVRE</option>
+                        <option value="cds">CDS-PP</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-icon"></i>
+                </div>
+                
+                <button class="compare-btn pulse" id="compareBtn">
+                    <i class="fas fa-balance-scale"></i> Comparar
+                </button>
+            </div>
+            
+            <div class="comparison-result" id="comparisonResult">
+                <!-- Conteúdo será gerado dinamicamente pelo JavaScript -->
+            </div>
+        </div>
+    </section>
+
     <script>
-        lucide.createIcons(); // --> chama logo no carregamento da página
-    
-        const form = document.getElementById('inscricao-form');
-    
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('email').value;
-    
-            if (emailInput.includes('@')) {
-                confetti({
-                    particleCount: 150,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-    
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Inscrição enviada!',
-                    text: 'Obrigado pela tua inscrição! Em breve receberás mais informações no teu email.',
-                    confirmButtonColor: '#0066CC'
-                });
-    
-                form.reset();
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Email inválido',
-                    text: 'Por favor, insere um email válido contendo "@" para fazer a inscrição.',
-                    confirmButtonColor: '#CC0000'
-                });
+        // Dados completos dos partidos (atualizados para 2025)
+        const partiesData = {
+            ps: {
+                name: "Partido Socialista",
+                shortName: "PS",
+                leader: "Pedro Nuno Santos",
+                logo: "photos/ps-logo.png",
+                colorClass: "ps",
+                video: "https://www.youtube.com/embed/VIDEO_PS",
+                proposals: {
+                    economia: [
+                        "Aumento progressivo do salário mínimo para €900 até 2026",
+                        "Reforço do investimento público em 3% do PIB",
+                        "Programa de apoio às PMEs com juros bonificados",
+                        "Taxa sobre lucros extraordinários de grandes empresas"
+                    ],
+                    saude: [
+                        "Contratação de mais 10.000 profissionais de saúde",
+                        "Criação de 50 novas unidades de saúde familiar",
+                        "Medicamentos gratuitos para doenças crônicas",
+                        "Plano nacional de saúde mental"
+                    ],
+                    educacao: [
+                        "Universalização do pré-escolar aos 3 anos",
+                        "Redução do número de alunos por turma (máx. 20)",
+                        "Aumento de 15% no financiamento das universidades",
+                        "Manuais escolares gratuitos até ao 12º ano"
+                    ],
+                    habitacao: [
+                        "Programa de arrendamento acessível",
+                        "Taxa sobre habitações devolutas",
+                        "Apoio à reabilitação urbana",
+                        "Limitação do aumento das rendas"
+                    ]
+                }
+            },
+            psd: {
+                name: "Partido Social Democrata",
+                shortName: "PSD",
+                leader: "Luís Montenegro",
+                logo: "photos/psd-logo.png",
+                colorClass: "psd",
+                video: "https://www.youtube.com/embed/VIDEO_PSD",
+                proposals: {
+                    economia: [
+                        "Redução do IRC para 17% (atual 21%)",
+                        "Corte de 5% na taxa máxima de IRS",
+                        "Flexibilização da legislação laboral",
+                        "Programa de atração de investimento estrangeiro"
+                    ],
+                    saude: [
+                        "Parcerias público-privadas em hospitais",
+                        "Bonificação para médicos no interior (+25%)",
+                        "Receita eletrónica obrigatória",
+                        "Cheque-saúde para escolha de prestador"
+                    ],
+                    educacao: [
+                        "Autonomia reforçada para as escolas",
+                        "Avaliação obrigatória dos professores",
+                        "Programa de bolsas para cursos técnicos",
+                        "Foco em STEM (Ciência, Tecnologia, Engenharia e Matemática)"
+                    ],
+                    habitacao: [
+                        "Simplificação do licenciamento",
+                        "Incentivos fiscais para construção",
+                        "Programa 'Porta 65 Jovem' reforçado",
+                        "Apoio à compra da primeira casa"
+                    ]
+                }
+            },
+            chega: {
+                name: "CHEGA",
+                shortName: "CHEGA",
+                leader: "André Ventura",
+                logo: "photos/chega-logo.png",
+                colorClass: "chega",
+                video: "https://www.youtube.com/embed/VIDEO_CHEGA",
+                proposals: {
+                    economia: [
+                        "Fim dos vistos gold e imigração qualificada",
+                        "Redução de impostos para famílias numerosas",
+                        "Penalização de empresas que contratem imigrantes ilegais",
+                        "Corte de 30% nos subsídios a partidos e sindicatos"
+                    ],
+                    saude: [
+                        "Fim do tratamento gratuito para imigrantes ilegais",
+                        "Criação de equipas médicas móveis para o interior",
+                        "Penalização de faltas não justificadas no SNS",
+                        "Dedução fiscal em seguros de saúde privados"
+                    ],
+                    educacao: [
+                        "Educação sexual opcional nas escolas",
+                        "Reforço do ensino da história de Portugal",
+                        "Fim do financiamento a associações estudantis",
+                        "Exames nacionais mais rigorosos"
+                    ],
+                    habitacao: [
+                        "Prioridade a portugueses em habitação social",
+                        "Tolerância zero para ocupações ilegais",
+                        "Programa de realojamento para sem-abrigo",
+                        "Redução de impostos sobre arrendamento"
+                    ]
+                }
+            },
+            il: {
+                name: "Iniciativa Liberal",
+                shortName: "IL",
+                leader: "Rui Rocha",
+                logo: "photos/il-logo.png",
+                colorClass: "il",
+                video: "https://www.youtube.com/embed/VIDEO_IL",
+                proposals: {
+                    economia: [
+                        "Flat tax de 15% no IRS",
+                        "Privatização de empresas públicas",
+                        "Extinção do salário mínimo nacional",
+                        "Redução drástica da burocracia"
+                    ],
+                    saude: [
+                        "Seguro de saúde universal em vez de SNS",
+                        "Vouchers para escolha de prestadores privados",
+                        "Autonomia hospitalar total",
+                        "Deduções fiscais em despesas de saúde"
+                    ],
+                    educacao: [
+                        "Cheque-ensino para escolha de escola",
+                        "Fim da gratuitidade no ensino superior para quem pode pagar",
+                        "Avaliação meritocrática de professores",
+                        "Financiamento por desempenho"
+                    ],
+                    habitacao: [
+                        "Liberalização total do mercado imobiliário",
+                        "Fim das restrições a AL (Alojamento Local)",
+                        "Redução de impostos sobre propriedade",
+                        "Simplificação radical do licenciamento"
+                    ]
+                }
+            },
+            be: {
+                name: "Bloco de Esquerda",
+                shortName: "BE",
+                leader: "Mariana Mortágua",
+                logo: "photos/be-logo.png",
+                colorClass: "be",
+                video: "https://www.youtube.com/embed/VIDEO_BE",
+                proposals: {
+                    economia: [
+                        "Taxa de 75% para rendimentos acima de 250 mil euros",
+                        "Fim dos benefícios fiscais para grandes empresas",
+                        "Congelamento das rendas por 5 anos",
+                        "Redução do horário de trabalho para 35h semanais"
+                    ],
+                    saude: [
+                        "Fim das parcerias público-privadas na saúde",
+                        "Medicamentos gratuitos para toda a população",
+                        "Triplicar o orçamento para saúde mental",
+                        "SNS 100% público"
+                    ],
+                    educacao: [
+                        "Gratuitidade de manuais escolares até ao 12º ano",
+                        "Redução para 15 alunos por turma",
+                        "Fim dos exames nacionais",
+                        "Ensino superior totalmente gratuito"
+                    ],
+                    habitacao: [
+                        "Controlo público dos preços das rendas",
+                        "Expropriação de casas devolutas",
+                        "Fim dos vistos gold",
+                        "Programa nacional de habitação pública"
+                    ]
+                }
+            },
+            pan: {
+                name: "PAN",
+                shortName: "PAN",
+                leader: "Inês Sousa Real",
+                logo: "photos/pan-logo.png",
+                colorClass: "pan",
+                video: "https://www.youtube.com/embed/VIDEO_PAN",
+                proposals: {
+                    economia: [
+                        "Taxa sobre transações financeiras",
+                        "Fim dos subsídios a combustíveis fósseis",
+                        "Incentivos fiscais para empresas sustentáveis",
+                        "Rendimento básico universal piloto"
+                    ],
+                    saude: [
+                        "Integração de terapias alternativas no SNS",
+                        "Nutricionistas em todos os centros de saúde",
+                        "Redução do IVA em produtos biológicos",
+                        "Plano nacional de medicina preventiva"
+                    ],
+                    educacao: [
+                        "Educação ambiental obrigatória",
+                        "Refeições 100% vegetais nas cantinas escolares",
+                        "Proibição de zoos e circos com animais",
+                        "Programas de educação emocional"
+                    ],
+                    habitacao: [
+                        "Eco-casas com eficiência energética",
+                        "Reabilitação de edifícios abandonados",
+                        "Prioridade a famílias com animais",
+                        "Comunidades sustentáveis"
+                    ]
+                }
+            },
+            livre: {
+                name: "LIVRE",
+                shortName: "LIVRE",
+                leader: "Rui Tavares",
+                logo: "photos/livre-logo.png",
+                colorClass: "livre",
+                video: "https://www.youtube.com/embed/VIDEO_LIVRE",
+                proposals: {
+                    economia: [
+                        "Rendimento básico universal piloto",
+                        "Semana de trabalho de 4 dias em empresas públicas",
+                        "Taxação de grandes fortunas",
+                        "Reforma fiscal progressiva"
+                    ],
+                    saude: [
+                        "Legalização da eutanásia e cannabis medicinal",
+                        "Centros de saúde abertos 24h nas grandes cidades",
+                        "Psicólogos em todas as escolas",
+                        "Plano nacional de combate às adições"
+                    ],
+                    educacao: [
+                        "Ensino da programação desde o 1º ciclo",
+                        "Gratuitidade de creches para todas as famílias",
+                        "Plano nacional de combate ao bullying",
+                        "Democratização das escolas"
+                    ],
+                    habitacao: [
+                        "Programa de cooperativas de habitação",
+                        "Regulação do mercado de arrendamento",
+                        "Apoio à co-habitação",
+                        "Combate à especulação imobiliária"
+                    ]
+                }
+            },
+            cds: {
+                name: "CDS-PP",
+                shortName: "CDS",
+                leader: "Nuno Melo",
+                logo: "photos/cds-logo.png",
+                colorClass: "cds",
+                video: "https://www.youtube.com/embed/VIDEO_CDS",
+                proposals: {
+                    economia: [
+                        "Redução do IVA na restauração para 13%",
+                        "Apoio às PMEs com crédito bonificado",
+                        "Programa de atração de investimento estrangeiro",
+                        "Corte na despesa pública"
+                    ],
+                    saude: [
+                        "Cheque-saúde para escolha de prestador",
+                        "Dedução fiscal em seguros de saúde",
+                        "Mais médicos no interior com incentivos fiscais",
+                        "Parcerias com o setor social"
+                    ],
+                    educacao: [
+                        "Educação financeira obrigatória",
+                        "Apoio ao ensino profissional",
+                        "Autonomia das escolas católicas",
+                        "Valorização do ensino técnico"
+                    ],
+                    habitacao: [
+                        "Programa de arrendamento jovem",
+                        "Incentivos à natalidade",
+                        "Apoio à reabilitação urbana",
+                        "Simplificação do licenciamento"
+                    ]
+                }
+            }
+        };
+
+        // Função para comparar os partidos
+        function compareParties() {
+            const party1Id = document.getElementById('party1').value;
+            const party2Id = document.getElementById('party2').value;
+            
+            if (!party1Id || !party2Id) {
+                alert('Por favor, selecione dois partidos para comparar');
+                return;
+            }
+            
+            if (party1Id === party2Id) {
+                alert('Selecione partidos diferentes para comparar');
+                return;
+            }
+            
+            const party1 = partiesData[party1Id];
+            const party2 = partiesData[party2Id];
+            const resultDiv = document.getElementById('comparisonResult');
+            
+            // Gerar HTML da comparação
+            let html = `
+                <div class="comparison-header">
+                    <div class="party-card">
+                        <img src="${party1.logo}" alt="${party1.name}" class="party-logo">
+                        <h3 class="party-name ${party1.colorClass}">${party1.name}</h3>
+                        <p class="party-leader">${party1.leader}</p>
+                    </div>
+                    
+                    <div class="versus"><span>VS</span></div>
+                    
+                    <div class="party-card">
+                        <img src="${party2.logo}" alt="${party2.name}" class="party-logo">
+                        <h3 class="party-name ${party2.colorClass}">${party2.name}</h3>
+                        <p class="party-leader">${party2.leader}</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-grid">
+                    <!-- Economia -->
+                    <div class="category-title">
+                        <i class="fas fa-chart-line"></i> Economia
+                    </div>
+                    <div class="policies-container">
+                        <div class="policy-column">
+                            ${party1.proposals.economia.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                        <div class="policy-column">
+                            ${party2.proposals.economia.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <!-- Saúde -->
+                    <div class="category-title">
+                        <i class="fas fa-heartbeat"></i> Saúde
+                    </div>
+                    <div class="policies-container">
+                        <div class="policy-column">
+                            ${party1.proposals.saude.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                        <div class="policy-column">
+                            ${party2.proposals.saude.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <!-- Educação -->
+                    <div class="category-title">
+                        <i class="fas fa-graduation-cap"></i> Educação
+                    </div>
+                    <div class="policies-container">
+                        <div class="policy-column">
+                            ${party1.proposals.educacao.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                        <div class="policy-column">
+                            ${party2.proposals.educacao.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <!-- Habitação -->
+                    <div class="category-title">
+                        <i class="fas fa-home"></i> Habitação
+                    </div>
+                    <div class="policies-container">
+                        <div class="policy-column">
+                            ${party1.proposals.habitacao.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                        <div class="policy-column">
+                            ${party2.proposals.habitacao.map(item => `<div class="policy-item">${item}</div>`).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção de Vídeos -->
+                <div class="videos-section">
+                    <h3 class="videos-title">Os líderes explicam suas propostas</h3>
+                    <div class="videos-container">
+                        <div class="video-card">
+                            <div class="video-player">
+                                <iframe src="${party1.video}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3>${party1.leader} (${party1.shortName})</h3>
+                                <p>Discurso sobre as principais medidas do partido</p>
+                            </div>
+                        </div>
+                        
+                        <div class="video-card">
+                            <div class="video-player">
+                                <iframe src="${party2.video}" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div class="video-info">
+                                <h3>${party2.leader} (${party2.shortName})</h3>
+                                <p>Discurso sobre as principais medidas do partido</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botão Nova Comparação -->
+                <div class="new-comparison">
+                    <button class="new-comparison-btn" onclick="resetComparator()">
+                        <i class="fas fa-sync-alt"></i> Fazer Nova Comparação
+                    </button>
+                </div>
+            `;
+            
+            resultDiv.innerHTML = html;
+            resultDiv.style.display = 'block';
+            
+            // Rolagem suave para o resultado
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Função para resetar o comparador
+        function resetComparator() {
+            document.getElementById('party1').value = '';
+            document.getElementById('party2').value = '';
+            document.getElementById('comparisonResult').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Event listener para o botão de comparação
+        document.getElementById('compareBtn').addEventListener('click', compareParties);
+        
+        // Permitir comparação com Enter
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                compareParties();
             }
         });
     </script>
-
 </body>
 </html>
