@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="pt-PT" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórum Democrático | Presidência da República</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+   
+    <style>
+        
+        .menu {
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffffcb;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alinha à esquerda */
+    padding-left: 20vw; /* Empurra o menu mais para o centro */
+    transition: all 0.3s ease;
+    z-index: 1000;
+    position: relative;
+}
+
+        /* Menu Principal */
+        .main-menu {
+    width: 200px;
+    padding-top: 20px;
+    padding-left: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    border-right: 1px solid #ddd;
+}
+
+.submenu-container {
+    position: absolute;
+    left: calc(20vw + 200px); /* 20vw padding + 200px menu */
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    flex-direction: column;
+    padding-top: 20px;
+    z-index: 999;
+    justify-content: center;
+    border-left: 1px solid #ddd;
+}
+        .menu a {
+            color: #333; /* Texto escuro */
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px 15px;
+            transition: background-color 0.3s;
+        }
+
+        .menu a:hover {
+            background-color: #eee; /* Cor de fundo ao passar o mouse */
+        }
+
+        .menu .submenu {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .menu .submenu a {
+            padding-left: 30px;
+        }
+
+        .menu .menu-item.active .submenu {
+            display: block;
+        }
+
+        .menu-item {
+            cursor: pointer;
+        }
+
+        /* Submenu à Direita */
+
+
+        .submenu-container a {
+            padding-left: 30px;
+        }
+
+        .submenu-container.open {
+            display: flex;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .main-menu {
+                width: 200px;
+            }
+
+            .submenu-container {
+                left: 200px;
+            }
+        }
+    </style>
+    <style>
+         /* [Manter todos os estilos anteriores...] */
+
+        /* Novos estilos para o sistema de login */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .login-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .login-box {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .login-overlay.active .login-box {
+            transform: translateY(0);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .login-header h3 {
+            margin: 0;
+            color: #1e293b;
+            font-size: 1.5rem;
+        }
+        
+        .login-header p {
+            margin: 10px 0 0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e293b;
+            font-weight: 500;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .login-form input:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+        
+        .login-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+        
+        .login-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .login-btn:hover {
+            background: #1e40af;
+        }
+        
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .register-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .logout-btn:hover {
+            color: #dc2626;
+        }
+        
+        .login-required {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .login-required h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+        
+        .login-required p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        
+        .login-required-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .login-required-btn:hover {
+            background: #1e40af;
+        }
+         .confirmation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .confirmation-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .confirmation-box {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .confirmation-overlay.active .confirmation-box {
+            transform: translateY(0);
+        }
+        
+        .confirmation-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+        
+        .confirmation-message {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+         /* Estilo para nova resposta */
+         .new-reply {
+            animation: fadeIn 0.5s ease-in-out;
+            background-color: #f0f7ff;
+            border-left: 3px solid #2563eb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .confirmation-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .confirmation-btn:hover {
+            background: #1e40af;
+        }
+        /* Estilos específicos para o fórum */
+        .forum-section {
+            padding: 60px 0;
+            background-color: #f5f7fa;
+        }
+        
+        .forum-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+        
+        .forum-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .forum-main {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .forum-header {
+            padding: 25px;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+        }
+        
+        .forum-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .forum-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+        }
+        
+        .forum-search {
+            padding: 20px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .search-bar {
+            display: flex;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px 0 0 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
+        }
+        
+        .search-bar input:focus {
+            border-color: #2563eb;
+        }
+        
+        .search-bar button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 6px 6px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background: #1e40af;
+        }
+        
+        .forum-categories {
+            margin-top: 20px;
+        }
+        
+        .category-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-title i {
+            margin-right: 10px;
+            color: #2563eb;
+        }
+        
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-item {
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-item:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        
+        .category-item.active {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .category-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .forum-actions {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .new-topic-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .new-topic-btn:hover {
+            background: #1e40af;
+        }
+        
+        .new-topic-btn i {
+            margin-right: 8px;
+        }
+        
+        .sort-options select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .topics-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .topic-item {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s;
+        }
+        
+        .topic-item:hover {
+            background: #f8fafc;
+        }
+        
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .topic-title {
+            font-size: 1.2rem;
+            color: #1e293b;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .topic-title:hover {
+            color: #2563eb;
+        }
+        
+        .topic-category {
+            background: #e0e7ff;
+            color: #2563eb;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .topic-content {
+            color: #475569;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .topic-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .topic-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: bold;
+        }
+        
+        .topic-stats {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            background: white;
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+        
+        /* Estilos para a página de tópico */
+        .topic-page {
+            padding: 30px;
+        }
+        
+        .topic-main {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .topic-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .topic-date {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .topic-body {
+            line-height: 1.7;
+            color: #334155;
+        }
+        
+        .replies-section {
+            margin-top: 40px;
+        }
+        
+        .replies-title {
+            font-size: 1.3rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2563eb;
+        }
+        
+        .reply {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .reply-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .reply-content {
+            flex: 1;
+        }
+        
+        .reply-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .reply-author {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .reply-date {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        
+        .reply-text {
+            color: #475569;
+            line-height: 1.6;
+        }
+        
+        .reply-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .reply-action {
+            color: #64748b;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .reply-action:hover {
+            color: #2563eb;
+        }
+        
+        .reply-form {
+            margin-top: 40px;
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .reply-form h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+        
+        .reply-form textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            resize: vertical;
+        }
+        
+        .reply-form button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .reply-form button:hover {
+            background: #1e40af;
+        }
+        
+        .back-to-forum {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #2563eb;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        /* Modal para novo tópico */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: #1e293b;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e293b;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .modal-btn.cancel {
+            background: white;
+            border: 1px solid #cbd5e1;
+            color: #64748b;
+        }
+        
+        .modal-btn.cancel:hover {
+            background: #f1f5f9;
+        }
+        
+        .modal-btn.submit {
+            background: #2563eb;
+            border: 1px solid #2563eb;
+            color: white;
+        }
+        
+        .modal-btn.submit:hover {
+            background: #1e40af;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .forum-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .forum-sidebar {
+                position: static;
+                margin-bottom: 30px;
+            }
+            
+            .forum-actions {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .topic-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .topic-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .topic-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .reply {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        /* Efeitos futuristas */
+        .topic-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .topic-item:hover::before {
+            left: 100%;
+        }
+        
+        .category-item {
+            position: relative;
+        }
+        
+        .category-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.3s;
+        }
+        
+        .category-item:hover::after {
+            width: 100%;
+        }
+        
+        .new-topic-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .new-topic-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        
+        .new-topic-btn:hover::after {
+            left: 100%;
+            top: 100%;
+        }
+        
+        /* Classe para esconder elementos */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        
+                        <a href="#" id="admin-btn" data-lucide="menu" class="logo">MenuImage</a>            
+                    
+                    </ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" data-lucide="languages" >Notícias</a></li>
+                        <li><a href="#" data-lucide="search" >Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class="menu" id="menu" style="display: none;">
+
+        <div class="menu" id="menu">
+            <div class="main-menu">
+                <div class="menu-item" id="menu-item-1">
+                    <a href="#">Novidades</a>
+                    <div class="submenu">
+                        <a href="#">Subopção 1.1</a>
+                        <a href="#">Subopção 1.2</a>
+                        <a href="#">Subopção 1.3</a>
+                    </div>
+                </div>
+                <div class="menu-item" id="menu-item-2">
+                    <a href="#">Opção 2</a>
+                    <div class="submenu">
+                        <a href="#">Subopção 2.1</a>
+                        <a href="#">Subopção 2.2</a>
+                    </div>
+                </div>
+                <div class="menu-item" id="menu-item-3">
+                    <a href="#">Eleições</a>
+                    <div class="submenu">
+                        <a href="#">Próximas Eleições</a>
+                        <a href="#">Como votar</a>
+                        <a href="#">Resultados Eleitoriais</a>
+                        <a href="#">Mesa de Voto</a>
+                    </div>
+                </div>
+                <div class="menu-item" id="menu-item-4">
+                    <a href="#">Forum</a>
+
+                </div>
+            </div>
+    
+            <!-- Submenu à Direita -->
+            <div class="submenu-container" id="submenu-container">
+                <!-- Aqui vão as sub-opções que aparecem à direita -->
+            </div>
+        </div>
+
+    </div>
+
+    
+    <!-- Página principal do fórum -->
+    <section class="forum-section" id="forum-content">
+        <div class="container forum-container">
+            <!-- Sidebar -->
+            <aside class="forum-sidebar">
+                <div class="forum-search">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Pesquisar no fórum...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                
+                <div class="forum-categories">
+                    <h3 class="category-title"><i class="fas fa-list"></i> Categorias</h3>
+                    <ul class="category-list">
+                        <li class="category-item active">
+                            <i class="fas fa-comments"></i> Todas as Discussões
+                        </li>
+                        <li class="category-item">
+                            <i class="fas fa-landmark"></i> Instituições Democráticas
+                        </li>
+                        <li class="category-item">
+                            <i class="fas fa-vote-yea"></i> Processos Eleitorais
+                        </li>
+                        <li class="category-item">
+                            <i class="fas fa-balance-scale"></i> Direitos e Deveres
+                        </li>
+                        <li class="category-item">
+                            <i class="fas fa-user-tie"></i> Representantes Políticos
+                        </li>
+                        <li class="category-item">
+                            <i class="fas fa-question-circle"></i> Dúvidas Gerais
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="forum-categories" style="margin-top: 30px;">
+                    <h3 class="category-title"><i class="fas fa-chart-line"></i> Estatísticas</h3>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <i class="fas fa-comment"></i> 1.245 Tópicos
+                        </li>
+                        <li class="category-item">
+                            <i class="fas fa-reply"></i> 5.892 Respostas
+                        </li>
+                        <li class="category-item">
+                            <i class="fas fa-users"></i> 893 Membros
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            
+            <!-- Conteúdo principal do fórum -->
+            <main class="forum-main" id="forum-main">
+                <header class="forum-header">
+                    <h2>Fórum Democrático</h2>
+                    <p>Espaço de discussão aberto sobre democracia, política e cidadania</p>
+                </header>
+                
+                <div class="forum-actions">
+                    <button class="new-topic-btn" id="newTopicBtn">
+                        <i class="fas fa-plus"></i> Novo Tópico
+                    </button>
+                    
+                    <div class="sort-options">
+                        <select>
+                            <option>Mais Recentes</option>
+                            <option>Mais Antigos</option>
+                            <option>Mais Populares</option>
+                            <option>Mais Comentados</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <ul class="topics-list">
+                    <!-- Tópico 1 -->
+                    <li class="topic-item" data-topic-id="1">
+                        <div class="topic-header">
+                            <h3 class="topic-title">Como funciona o processo de votação para as eleições presidenciais?</h3>
+                            <span class="topic-category">Processos Eleitorais</span>
+                        </div>
+                        <div class="topic-content">
+                            Gostaria de entender melhor como funciona todo o processo de votação nas eleições presidenciais, desde o cadastro até a contagem dos votos. Alguém pode explicar ou indicar onde posso encontrar essas informações?
+                        </div>
+                        <div class="topic-footer">
+                            <div class="topic-author">
+                                <div class="author-avatar">JP</div>
+                                <span>João Pereira - 15/05/2024</span>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 124
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-comment"></i> 8
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-thumbs-up"></i> 15
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <!-- Tópico 2 -->
+                    <li class="topic-item" data-topic-id="2">
+                        <div class="topic-header">
+                            <h3 class="topic-title">Quais são as principais funções do Presidente da República?</h3>
+                            <span class="topic-category">Representantes Políticos</span>
+                        </div>
+                        <div class="topic-content">
+                            Sempre tive dúvidas sobre o que exatamente faz o Presidente da República. Sei que tem um papel importante, mas gostaria de entender melhor suas atribuições e como elas diferem das funções do Primeiro-Ministro.
+                        </div>
+                        <div class="topic-footer">
+                            <div class="topic-author">
+                                <div class="author-avatar">AM</div>
+                                <span>Ana Martins - 12/05/2024</span>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 89
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-comment"></i> 5
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-thumbs-up"></i> 7
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <!-- Tópico 3 -->
+                    <li class="topic-item" data-topic-id="3">
+                        <div class="topic-header">
+                            <h3 class="topic-title">Como posso participar mais ativamente na política nacional?</h3>
+                            <span class="topic-category">Direitos e Deveres</span>
+                        </div>
+                        <div class="topic-content">
+                            Quero me envolver mais nas decisões políticas do país, mas não sei por onde começar. Além de votar, que outras formas de participação existem para um cidadão comum?
+                        </div>
+                        <div class="topic-footer">
+                            <div class="topic-author">
+                                <div class="author-avatar">RS</div>
+                                <span>Ricardo Silva - 10/05/2024</span>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 156
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-comment"></i> 12
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-thumbs-up"></i> 23
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <!-- Tópico 4 -->
+                    <li class="topic-item" data-topic-id="4">
+                        <div class="topic-header">
+                            <h3 class="topic-title">Qual a diferença entre Assembleia da República e Governo?</h3>
+                            <span class="topic-category">Instituições Democráticas</span>
+                        </div>
+                        <div class="topic-content">
+                            Às vezes confundo as funções da Assembleia da República com as do Governo. Alguém pode explicar de forma simples qual é a diferença entre estes dois órgãos?
+                        </div>
+                        <div class="topic-footer">
+                            <div class="topic-author">
+                                <div class="author-avatar">MC</div>
+                                <span>Maria Costa - 08/05/2024</span>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 210
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-comment"></i> 14
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-thumbs-up"></i> 31
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <!-- Tópico 5 -->
+                    <li class="topic-item" data-topic-id="5">
+                        <div class="topic-header">
+                            <h3 class="topic-title">Como funciona o sistema de voto dos emigrantes?</h3>
+                            <span class="topic-category">Processos Eleitorais</span>
+                        </div>
+                        <div class="topic-content">
+                            Vivo no estrangeiro e gostaria de saber como posso exercer o meu direito de voto nas próximas eleições. Quais são os passos necessários e os prazos a cumprir?
+                        </div>
+                        <div class="topic-footer">
+                            <div class="topic-author">
+                                <div class="author-avatar">LF</div>
+                                <span>Luís Fernandes - 05/05/2024</span>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-eye"></i> 78
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-comment"></i> 6
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-thumbs-up"></i> 9
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="pagination">
+                    <div class="page-btn active">1</div>
+                    <div class="page-btn">2</div>
+                    <div class="page-btn">3</div>
+                    <div class="page-btn">4</div>
+                    <div class="page-btn">5</div>
+                    <div class="page-btn"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </main>
+            
+            <!-- Página de detalhes do tópico (inicialmente escondida) -->
+            <main class="forum-main hidden" id="topic-page">
+                <div class="topic-page">
+                    <div class="back-to-forum" id="backToForum">
+                        <i class="fas fa-arrow-left"></i> Voltar ao Fórum
+                    </div>
+                    
+                    <div class="topic-main">
+                        <div class="topic-meta">
+                            <div class="topic-category">Processos Eleitorais</div>
+                            <div class="topic-date">Publicado em 15/05/2024</div>
+                        </div>
+                        
+                        <h2>Como funciona o processo de votação para as eleições presidenciais?</h2>
+                        
+                        <div class="topic-author" style="margin: 20px 0;">
+                            <div class="author-avatar" style="width: 40px; height: 40px;">JP</div>
+                            <span>João Pereira</span>
+                        </div>
+                        
+                        <div class="topic-body">
+                            <p>Olá a todos,</p>
+                            
+                            <p>Gostaria de entender melhor como funciona todo o processo de votação nas eleições presidenciais em Portugal. Tenho várias dúvidas sobre o assunto:</p>
+                            
+                            <ol>
+                                <li>Como devo proceder para me cadastrar como eleitor?</li>
+                                <li>Quais são os documentos necessários para votar?</li>
+                                <li>Como funciona a mesa de voto no dia das eleições?</li>
+                                <li>Qual o processo de contagem dos votos?</li>
+                                <li>Como é garantida a transparência e segurança do processo?</li>
+                            </ol>
+                            
+                            <p>Se alguém puder explicar ou indicar onde posso encontrar informações oficiais sobre este processo, agradeço muito. Quero entender melhor como funciona nossa democracia na prática.</p>
+                            
+                            <p>Cumprimentos,<br>João Pereira</p>
+                        </div>
+                        
+                        <div class="topic-stats" style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                            <div class="stat-item">
+                                <i class="fas fa-eye"></i> 124 visualizações
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-comment"></i> 8 respostas
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-thumbs-up"></i> 15 votos positivos
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="replies-section">
+                        <h3 class="replies-title"><i class="fas fa-comments"></i> Respostas (8)</h3>
+                        
+                        <!-- Resposta 1 -->
+                        <div class="reply">
+                            <div class="reply-avatar">AR</div>
+                            <div class="reply-content">
+                                <div class="reply-header">
+                                    <span class="reply-author">António Rodrigues</span>
+                                    <span class="reply-date">15/05/2024 às 14:23</span>
+                                </div>
+                                <div class="reply-text">
+                                    <p>Olá João,</p>
+                                    <p>Para se cadastrar como eleitor, você precisa se recensear. O recenseamento eleitoral é automático quando completa 18 anos, mas se não estiver recenseado, pode fazê-lo na junta de freguesia da sua área de residência ou online no portal do recenseamento.</p>
+                                    <p>No dia das eleições, basta apresentar o Cartão de Cidadão ou outro documento de identificação válido.</p>
+                                </div>
+                                <div class="reply-actions">
+                                    <div class="reply-action">
+                                        <i class="fas fa-thumbs-up"></i> Útil (12)
+                                    </div>
+                                    <div class="reply-action">
+                                        <i class="fas fa-reply"></i> Responder
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Resposta 2 -->
+                        <div class="reply">
+                            <div class="reply-avatar">SM</div>
+                            <div class="reply-content">
+                                <div class="reply-header">
+                                    <span class="reply-author">Sofia Mendes</span>
+                                    <span class="reply-date">15/05/2024 às 15:47</span>
+                                </div>
+                                <div class="reply-text">
+                                    <p>Complementando a resposta anterior, sobre a mesa de voto:</p>
+                                    <p>No local de voto, você será direcionado para a mesa correspondente à sua secção eleitoral. Apresenta o documento de identificação, os membros da mesa verificam seu nome na lista de eleitores, você assina o caderno e recebe o boletim de voto.</p>
+                                    <p>Depois vai para a cabine de voto (que é privada), assinala a sua escolha, dobra o boletim e deposita na urna.</p>
+                                </div>
+                                <div class="reply-actions">
+                                    <div class="reply-action">
+                                        <i class="fas fa-thumbs-up"></i> Útil (8)
+                                    </div>
+                                    <div class="reply-action">
+                                        <i class="fas fa-reply"></i> Responder
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Resposta 3 -->
+                        <div class="reply">
+                            <div class="reply-avatar">PF</div>
+                            <div class="reply-content">
+                                <div class="reply-header">
+                                    <span class="reply-author">Pedro Fonseca</span>
+                                    <span class="reply-date">15/05/2024 às 16:12</span>
+                                </div>
+                                <div class="reply-text">
+                                    <p>Quanto à segurança do processo, posso dizer que:</p>
+                                    <p>1. As urnas são transparentes para que se possa ver que estão vazias no início</p>
+                                    <p>2. São lacradas na presença dos delegados dos partidos</p>
+                                    <p>3. A contagem é feita manualmente por cada mesa, com fiscalização de representantes dos candidatos</p>
+                                    <p>4. Os resultados são transmitidos para a Comissão Nacional de Eleições que consolida os dados</p>
+                                    <p>Todo o processo é bastante seguro e transparente.</p>
+                                </div>
+                                <div class="reply-actions">
+                                    <div class="reply-action">
+                                        <i class="fas fa-thumbs-up"></i> Útil (15)
+                                    </div>
+                                    <div class="reply-action">
+                                        <i class="fas fa-reply"></i> Responder
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Resposta 4 -->
+                        <div class="reply">
+                            <div class="reply-avatar">OF</div>
+                            <div class="reply-content">
+                                <div class="reply-header">
+                                    <span class="reply-author">Ofélia Dias (Moderadora)</span>
+                                    <span class="reply-date">15/05/2024 às 17:30</span>
+                                </div>
+                                <div class="reply-text">
+                                    <p>Boa tarde,</p>
+                                    <p>Como moderadora, gostaria de complementar com informações oficiais:</p>
+                                    <p>Todo o processo eleitoral está regulamentado no Código Eleitoral, que pode ser consultado no site da Comissão Nacional de Eleições (www.cne.pt).</p>
+                                    <p>Para informações detalhadas sobre o processo de votação, recomendo o guia do eleitor disponível no mesmo site, que explica passo a passo todo o processo, desde o recenseamento até à contagem dos votos.</p>
+                                    <p>Qualquer dúvida adicional, estou à disposição.</p>
+                                </div>
+                                <div class="reply-actions">
+                                    <div class="reply-action">
+                                        <i class="fas fa-thumbs-up"></i> Útil (20)
+                                    </div>
+                                    <div class="reply-action">
+                                        <i class="fas fa-reply"></i> Responder
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reply-form">
+                        <h3><i class="fas fa-reply"></i> Responder a este tópico</h3>
+                        <textarea placeholder="Escreva a sua resposta..."></textarea>
+                        <button><i class="fas fa-paper-plane"></i> Publicar Resposta</button>
+                    </div>
+                    <div class="confirmation-overlay" id="confirmationOverlay">
+                        <div class="confirmation-box">
+                            <div class="confirmation-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 class="confirmation-title">Resposta Enviada!</h3>
+                            <p class="confirmation-message">Sua resposta foi publicada com sucesso no fórum.</p>
+                            <button class="confirmation-btn" id="closeConfirmation">OK</button>
+                        </div>
+                    </div>
+                
+                </div>
+            </main>
+        </div>
+    </section>
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <div class="login-header">
+                <h3>Entrar no Fórum</h3>
+                <p>Faça login para participar das discussões</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                </div>
+                
+                <div class="login-actions">
+                    <button type="submit" class="login-btn">Entrar</button>
+                </div>
+            </form>
+            
+            <div class="register-link">
+                Não tem uma conta? <a href="#" id="registerLink">Registre-se</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para novo tópico -->
+    <div class="modal-overlay" id="newTopicModal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3>Criar Novo Tópico</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </header>
+            
+            <div class="modal-body">
+                <form id="newTopicForm">
+                    <div class="form-group">
+                        <label for="topicTitle">Título do Tópico</label>
+                        <input type="text" id="topicTitle" placeholder="Escreva um título claro e objetivo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topicCategory">Categoria</label>
+                        <select id="topicCategory" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="instituicoes">Instituições Democráticas</option>
+                            <option value="eleicoes">Processos Eleitorais</option>
+                            <option value="direitos">Direitos e Deveres</option>
+                            <option value="representantes">Representantes Políticos</option>
+                            <option value="duvidas">Dúvidas Gerais</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topicContent">Conteúdo</label>
+                        <textarea id="topicContent" placeholder="Descreva sua dúvida ou opinião com detalhes" required></textarea>
+                    </div>
+                </form>
+            </div>
+            
+            <footer class="modal-footer">
+                <button class="modal-btn cancel" id="cancelTopic">Cancelar</button>
+                <button class="modal-btn submit" id="submitTopic">Publicar Tópico</button>
+            </footer>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
+            </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Modal de novo tópico
+        const newTopicBtn = document.getElementById('newTopicBtn');
+        const closeModal = document.getElementById('closeModal');
+        const cancelTopic = document.getElementById('cancelTopic');
+        const newTopicModal = document.getElementById('newTopicModal');
+        
+        newTopicBtn.addEventListener('click', () => {
+            newTopicModal.classList.add('active');
+        });
+        
+        closeModal.addEventListener('click', () => {
+            newTopicModal.classList.remove('active');
+        });
+        
+        cancelTopic.addEventListener('click', () => {
+            newTopicModal.classList.remove('active');
+        });
+        
+        // Fechar modal ao clicar fora
+        newTopicModal.addEventListener('click', (e) => {
+            if (e.target === newTopicModal) {
+                newTopicModal.classList.remove('active');
+            }
+        });
+        
+        // Submeter formulário
+        const submitTopic = document.getElementById('submitTopic');
+        const newTopicForm = document.getElementById('newTopicForm');
+        
+        submitTopic.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (newTopicForm.checkValidity()) {
+                alert('Tópico criado com sucesso!');
+                newTopicForm.reset();
+                newTopicModal.classList.remove('active');
+            } else {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+            }
+        });
+        
+        // Navegação entre tópicos
+        const topicTitles = document.querySelectorAll('.topic-title');
+        const forumMain = document.getElementById('forum-main');
+        const topicPage = document.getElementById('topic-page');
+        const backToForum = document.getElementById('backToForum');
+        
+        // Mostrar página de tópico quando clicar em um título
+        topicTitles.forEach(title => {
+            title.addEventListener('click', (e) => {
+                e.preventDefault();
+                forumMain.classList.add('hidden');
+                topicPage.classList.remove('hidden');
+                
+                // Rolagem suave para o topo da página de tópico
+                window.scrollTo({
+                    top: topicPage.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Voltar para a lista de tópicos
+        backToForum.addEventListener('click', () => {
+            topicPage.classList.add('hidden');
+            forumMain.classList.remove('hidden');
+            
+            // Rolagem suave para o topo do fórum
+            window.scrollTo({
+                top: forumMain.offsetTop - 20,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Efeitos de hover nos cards
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+        const replyFormBtn = document.querySelector('.reply-form button');
+        const replyTextarea = document.querySelector('.reply-form textarea');
+        const repliesSection = document.querySelector('.replies-section');
+        const confirmationOverlay = document.getElementById('confirmationOverlay');
+        const closeConfirmation = document.getElementById('closeConfirmation');
+        
+        replyFormBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (replyTextarea.value.trim() !== '') {
+                // Criar nova resposta
+                const newReply = document.createElement('div');
+                newReply.className = 'reply new-reply';
+                newReply.innerHTML = `
+                    <div class="reply-avatar">TU</div>
+                    <div class="reply-content">
+                        <div class="reply-header">
+                            <span class="reply-author">Você</span>
+                            <span class="reply-date">Agora</span>
+                        </div>
+                        <div class="reply-text">
+                            <p>${replyTextarea.value}</p>
+                        </div>
+                        <div class="reply-actions">
+                            <div class="reply-action">
+                                <i class="fas fa-thumbs-up"></i> Útil (0)
+                            </div>
+                            <div class="reply-action">
+                                <i class="fas fa-reply"></i> Responder
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Adicionar a nova resposta no início da lista
+                const firstReply = document.querySelector('.reply');
+                if (firstReply) {
+                    repliesSection.insertBefore(newReply, firstReply);
+                } else {
+                    const repliesTitle = document.querySelector('.replies-title');
+                    repliesSection.insertBefore(newReply, repliesTitle.nextSibling);
+                }
+                
+                // Atualizar contador de respostas
+                const repliesTitle = document.querySelector('.replies-title');
+                const replyCount = document.querySelectorAll('.reply').length;
+                repliesTitle.textContent = `Respostas (${replyCount})`;
+                
+                // Mostrar overlay de confirmação
+                confirmationOverlay.classList.add('active');
+                
+                // Limpar o textarea
+                replyTextarea.value = '';
+                
+                // Rolar suavemente para a nova resposta
+                setTimeout(() => {
+                    newReply.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            } else {
+                alert('Por favor, escreva uma resposta antes de enviar.');
+            }
+        });
+        
+        closeConfirmation.addEventListener('click', () => {
+            confirmationOverlay.classList.remove('active');
+        });
+
+        // Função para formatar a data como "há X minutos"
+        function formatDateAsTimeAgo() {
+            return "há alguns segundos";
+        }
+        
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const adminBtn = document.getElementById('admin-btn');
+            const menu = document.getElementById('menu');
+            const mainContent = document.getElementById('main-content');
+    
+            adminBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.style.display = 'flex';        // Mostrar o menu
+                mainContent.style.display = 'none'; // Esconder conteúdo principal
+            });
+        });
+    </script>
+    
+    <script>
+        // SCRIPTS DO MENU
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const submenuContainer = document.getElementById('submenu-container');
+    
+            menuItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    // Verificar se o submenu já está visível
+                    const submenu = this.querySelector('.submenu');
+                    const subMenuLinks = submenu ? submenu.querySelectorAll('a') : [];
+                    
+                    // Adicionar ou remover a classe 'active' para exibir/ocultar o submenu
+                    if (submenu) {
+                        submenu.classList.toggle('active');
+                    }
+    
+                    // Criar sub-menu à direita
+                    submenuContainer.innerHTML = ''; // Limpar conteúdo anterior
+                    subMenuLinks.forEach(function (link) {
+                        const submenuLink = document.createElement('a');
+                        submenuLink.href = '#';
+                        submenuLink.textContent = link.textContent;
+                        submenuContainer.appendChild(submenuLink);
+                    });
+    
+                    // Tornar o submenu à direita visível
+                    submenuContainer.classList.add('open');
+                });
+            });
+        });
+    </script>
+    <script>
+        lucide.createIcons();
+    </script>
+    
+</body>
+</html>
