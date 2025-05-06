@@ -75,19 +75,22 @@
                 <nav class="nav-left">
                     <ul>
                         
-                        <a href="#" id="admin-btn" data-lucide="menu" class="logo">MenuImage</a>            
+                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo" >MenuImage</a>            
                     
                     </ul>
                 </nav>
+                </nav>
         
                 <div class="logo-container">
-                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                    <a href="PaginaInicial.html">
+                        <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                    </a>
                 </div>
         
                 <nav class="nav-right">
                     <ul>
-                        <li><a href="#" data-lucide="languages" >Notícias</a></li>
-                        <li><a href="#" data-lucide="search" >Search</a></li>
+                        <li><a href="#" data-lucide="languages" class="sbtn" >Notícias</a></li>
+                        <li><a href="#" class="sbtn" data-lucide="search" >Search</a></li>
                     </ul>
                 </nav>
             </div>
@@ -194,6 +197,17 @@
             }
         });
     </script>
+
+<script>
+    lucide.createIcons();
+</script>
+
+<script>
+    document.getElementById("admin-btn").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default link behavior (optional)
+        window.location.href = "Menu.html"; // Change this to your desired page
+    });
+</script>
 
 </body>
 </html>

@@ -27,7 +27,7 @@
             border-right: 1px solid var(--medium-gray);
             display: flex;
             flex-direction: column;
-            padding-top: 20px;
+            padding-top: 5px;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -41,16 +41,19 @@
 
         .menu-item a:hover {
             background-color: #f0f0f0;
+            transform: scale(1.1);
+            transition: transform 0.3s ease
         }
 
         .submenu-container {
-            width: 200px;
+            width: 250px;
             background-color: #fff;
 
-            padding-top: 20px;
+            padding-top: 15px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+
 
         }
 
@@ -62,6 +65,8 @@
 
         .submenu-container a:hover {
             background-color: #f0f0f0;
+            transform: scale(1.1);
+            transition: transform 0.3s ease
         }
 
         @media (max-width: 768px) {
@@ -93,7 +98,9 @@
                 </nav>
         
                 <div class="logo-container">
-                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                    <a href="PaginaInicial.html">
+                        <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                    </a>
                 </div>
         
                 <nav class="nav-right">
@@ -109,8 +116,11 @@
 <!-- MENU CENTRAL -->
 <div class="menu">
     <div class="main-menu">
+        <div class="menu-item" data-submenu="4">
+            <a href="#">Partidos</a>
+        </div>
         <div class="menu-item" data-submenu="1">
-            <a href="#">Novidades</a>
+            <a href="#">Assembleia da República</a>
         </div>
         <div class="menu-item" data-submenu="2">
             <a href="#">Eleições</a>
@@ -130,9 +140,25 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         const submenuData = {
-            1: ['Subopção 1.1', 'Subopção 1.2', 'Subopção 1.3'],
-            2: ['Próximas Eleições', 'Como votar', 'Resultados Eleitorais', 'Mesa de Voto'],
-            3: ['Discussões Atuais', 'Criar Tópico']
+            1: [
+                { text: 'Deputados em funções', href: '#' },
+                { text: 'Agenda Parlamentar', href: '#' },
+                { text: 'Leis em Discussão', href: '#' },
+                { text: 'Contactar um deputado', href: '#' }
+            ],
+            2: [
+                { text: 'Próximas Eleições', href: '#' },
+                { text: 'Como votar', href: '#' },
+                { text: 'Resultados Eleitorais', href: '#' },
+                { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
+            ],
+            3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+            4: [
+                { text: 'Partidos', href: 'partidos.html' },
+                { text: 'Financiamento partidário', href: '#' },
+                { text: 'Como criar um partido', href: '#' },
+                { text: 'Comparador de Partidos', href: 'comparador.html' }
+            ],
         };
 
         const menuItems = document.querySelectorAll('.menu-item');
@@ -144,10 +170,17 @@
                 const submenuLinks = submenuData[submenuId] || [];
 
                 submenuContainer.innerHTML = '';
-                submenuLinks.forEach(text => {
+                submenuLinks.forEach(linkData => {
                     const link = document.createElement('a');
-                    link.href = '#';
-                    link.textContent = text;
+
+                    if (typeof linkData === 'string') {
+                        link.href = '#';
+                        link.textContent = linkData;
+                    } else {
+                        link.href = linkData.href;
+                        link.textContent = linkData.text;
+                    }
+
                     submenuContainer.appendChild(link);
                 });
             });
