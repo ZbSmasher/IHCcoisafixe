@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+
+        /* MENU CENTRALIZADO */
+        .menu {
+            width: 100%;
+            height: calc(100vh - 80px);
+            background-color: #ffffffcb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-menu {
+            width: 200px;
+            background-color: #fff;
+            border-right: 1px solid var(--medium-gray);
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .menu-item a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .submenu-container {
+            width: 200px;
+            background-color: #fff;
+
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+
+        }
+
+        .submenu-container a {
+            padding: 10px 30px;
+            text-decoration: none;
+            color: var(--dark-gray);
+        }
+
+        .submenu-container a:hover {
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 20px;
+            }
+
+            .submenu-container {
+                border-left: none;
+                border-top: 1px solid var(--medium-gray);
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        
+                        <a href="PaginaInicial.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo" >MenuImage</a>            
+                    
+                    </ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" class = "sbtn" data-lucide="languages" >Notícias</a></li>
+                        <li><a href="#" class= "sbtn" data-lucide="search" >Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+<!-- MENU CENTRAL -->
+<div class="menu">
+    <div class="main-menu">
+        <div class="menu-item" data-submenu="1">
+            <a href="#">Novidades</a>
+        </div>
+        <div class="menu-item" data-submenu="2">
+            <a href="#">Eleições</a>
+        </div>
+        <div class="menu-item" data-submenu="3">
+            <a href="#">Forum</a>
+        </div>
+    </div>
+
+    <div class="submenu-container" id="submenu-container">
+        <!-- Subopções aparecerão aqui -->
+    </div>
+</div>
+
+<script>
+    lucide.createIcons();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const submenuData = {
+            1: ['Subopção 1.1', 'Subopção 1.2', 'Subopção 1.3'],
+            2: ['Próximas Eleições', 'Como votar', 'Resultados Eleitorais', 'Mesa de Voto'],
+            3: ['Discussões Atuais', 'Criar Tópico']
+        };
+
+        const menuItems = document.querySelectorAll('.menu-item');
+        const submenuContainer = document.getElementById('submenu-container');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const submenuId = item.getAttribute('data-submenu');
+                const submenuLinks = submenuData[submenuId] || [];
+
+                submenuContainer.innerHTML = '';
+                submenuLinks.forEach(text => {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = text;
+                    submenuContainer.appendChild(link);
+                });
+            });
+        });
+    });
+</script>
+
+<script>
+    document.getElementById("admin-btn").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent default link behavior (optional)
+        window.location.href = "PaginaInicial.html"; // Change this to your desired page
+    });
+</script>
+
+</body>
+</html>
