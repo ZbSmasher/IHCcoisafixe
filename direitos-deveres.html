@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direitos e Deveres Fundamentais - Constituição Portuguesa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Estilos específicos para esta página */
+        .rights-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .rights-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .rights-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .rights-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .rights-divider {
+            height: 3px;
+            width: 100px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+        
+        .rights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .rights-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid;
+        }
+        
+        .rights-section.duties {
+            border-top-color: #e74c3c;
+        }
+        
+        .rights-section.rights {
+            border-top-color: #2ecc71;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .duties .section-icon {
+            background-color: #fdeaea;
+            color: #e74c3c;
+        }
+        
+        .rights .section-icon {
+            background-color: #e8f5e9;
+            color: #2ecc71;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .rights-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .rights-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .rights-item:last-child {
+            border-bottom: none;
+        }
+        
+        .rights-item i {
+            margin-right: 15px;
+            margin-top: 3px;
+            color: #3498db;
+        }
+        
+        .rights-content h4 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+        }
+        
+        .rights-content p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+        
+        .article-reference {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #3498db;
+            font-weight: 500;
+        }
+        
+        .constitution-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .constitution-link a {
+            display: inline-flex;
+            align-items: center;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .constitution-link a i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header igual ao modelo -->
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo">MenuImage</a>            
+                    </ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+                        <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div id="main-content">
+        <section class="rights-container">
+            <div class="rights-header">
+                <h1 class="rights-title">Direitos e Deveres Fundamentais</h1>
+                <p class="rights-subtitle">A base da cidadania portuguesa conforme estabelecido na Constituição da República</p>
+                <div class="rights-divider"></div>
+            </div>
+            
+            <div class="rights-grid">
+                <!-- Seção de Direitos -->
+                <div class="rights-section rights">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h2 class="section-title">Direitos Fundamentais</h2>
+                    </div>
+                    
+                    <ul class="rights-list">
+                        <li class="rights-item">
+                            <i class="fas fa-user-shield"></i>
+                            <div class="rights-content">
+                                <h4>Direito à Vida</h4>
+                                <p>A vida humana é inviolável e em caso algum haverá pena de morte.</p>
+                                <span class="article-reference">Artigo 24.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-comment-dots"></i>
+                            <div class="rights-content">
+                                <h4>Liberdade de Expressão</h4>
+                                <p>Todos têm o direito de exprimir e divulgar livremente o seu pensamento.</p>
+                                <span class="article-reference">Artigo 37.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-home"></i>
+                            <div class="rights-content">
+                                <h4>Inviolabilidade do Domicílio</h4>
+                                <p>O domicílio e o sigilo da correspondência são invioláveis.</p>
+                                <span class="article-reference">Artigo 34.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <div class="rights-content">
+                                <h4>Direito à Saúde</h4>
+                                <p>Todos têm direito à proteção da saúde e o dever de a defender e promover.</p>
+                                <span class="article-reference">Artigo 64.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div class="rights-content">
+                                <h4>Direito à Educação</h4>
+                                <p>Todos têm direito ao ensino com garantia do direito à igualdade de oportunidades.</p>
+                                <span class="article-reference">Artigo 73.º</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Seção de Deveres -->
+                <div class="rights-section duties">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h2 class="section-title">Deveres Fundamentais</h2>
+                    </div>
+                    
+                    <ul class="rights-list">
+                        <li class="rights-item">
+                            <i class="fas fa-euro-sign"></i>
+                            <div class="rights-content">
+                                <h4>Dever Fiscal</h4>
+                                <p>Todos têm o dever de contribuir para as despesas públicas segundo a capacidade económica.</p>
+                                <span class="article-reference">Artigo 103.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-child"></i>
+                            <div class="rights-content">
+                                <h4>Dever de Trabalho</h4>
+                                <p>Todos têm o dever de trabalhar e de escolher livremente a profissão.</p>
+                                <span class="article-reference">Artigo 59.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="rights-content">
+                                <h4>Defesa da Pátria</h4>
+                                <p>Todos os portugueses têm o dever de defender a pátria.</p>
+                                <span class="article-reference">Artigo 276.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-book"></i>
+                            <div class="rights-content">
+                                <h4>Dever de Estudo</h4>
+                                <p>É garantido o direito à educação com o dever de frequência obrigatória.</p>
+                                <span class="article-reference">Artigo 74.º</span>
+                            </div>
+                        </li>
+                        
+                        <li class="rights-item">
+                            <i class="fas fa-hands-helping"></i>
+                            <div class="rights-content">
+                                <h4>Solidariedade Social</h4>
+                                <p>Todos têm o dever de ser solidários com os mais desfavorecidos.</p>
+                                <span class="article-reference">Artigo 9.º</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="constitution-link">
+                <a href="constituicao.html"><i class="fas fa-arrow-left"></i> Voltar à Constituição</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer igual ao modelo -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a> 
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
+            </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts iguais ao modelo -->
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            let current = 0;
+    
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) slide.classList.add('active');
+                });
+            }
+    
+            prevBtn.addEventListener('click', () => {
+                current = (current - 1 + slides.length) % slides.length;
+                showSlide(current);
+            });
+    
+            nextBtn.addEventListener('click', () => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            });
+    
+            // Auto-slide (opcional)
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }, 7000); // muda a cada 7 segundos
+        });
+
+        lucide.createIcons();
+
+        document.getElementById("admin-btn").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.location.href = "Menu.html";
+        });
+    </script>
+</body>
+</html>

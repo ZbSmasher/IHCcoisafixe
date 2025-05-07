@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constituição da República Portuguesa - Explicação Simplificada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        .constitution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .explanation-section {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .official-document {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        
+        .media-resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .media-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .media-card iframe {
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+        
+        .media-content {
+            padding: 15px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #2c3e50;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .article-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .article-title {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .media-resources {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <style>
+        /* Estilos Modernizados */
+        .explanation-section {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .modern-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .modern-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .modern-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .divider {
+            height: 3px;
+            width: 80px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            margin: 0 auto;
+            border-radius: 3px;
+        }
+        
+        .modern-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .intro-card {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-left: 4px solid #3498db;
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-right: 20px;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .modern-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .modern-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .principle-card {
+            border-top: 4px solid #e74c3c;
+        }
+        
+        .structure-card {
+            border-top: 4px solid #2ecc71;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .card-header i {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: inherit;
+        }
+        
+        .card-header h3 {
+            font-size: 1.5rem;
+            color: inherit;
+            margin: 0;
+        }
+        
+        .styled-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .styled-list li {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: flex-start;
+        }
+        
+        .styled-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .styled-list li i {
+            font-size: 1.2rem;
+            color: #3498db;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .styled-list li strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .styled-list li p {
+            color: #7f8c8d;
+            margin: 5px 0 10px 0;
+            font-size: 0.95rem;
+        }
+        
+        .learn-more {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .learn-more i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .learn-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        .structure-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 480px) {
+            .structure-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .structure-item {
+            display: flex;
+            text-decoration: none;
+            color: inherit;
+            padding: 15px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        
+        .structure-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .structure-icon {
+            width: 40px;
+            height: 40px;
+            background: #f1f8fe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #3498db;
+            font-size: 1.1rem;
+        }
+        
+        .structure-content h4 {
+            margin: 0 0 5px 0;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        
+        .structure-content p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .quick-facts {
+            margin-top: 40px;
+        }
+        
+        .quick-facts h3 {
+            display: flex;
+            align-items: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .quick-facts h3 i {
+            color: #f39c12;
+            margin-right: 10px;
+        }
+        
+        .facts-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .fact-item {
+            flex: 1;
+            min-width: 150px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .fact-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .fact-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        
+        .fact-text {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo">MenuImage</a>            
+                    </ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+                        <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+        <div class="constitution-container">
+            <div class="tabs">
+                <div class="tab active" data-tab="explanation">Explicação</div>
+                <div class="tab" data-tab="document">Documento Oficial</div>
+                <div class="tab" data-tab="resources">Recursos de Aprendizagem</div>
+            </div>
+            
+            <div class="tab-content active" id="explanation">
+                <div class="explanation-section">
+                    <div class="modern-header">
+                        <h2 class="modern-title">Constituição da República Portuguesa</h2>
+                        <p class="modern-subtitle">A Lei Fundamental que rege a nossa democracia</p>
+                        <div class="divider"></div>
+                    </div>
+                    
+                    <div class="modern-card intro-card">
+                        <div class="card-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>O que é a Constituição?</h3>
+                            <p>A Constituição da República Portuguesa, aprovada em 2 de abril de 1976, é a lei suprema do país que estabelece os direitos e deveres dos cidadãos, a organização do Estado e os princípios fundamentais da nossa democracia.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="modern-grid">
+                        <!-- Princípios Fundamentais -->
+                        <div class="modern-card principle-card">
+                            <div class="card-header">
+                                <i class="fas fa-star"></i>
+                                <h3>Princípios Fundamentais</h3>
+                            </div>
+                            <ul class="styled-list">
+                                <li>
+                                    <i class="fas fa-democrat"></i>
+                                    <div>
+                                        <strong>Estado de Direito Democrático</strong>
+                                        <p>Portugal é uma república soberana baseada na dignidade humana e vontade popular.</p>
+                                        <a href="principios-fundamentais.html" class="learn-more">Saber mais <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    <div>
+                                        <strong>Direitos Fundamentais</strong>
+                                        <p>Garante liberdades como expressão, religião e direitos sociais como saúde e educação.</p>
+                                        <a href="direitos-deveres.html" class="learn-more">Explorar direitos <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-gavel"></i>
+                                    <div>
+                                        <strong>Separação de Poderes</strong>
+                                        <p>Divide o poder entre legislativo, executivo e judicial para evitar abusos.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <div>
+                                        <strong>Autonomia Local</strong>
+                                        <p>Reconhece as regiões autónomas dos Açores e Madeira e o poder local.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Estrutura Básica -->
+                        <div class="modern-card structure-card">
+                            <div class="card-header">
+                                <i class="fas fa-sitemap"></i>
+                                <h3>Estrutura Básica</h3>
+                            </div>
+                            <div class="structure-grid">
+                                <a href="#" class="structure-item">
+                                    <div class="structure-icon">
+                                        <i class="fas fa-book-open"></i>
+                                    </div>
+                                    <div class="structure-content">
+                                        <h4>Preâmbulo</h4>
+                                        <p>Introdução que explica os valores e objetivos da Constituição.</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="direitos-deveres.html" class="structure-item">
+                                    <div class="structure-icon">
+                                        <i class="fas fa-scale-balanced"></i>
+                                    </div>
+                                    <div class="structure-content">
+                                        <h4>Direitos e Deveres</h4>
+                                        <p>Garantias dos cidadãos em liberdade, igualdade e participação política.</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="#" class="structure-item">
+                                    <div class="structure-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="structure-content">
+                                        <h4>Organização Económica</h4>
+                                        <p>Princípios da economia portuguesa e setores públicos/privados.</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="#" class="structure-item">
+                                    <div class="structure-icon">
+                                        <i class="fas fa-landmark"></i>
+                                    </div>
+                                    <div class="structure-content">
+                                        <h4>Poder Político</h4>
+                                        <p>Funcionamento dos órgãos de soberania e suas competências.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-facts">
+                        <h3><i class="fas fa-lightbulb"></i> Sabia que?</h3>
+                        <div class="facts-container">
+                            <div class="fact-item">
+                                <div class="fact-number">7</div>
+                                <div class="fact-text">Revisões constitucionais desde 1976</div>
+                            </div>
+                            <div class="fact-item">
+                                <div class="fact-number">296</div>
+                                <div class="fact-text">Artigos na versão atual</div>
+                            </div>
+                            <div class="fact-item">
+                                <div class="fact-number">2</div>
+                                <div class="fact-text">Regiões Autónomas reconhecidas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="document">
+                <div class="official-document">
+                    <h2>Constituição da República Portuguesa - Texto Oficial</h2>
+                    <p>Aqui você pode consultar o texto integral da Constituição, conforme aprovado e com as suas revisões.</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <a href="https://www.parlamento.pt/Legislacao/Documents/constpt2005.pdf" class="btn" target="_blank">Baixar PDF Completo</a>
+                    </div>
+                    
+                    <h3>Versão online (extrato dos artigos principais):</h3>
+                    
+                    <div class="article-card">
+                        <h4>Artigo 1.º (República Portuguesa)</h4>
+                        <p>Portugal é uma República soberana, baseada na dignidade da pessoa humana e na vontade popular e empenhada na construção de uma sociedade livre, justa e solidária.</p>
+                    </div>
+                    
+                    <div class="article-card">
+                        <h4>Artigo 2.º (Estado de direito democrático)</h4>
+                        <p>A República Portuguesa é um Estado de direito democrático, baseado na soberania popular, no pluralismo de expressão e organização política democráticas, no respeito e na garantia de efetivação dos direitos e liberdades fundamentais e na separação e interdependência de poderes, visando a realização da democracia económica, social e cultural e o aprofundamento da democracia participativa.</p>
+                    </div>
+                    
+                    <div class="article-card">
+                        <h4>Artigo 13.º (Princípio da igualdade)</h4>
+                        <p>1. Todos os cidadãos têm a mesma dignidade social e são iguais perante a lei.
+                        <br>2. Ninguém pode ser privilegiado, beneficiado, prejudicado, privado de qualquer direito ou isento de qualquer dever em razão de ascendência, sexo, raça, língua, território de origem, religião, convicções políticas ou ideológicas, instrução, situação económica, condição social ou orientação sexual.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="resources">
+                <h2>Recursos para Aprender sobre a Constituição</h2>
+                <p>Vídeos, infográficos e materiais didáticos para entender melhor a Constituição Portuguesa.</p>
+                
+                <div class="media-resources">
+                    <!-- Vídeo 1 - YouTube (corrigido) -->
+                    <div class="media-card">
+                        <iframe src="https://www.youtube.com/embed/-umOMwqeZ4o" allowfullscreen></iframe>
+                        <div class="media-content">
+                            <h4>A Constituição segundo o Presidente</h4>
+                            <p>O olhar do chefe de Estado sobre a nossa Lei Fundamental e os três desafios que, à luz dos valores que lhe estão associados, se podem colocar à Constituição nos próximos anos.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Vídeo 2 - YouTube (corrigido) -->
+                    <div class="media-card">
+                        <iframe src="https://www.youtube.com/embed/fpCDEe_z5Xs" allowfullscreen></iframe>
+                        <div class="media-content">
+                            <h4>A Constituição de 1822</h4>
+                            <p>Documentário sobre o processo constituinte de 1976 e as revisões constitucionais.</p>
+                        </div>
+                    </div>
+                
+                    <!-- Vídeo 3 - Substituído por player de vídeo HTML5 -->
+                    <div class="media-card">
+                        <video controls style="width:100%; height:200px;">
+                            <source src="https://app.parlamento.pt/programas/videos/Parlamentes_S4_EP1_subsPT.mp4" type="video/mp4">
+                            Seu navegador não suporta vídeos HTML5.
+                        </video>
+                        <div class="media-content">
+                            <h4>Órgãos de soberania</h4>
+                            <p>Quais são os órgãos de soberania e que poderes exercem?</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Link RTP substituído por imagem clicável -->
+                    <div class="media-card">
+                        <a href="https://ensina.rtp.pt/artigo/como-se-faz-uma-lei/" target="_blank">
+                            <img src="https://ensina.rtp.pt/site-uploads/2013/09/como-se-faz-uma-lei-854x480.jpg" alt="Como se faz uma lei" style="width:100%; height:200px; object-fit:cover;">
+                        </a>
+                        <div class="media-content">
+                            <h4>Como as leis são feitas?</h4>
+                            <p>Explicação do processo legislativo conforme definido na Constituição.</p>
+                            <a href="https://ensina.rtp.pt/artigo/como-se-faz-uma-lei/" class="btn" target="_blank">Ver no site da RTP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    <footer>
+                <div class="container">
+                    <div class="footer-links">
+                        <a href="#">Política de Privacidade</a> 
+                        <a href="#">Acessibilidade</a>
+                        <a href="#">Informação de Copyright</a>
+                        <a href="#">Contactos</a>
+                    </div>
+                    <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+                </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Simple carousel for hero section
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            let current = 0;
+            
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) slide.classList.add('active');
+                });
+            }
+            
+            // Auto-slide (optional)
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }, 7000);
+        });
+        
+        lucide.createIcons();
+    </script>
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            let current = 0;
+    
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) slide.classList.add('active');
+                });
+            }
+    
+            prevBtn.addEventListener('click', () => {
+                current = (current - 1 + slides.length) % slides.length;
+                showSlide(current);
+            });
+    
+            nextBtn.addEventListener('click', () => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            });
+    
+            // Auto-slide (opcional)
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }, 7000); // muda a cada 7 segundos
+        });
+
+        lucide.createIcons();
+
+        document.getElementById("admin-btn").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior (optional)
+            window.location.href = "Menu.html"; // Change this to your desired page
+        });
+    </script>
+</body>
+</html>
