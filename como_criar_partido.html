@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar um Partido Político - Guia Legal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Estilos específicos para esta página */
+        .party-creation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .party-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .party-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .party-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .party-divider {
+            height: 3px;
+            width: 100px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .step-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #9b59b6;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: rgba(155, 89, 182, 0.1);
+            z-index: 1;
+        }
+        
+        .step-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-title i {
+            margin-right: 15px;
+            color: #9b59b6;
+            font-size: 1.8rem;
+        }
+        
+        .step-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .requirements-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        
+        .requirements-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .requirements-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .requirements-list li i {
+            color: #9b59b6;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .legal-reference {
+            background: #f8f9fa;
+            border-left: 3px solid #9b59b6;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .legal-reference h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .legal-reference p {
+            margin-bottom: 0;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .resources-section {
+            margin-top: 60px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .resource-card a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .resource-icon {
+            font-size: 2rem;
+            color: #9b59b6;
+            margin-bottom: 15px;
+        }
+        
+        .resource-title {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .resource-description {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+        
+        .resource-link {
+            color: #9b59b6;
+            font-weight: 500;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .resource-link i {
+            margin-left: 5px;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .resource-card:hover .resource-link i {
+            transform: translateX(3px);
+        }
+        
+        @media (max-width: 768px) {
+            .party-title {
+                font-size: 2rem;
+            }
+            
+            .party-subtitle {
+                font-size: 1rem;
+            }
+            
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header igual ao modelo -->
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo">MenuImage</a>            
+                    </ul>
+                </nav>
+        
+                <div class="logo-container">
+                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                </div>
+        
+                <nav class="nav-right">
+                    <ul>
+                        <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+                        <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <div id="main-content">
+        <section class="party-creation-container">
+            <div class="party-header">
+                <h1 class="party-title">Como Criar um Partido Político em Portugal</h1>
+                <p class="party-subtitle">Guia completo com os passos legais para fundar uma nova força política</p>
+                <div class="party-divider"></div>
+            </div>
+            
+            <div class="steps-container">
+                <!-- Passo 1 -->
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title"><i class="fas fa-users"></i> Constituição Inicial</h3>
+                        <p class="step-description">Reúna pelo menos 7.500 eleitores inscritos no recenseamento eleitoral para constituir o partido.</p>
+                        
+                        <ul class="requirements-list">
+                            <li><i class="fas fa-check-circle"></i> Assembleia de fundação com mínimo de 50 pessoas</li>
+                            <li><i class="fas fa-check-circle"></i> Aprovação dos estatutos e programa</li>
+                            <li><i class="fas fa-check-circle"></i> Eleição dos órgãos sociais</li>
+                        </ul>
+                        
+                        <div class="legal-reference">
+                            <h4>Base Legal</h4>
+                            <p>Lei Orgânica n.º 2/2003, Artigo 3.º</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Passo 2 -->
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title"><i class="fas fa-file-signature"></i> Registo no TC</h3>
+                        <p class="step-description">Apresente a documentação necessária no Tribunal Constitucional para registro oficial.</p>
+                        
+                        <ul class="requirements-list">
+                            <li><i class="fas fa-file-alt"></i> Ata da assembleia constitutiva</li>
+                            <li><i class="fas fa-file-alt"></i> Estatutos aprovados</li>
+                            <li><i class="fas fa-file-alt"></i> Lista de apoiantes com assinaturas autenticadas</li>
+                            <li><i class="fas fa-file-alt"></i> Programa político</li>
+                        </ul>
+                        
+                        <div class="legal-reference">
+                            <h4>Base Legal</h4>
+                            <p>Lei n.º 2/2003, Artigo 5.º</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Passo 3 -->
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title"><i class="fas fa-search"></i> Análise do TC</h3>
+                        <p class="step-description">O Tribunal Constitucional analisará a documentação em até 90 dias.</p>
+                        
+                        <ul class="requirements-list">
+                            <li><i class="fas fa-balance-scale"></i> Verificação de legalidade</li>
+                            <li><i class="fas fa-ban"></i> Não pode ter natureza militar ou paramilitar</li>
+                            <li><i class="fas fa-ban"></i> Não pode promover discriminação</li>
+                            <li><i class="fas fa-ban"></i> Nome não pode confundir com partidos existentes</li>
+                        </ul>
+                        
+                        <div class="legal-reference">
+                            <h4>Base Legal</h4>
+                            <p>Lei n.º 2/2003, Artigo 8.º</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Passo 4 -->
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title"><i class="fas fa-gavel"></i> Publicação em Diário da República</h3>
+                        <p class="step-description">Após aprovação, o partido é publicado no Diário da República.</p>
+                        
+                        <ul class="requirements-list">
+                            <li><i class="fas fa-newspaper"></i> Publicação dos estatutos</li>
+                            <li><i class="fas fa-user-check"></i> Reconhecimento da personalidade jurídica</li>
+                            <li><i class="fas fa-clipboard-list"></i> Inscrição no registo de partidos políticos</li>
+                        </ul>
+                        
+                        <div class="legal-reference">
+                            <h4>Base Legal</h4>
+                            <p>Lei n.º 2/2003, Artigo 10.º</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Passo 5 -->
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title"><i class="fas fa-vote-yea"></i> Participação Eleitoral</h3>
+                        <p class="step-description">Com o registro aprovado, o partido pode concorrer a eleições.</p>
+                        
+                        <ul class="requirements-list">
+                            <li><i class="fas fa-calendar-alt"></i> Apresentação de candidaturas dentro dos prazos</li>
+                            <li><i class="fas fa-money-bill-wave"></i> Financiamento conforme lei eleitoral</li>
+                            <li><i class="fas fa-microphone"></i> Acesso a tempos de antena</li>
+                        </ul>
+                        
+                        <div class="legal-reference">
+                            <h4>Base Legal</h4>
+                            <p>Lei Eleitoral da Assembleia da República</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Passo 6 -->
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3 class="step-title"><i class="fas fa-chart-line"></i> Manutenção do Partido</h3>
+                        <p class="step-description">Obrigações contínuas para manter o registro ativo.</p>
+                        
+                        <ul class="requirements-list">
+                            <li><i class="fas fa-sync-alt"></i> Eleições internas regulares</li>
+                            <li><i class="fas fa-file-invoice-dollar"></i> Prestação de contas anual</li>
+                            <li><i class="fas fa-exclamation-triangle"></i> Participação em atos eleitorais</li>
+                            <li><i class="fas fa-users"></i> Manter número mínimo de membros</li>
+                        </ul>
+                        
+                        <div class="legal-reference">
+                            <h4>Base Legal</h4>
+                            <p>Lei n.º 2/2003, Artigo 19.º</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="resources-section">
+                <h2><i class="fas fa-tools"></i> Recursos Úteis</h2>
+                <p>Documentos e ferramentas para ajudar no processo de criação do partido</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <a href="https://www.tribunalconstitucional.pt/tc/partidos.html" target="_blank">
+                            <div class="resource-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h3 class="resource-title">Tribunal Constitucional</h3>
+                            <p class="resource-description">Informações oficiais sobre registro de partidos e formulários necessários.</p>
+                            <span class="resource-link">Acessar site <i class="fas fa-external-link-alt"></i></span>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <a href="https://dre.pt/" target="_blank">
+                            <div class="resource-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h3 class="resource-title">Diário da República</h3>
+                            <p class="resource-description">Consulte a publicação oficial de partidos já registrados.</p>
+                            <span class="resource-link">Acessar site <i class="fas fa-external-link-alt"></i></span>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <a href="https://www.parlamento.pt/Partidos/Paginas/default.aspx" target="_blank">
+                            <div class="resource-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h3 class="resource-title">Partidos no Parlamento</h3>
+                            <p class="resource-description">Lista de partidos com assento parlamentar para referência.</p>
+                            <span class="resource-link">Acessar site <i class="fas fa-external-link-alt"></i></span>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <a href="https://www.cne.pt/" target="_blank">
+                            <div class="resource-icon">
+                                <i class="fas fa-vote-yea"></i>
+                            </div>
+                            <h3 class="resource-title">Comissão Nacional de Eleições</h3>
+                            <p class="resource-description">Normas sobre financiamento e participação eleitoral.</p>
+                            <span class="resource-link">Acessar site <i class="fas fa-external-link-alt"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer igual ao modelo -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a> 
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
+            </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts iguais ao modelo -->
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            let current = 0;
+    
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    if (i === index) slide.classList.add('active');
+                });
+            }
+    
+            prevBtn.addEventListener('click', () => {
+                current = (current - 1 + slides.length) % slides.length;
+                showSlide(current);
+            });
+    
+            nextBtn.addEventListener('click', () => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            });
+    
+            // Auto-slide (opcional)
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                showSlide(current);
+            }, 7000); // muda a cada 7 segundos
+        });
+
+        lucide.createIcons();
+
+        document.getElementById("admin-btn").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.location.href = "Menu.html";
+        });
+    </script>
+</body>
+</html>
