@@ -1,251 +1,381 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presidência da República</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        /* Additional styles for the cards section */
-        .cards-section {
-            padding: 40px 0 60px 0;  /* Reduzi o padding superior para 40px */
-            background-color: var(--light-gray);
-            margin-top: -20px;  /* Adicionei esta margem negativa para subir a seção */
-        }
-        
-        .cards-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .card {
-            flex: 1;
-            min-width: 300px;
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        }
-        
-        .card-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        
-        .card-content {
-            padding: 20px;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--dark-gray);
-        }
-        
-        .card-subtitle {
-            font-size: 1rem;
-            color: var(--blue);
-            margin-bottom: 15px;
-        }
-        
-        .card-text {
-            color: #555;
-            line-height: 1.6;
-        }
-        
-        .parties-list {
-            list-style-type: none;
-        }
-        
-        .parties-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--medium-gray);
-        }
-        
-        .parties-list li:last-child {
-            border-bottom: none;
-        }
-        
-        @media (max-width: 768px) {
-            .cards-container {
-                flex-direction: column;
-            }
-            
-            .card {
-                min-width: 100%;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presidência da República</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --dark-gray: #525252;
+      --medium-gray: #999;
+      --light-gray: #f4f4f4;
+      --white: #fff;
+      --blue: #007bff;
+    }
 
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .back-button {
+  background-color: #e0e0e0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: var(--dark-gray);
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #d5d5d5;
+}
+
+    .menu-dropdown {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #ffffff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      z-index: 999;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-dropdown.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .menu-dropdown a {
+      padding: 10px 0;
+      text-decoration: none;
+      color: var(--dark-gray);
+      border-bottom: 1px solid var(--medium-gray);
+      transition: transform 0.2s;
+    }
+
+    .menu-dropdown a:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-dropdown a.submenu {
+      padding-left: 15px;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      display: none;
+    }
+
+    .menu-overlay.show {
+      display: block;
+    }
+
+    .cards-section {
+      padding: 40px 0 60px 0;
+      background-color: var(--light-gray);
+      margin-top: -20px;
+    }
+
+    .cards-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 300px;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      vertical-align: top;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--dark-gray);
+    }
+
+    .card-subtitle {
+      font-size: 1rem;
+      color: var(--blue);
+      margin-bottom: 15px;
+    }
+
+    .card-text {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .cards-container {
+        flex-direction: column;
+      }
+
+      .card {
+        min-width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <div class="main-nav">
-            <div class="container">
-                <nav class="nav-left">
-                    <ul>
-                        
-                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo" >MenuImage</a>            
-                    
-                    </ul>
-                </nav>
-        
-                <div class="logo-container">
-                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
-                </div>
-        
-                <nav class="nav-right">
-                    <ul>
-                        <li><a href="#" data-lucide="languages" class="sbtn" >Notícias</a></li>
-                        <li><a href="#" class="sbtn" data-lucide="search" >Search</a></li>
-                    </ul>
-                </nav>
-            </div>
+  <header>
+    <div class="main-nav">
+      <div class="container">
+        <nav class="nav-left">
+          <ul>
+            <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+          </ul>
+        </nav>
+
+        <div class="logo-container">
+          <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
         </div>
-    </header>
-    
-    <div id="main-content">
-    <section class="hero-carousel">
-        <div class="carousel">
-            <div class="slide active" style="background-image: url('photos/photo1.jpg');">
-                <div class="hero-content">
-                    <h1>O Coração da Democracia</h1>
-                    <p>Onde as decisões que moldam o país ganham voz e forma</p>
-                    <a href="#" class="btn">Saber Mais</a>
-                </div>
-            </div>
-            <div class="slide" style="background-image: url('photos/photo2.jpg');">
-                <div class="hero-content">
-                    <h1>Liderança e Representação</h1>
-                    <p>O papel dos nossos representantes na construção do futuro</p>
-                    <a href="#" class="btn">Ver Mais</a>
-                </div>
-            </div>
-            <div class="slide" style="background-image: url('photos/photo3.png');">
-                <div class="hero-content">
-                    <h1>O Poder do Voto</h1>
-                    <p>A base da democracia começa na sua escolha</p>
-                    <a href="#" class="btn">Saiba como Votar</a>
-                </div>
-            </div>
-            <div class="slide" style="background-image: url('photos/photo4.jpg');">
-                <div class="hero-content">
-                    <h1>Notícias</h1>
-                    <p>Fique a par dos acontecimentos mais relevantes</p>
-                    <a href="#" class="btn">Ver Mais</a>
-                </div>
-            </div>
-    
-            <!-- Botões -->
-            <button class="prev">&#10094;</button>
-            <button class="next">&#10095;</button>
-        </div>
-    </section>
-    
-    <section class="cards-section">
-        <div class="container">
-            <h2 class="section-title">Liderança Política</h2>
-            <div class="cards-container">
-                <div class="card">
-                    <img src="photos/pres.jpg" alt="Marcelo Rebelo de Sousa" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Marcelo Rebelo de Sousa</h3>
-                        <p class="card-subtitle">Presidente da República</p>
-                        <p class="card-text">20.º Presidente da República Portuguesa, no cargo desde 9 de março de 2016. Professor catedrático jubilado, jurista e político português.</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="photos/ministro.jpg" alt="Primeiro-Ministro" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Luís Montenegro</h3>
-                        <p class="card-subtitle">Primeiro-Ministro</p>
-                        <p class="card-text">Líder do Partido Social Democrata (PSD) e atual Primeiro-Ministro de Portugal desde 2 de abril de 2024.</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <img src="photos/partidos.jpg" alt="Partidos Políticos" class="card-img">
-                    <div class="card-content">
-                        <h3 class="card-title">Partidos Políticos</h3>
-                        <p class="card-subtitle">Representação na Assembleia</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        <nav class="nav-right">
+          <ul>
+            <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+            <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+            <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
+  </header>
+
+  <div class="menu-dropdown" id="dropdownMenu"></div>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <div id="main-content">
+    <section class="hero-carousel">
+      <div class="carousel">
+        <div class="slide active" style="background-image: url('photos/photo1.jpg');">
+          <div class="hero-content">
+            <h1>O Coração da Democracia</h1>
+            <p>Onde as decisões que moldam o país ganham voz e forma</p>
+            <a href="#" class="btn">Saber Mais</a>
+          </div>
+        </div>
+        <div class="slide" style="background-image: url('photos/photo2.jpg');">
+          <div class="hero-content">
+            <h1>Liderança e Representação</h1>
+            <p>O papel dos nossos representantes na construção do futuro</p>
+            <a href="#" class="btn">Ver Mais</a>
+          </div>
+        </div>
+        <div class="slide" style="background-image: url('photos/photo3.png');">
+          <div class="hero-content">
+            <h1>O Poder do Voto</h1>
+            <p>A base da democracia começa na sua escolha</p>
+            <a href="#" class="btn">Saiba como Votar</a>
+          </div>
+        </div>
+        <div class="slide" style="background-image: url('photos/photo4.jpg');">
+          <div class="hero-content">
+            <h1>Notícias</h1>
+            <p>Fique a par dos acontecimentos mais relevantes</p>
+            <a href="#" class="btn">Ver Mais</a>
+          </div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+      </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="#">Política de Privacidade</a> 
-                <a href="#">Acessibilidade</a>
-                <a href="#">Informação de Copyright</a>
-                <a href="#">Contactos</a>
+    <section class="cards-section">
+      <div class="container">
+        <h2 class="section-title">Liderança Política</h2>
+        <div class="cards-container">
+          <div class="card">
+            <img src="photos/pres.jpg" alt="Marcelo Rebelo de Sousa" class="card-img">
+            <div class="card-content">
+              <h3 class="card-title">Marcelo Rebelo de Sousa</h3>
+              <p class="card-subtitle">Presidente da República</p>
+              <p class="card-text">20.º Presidente da República Portuguesa, no cargo desde 9 de março de 2016.</p>
             </div>
-            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+          </div>
+          <div class="card">
+            <img src="photos/ministro.jpg" alt="Primeiro-Ministro" class="card-img">
+            <div class="card-content">
+              <h3 class="card-title">Luís Montenegro</h3>
+              <p class="card-subtitle">Primeiro-Ministro</p>
+              <p class="card-text">Líder do PSD e atual Primeiro-Ministro desde abril de 2024.</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="photos/partidos.jpg" alt="Partidos Políticos" class="card-img">
+            <div class="card-content">
+              <h3 class="card-title">Partidos Políticos</h3>
+              <p class="card-subtitle">Representação na Assembleia</p>
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
+  </div>
 
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Acessibilidade</a>
+        <a href="#">Informação de Copyright</a>
+        <a href="#">Contactos</a>
+      </div>
+      <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 
-
-    <script src="js/script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const slides = document.querySelectorAll('.slide');
-            const prevBtn = document.querySelector('.prev');
-            const nextBtn = document.querySelector('.next');
-            let current = 0;
-    
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.remove('active');
-                    if (i === index) slide.classList.add('active');
-                });
-            }
-    
-            prevBtn.addEventListener('click', () => {
-                current = (current - 1 + slides.length) % slides.length;
-                showSlide(current);
-            });
-    
-            nextBtn.addEventListener('click', () => {
-                current = (current + 1) % slides.length;
-                showSlide(current);
-            });
-    
-            // Auto-slide (opcional)
-            setInterval(() => {
-                current = (current + 1) % slides.length;
-                showSlide(current);
-            }, 7000); // muda a cada 7 segundos
-        });
-    </script>
-
-
-<script>
+  <script>
     lucide.createIcons();
-</script>
 
-<script>
-    document.getElementById("admin-btn").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent default link behavior (optional)
-        window.location.href = "Menu.html"; // Change this to your desired page
+    const submenuData = {
+      1: [
+        { text: 'Deputados em funções', href: '#' },
+        { text: 'Agenda Parlamentar', href: '#' },
+        { text: 'Leis em Discussão', href: '#' },
+        { text: 'Contactar um deputado', href: '#' }
+      ],
+      2: [
+        { text: 'Próximas Eleições', href: '#' },
+        { text: 'Como votar', href: '#' },
+        { text: 'Resultados Eleitorais', href: '#' },
+        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
+      ],
+      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+      4: [
+        { text: 'Partidos', href: 'partidos.html' },
+        { text: 'Financiamento partidário', href: '#' },
+        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
+        { text: 'Comparador de Partidos', href: 'comparador.html' }
+      ],
+      5: [
+        { text: 'Texto da Constituição', href: 'constituicao.html' },
+        { text: 'Princípios Fundamentais', href: '#' },
+        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
+      ]
+    };
+
+    function renderMenuCategories() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.innerHTML = '';
+
+      // Add top-level "Voltar" button to close menu
+      const closeBtn = document.createElement('a');
+      closeBtn.href = "#";
+      closeBtn.className = 'back-button'; // AQUI
+      closeBtn.textContent = '← Voltar';
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        menu.classList.remove("show");
+        document.getElementById("menuOverlay").classList.remove("show");
+      });
+      menu.appendChild(closeBtn);
+
+      const categories = [
+        { id: 4, name: 'Partidos' },
+        { id: 1, name: 'Assembleia da República' },
+        { id: 2, name: 'Eleições' },
+        { id: 5, name: 'Constituição' },
+        { id: 3, name: 'Forum' }
+      ];
+
+      categories.forEach(cat => {
+        const link = document.createElement('a');
+        link.href = "#";
+        link.textContent = cat.name;
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          renderSubmenu(cat.id);
+        });
+        menu.appendChild(link);
+      });
+    }
+
+    function renderSubmenu(id) {
+      const menu = document.getElementById("dropdownMenu");
+      const submenu = submenuData[id];
+      menu.innerHTML = '';
+
+      const back = document.createElement('a');
+      back.textContent = '← Voltar';
+      back.href = "#";
+      back.className = 'back-button';
+      back.addEventListener('click', (e) => {
+        e.preventDefault();
+        renderMenuCategories();
+      });
+      menu.appendChild(back);
+
+      submenu.forEach(item => {
+        const sublink = document.createElement('a');
+        sublink.href = item.href;
+        sublink.textContent = item.text;
+        sublink.classList.add("submenu");
+        menu.appendChild(sublink);
+      });
+    }
+
+    document.getElementById("admin-btn").addEventListener("click", function (event) {
+      event.preventDefault();
+      const menu = document.getElementById("dropdownMenu");
+      const overlay = document.getElementById("menuOverlay");
+
+      menu.classList.toggle("show");
+      overlay.classList.toggle("show");
+
+      if (menu.classList.contains("show")) {
+        renderMenuCategories();
+      }
     });
-</script>
 
+    document.getElementById("menuOverlay").addEventListener("click", () => {
+      document.getElementById("dropdownMenu").classList.remove("show");
+      document.getElementById("menuOverlay").classList.remove("show");
+    });
+  </script>
 </body>
 </html>
