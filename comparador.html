@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comparador de Partidos - Eleições 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --ps: #FF0000;
@@ -13,7 +18,7 @@
             --il: #00FFFF;
             --be: #FF00FF;
             --pan: #00FF00;
-            --livre: #66FF66;
+            --livre: #rgb(101, 65, 189)
             --cds: #000080;
             --dark: #1a1a2e;
             --light: #f8f9fa;
@@ -40,67 +45,6 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
-        }
-        
-        /* Header */
-        header {
-            background-color: white;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1rem 0;
-        }
-        
-        .main-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo-container img {
-            height: 50px;
-        }
-        
-        /* Menu */
-        .menu {
-            width: 100%;
-            height: 100vh;
-            background-color: #ffffffcb;
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-left: 20vw;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: none;
-        }
-        
-        .main-menu {
-            width: 200px;
-            padding: 20px 10px;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            border-right: 1px solid #ddd;
-        }
-        
-        .menu a {
-            color: #333;
-            text-decoration: none;
-            font-size: 18px;
-            display: block;
-            padding: 10px 15px;
-            transition: background-color 0.3s;
-        }
-        
-        .menu a:hover {
-            background-color: #eee;
         }
         
         /* Hero Section */
@@ -324,26 +268,6 @@
             border: none;
         }
         
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-        }
-        
         /* Responsividade */
         @media (max-width: 1024px) {
             .policies-row {
@@ -372,12 +296,14 @@
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="main-nav">
+        <div class="main-nav">
+            <div class="container">
                 <nav class="nav-left">
-                    <a href="#" id="admin-btn" class="logo">
-                        <i class="fas fa-bars"></i>
-                    </a>            
+                    <ul>
+                        
+                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo" >MenuImage</a>            
+                    
+                    </ul>
                 </nav>
         
                 <div class="logo-container">
@@ -385,34 +311,14 @@
                 </div>
         
                 <nav class="nav-right">
-                    <a href="#"><i class="fas fa-newspaper"></i> Notícias</a>
-                    <a href="#"><i class="fas fa-search"></i> Pesquisa</a>
+                    <ul>
+                        <li><a href="#" data-lucide="languages" class="sbtn" >Notícias</a></li>
+                        <li><a href="#" class="sbtn" data-lucide="search" >Search</a></li>
+                    </ul>
                 </nav>
             </div>
         </div>
     </header>
-
-    <!-- Menu Lateral -->
-    <div class="menu" id="menu">
-        <div class="main-menu">
-            <div class="menu-item">
-                <a href="#">Novidades</a>
-                <div class="submenu">
-                    <a href="#">Subopção 1.1</a>
-                    <a href="#">Subopção 1.2</a>
-                </div>
-            </div>
-            <div class="menu-item">
-                <a href="#">Eleições</a>
-                <div class="submenu">
-                    <a href="#">Próximas Eleições</a>
-                    <a href="#">Como votar</a>
-                </div>
-            </div>
-            <a href="#">Fórum</a>
-        </div>
-    </div>
-
     <section class="hero">
         <div class="container">
             <h1>Compare as Propostas dos Partidos</h1>
@@ -473,14 +379,25 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="#">Política de Privacidade</a>
+                <a href="#">Política de Privacidade</a> 
                 <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
                 <a href="#">Contactos</a>
             </div>
-            <p>&copy; 2025 Comparador Político. Todos os direitos reservados.</p>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
         </div>
     </footer>
-
+    <script src="js/script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+    <script>
+        document.getElementById("admin-btn").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior (optional)
+            window.location.href = "Menu.html"; // Change this to your desired page
+        });
+    </script>
+ 
     <script>
         // Dados dos partidos
         const partiesData = {
