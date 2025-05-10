@@ -8,15 +8,14 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    :root {
+     :root {
       --dark-gray: #525252;
       --medium-gray: #999;
       --light-gray: #f4f4f4;
       --white: #fff;
-      --blue: #7e1212;
-      --psd-orange: #3a0d0d;
+      --chega-blue: #0056A3;
+      --chega-dark-blue: #003366;
     }
-
     body {
       margin: 0;
       font-family: sans-serif;
@@ -150,7 +149,7 @@
 
     /* PSD specific styles */
     .hero {
-      background-color: var(--psd-orange);
+      background-color: var(--chega-blue);
       color: white;
       padding: 60px 0;
       text-align: center;
@@ -172,7 +171,7 @@
     }
 
     .section-title {
-      color: var(--psd-orange);
+      color: var(--chega-blue);
       text-align: center;
       margin-bottom: 40px;
       font-size: 2rem;
@@ -220,7 +219,7 @@
     }
 
     .card-title {
-      color: var(--psd-orange);
+      color: var(--chega-blue);
       margin-top: 0;
       margin-bottom: 10px;
     }
@@ -238,16 +237,15 @@
     }
 
     .timeline::after {
-      content: '';
-      position: absolute;
-      width: 6px;
-      background-color: var(--psd-orange);
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      margin-left: -3px;
-    }
-
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: var(--chega-blue); /* Alterado para azul do CHEGA */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+  }
     .timeline-item {
       padding: 10px 40px;
       position: relative;
@@ -256,17 +254,18 @@
     }
 
     .timeline-item::after {
-      content: '';
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      right: -12px;
-      background-color: white;
-      border: 4px solid var(--psd-orange);
-      top: 15px;
-      border-radius: 50%;
-      z-index: 1;
-    }
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -12px;
+    background-color: white;
+    border: 4px solid var(--chega-blue); /* Alterado para azul do CHEGA */
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+
 
     .left {
       left: 0;
@@ -362,7 +361,7 @@
       }
     }
     .youth-section {
-      background: linear-gradient(135deg, var(--psd-orange) 0%, #ff9a44 100%);
+      background: linear-gradient(135deg, var(--chega-dark-blue) 0%, #ff9a44 100%);
       color: white;
       padding: 60px 0;
     }
@@ -385,12 +384,12 @@
     }
 
     .youth-card h3 {
-      color: var(--psd-orange);
+      color: var(--chega-dark-blue);
       margin-top: 0;
     }
 
     .join-button {
-      background-color: var(--psd-orange);
+      background-color: var(--chega-blue);
       color: white;
       border: none;
       padding: 10px 20px;
@@ -438,160 +437,188 @@
 
   <section class="hero">
     <div class="container">
-      <h1>Partido Socialista</h1>
-      <p>"Liberdade, Igualdade, Solidariedade" - Os valores que nos guiam desde 1973</p>
+      <h1>CHEGA</h1>
+      <p>"Pela Pátria, pela Liberdade, pela Família e pela Vida"</p>
     </div>
-</section>
+  </section>
   <section id="historia" class="section">
     <div class="container">
-      <h2 class="section-title">História do PS</h2>
-      <p>O Partido Socialista (PS) é um partido político português fundado em 19 de abril de 1973, na cidade alemã de Bad Münstereifel. O PS define-se como um partido socialista democrático, comprometido com a construção de uma sociedade livre, justa e solidária.</p>
+      <h2 class="section-title">História do CHEGA</h2>
+      <p>O CHEGA é um partido político português fundado em 9 de abril de 2019 por André Ventura. Em 2025, consolidou-se como terceira força política no país, com representação em todos os órgãos de soberania.</p>
       
       <div class="timeline">
         <div class="timeline-item left">
           <div class="timeline-content">
-            <div class="timeline-year">1973</div>
+            <div class="timeline-year">2019</div>
             <h3>Fundação</h3>
-            <p>Fundado na Alemanha por Mário Soares e outros exilados políticos durante o Estado Novo.</p>
+            <p>André Ventura funda o CHEGA após sair do PSD, com foco no combate à corrupção e defesa da identidade nacional.</p>
           </div>
         </div>
         
         <div class="timeline-item right">
           <div class="timeline-content">
-            <div class="timeline-year">1974</div>
-            <h3>Revolução dos Cravos</h3>
-            <p>O PPD forma coligação com o CDS e forma o primeiro governo constitucional de Portugal, com Sá Carneiro como vice-primeiro-ministro.</p>
+            <div class="timeline-year">2022</div>
+            <h3>Primeiro Grupo Parlamentar</h3>
+            <p>Eleito 1 deputado à AR (André Ventura), marcando a entrada no parlamento.</p>
           </div>
         </div>
         
         <div class="timeline-item left">
           <div class="timeline-content">
-            <div class="timeline-year">1976-1978</div>
-            <h3>Primeiro Governo Constitucional
-            </h3>
-            <p>Mário Soares torna-se o primeiro Primeiro-Ministro eleito democraticamente em Portugal.</p>
+            <div class="timeline-year">2024</div>
+            <h3>Crescimento Eleitoral</h3>
+            <p>Nas eleições legislativas, elege 12 deputados, tornando-se na 3ª força política.</p>
           </div>
         </div>
         
         <div class="timeline-item right">
           <div class="timeline-content">
-            <div class="timeline-year">1995-2002</div>
-            <h3>Governo de António Guterres            </h3>
-            <p>Período de crescimento económico e desenvolvimento social.</p>
-          </div>
-        </div>
-      </div>
-      
-       
-      <div class="card-container">
-        <div class="card">
-          <img src="https://img.washingtonpost.com/rf/image_1484w/2010-2019/WashingtonPost/2017/01/07/Obituaries/Images/AFP_JO940.jpg?uuid=oBn7dtUCEeacsFSrYwhR6A" alt="Mário Soares">
-          <div class="card-content">
-            <h3 class="card-title">Mário Soares</h3>
-            <p>Fundador do partido e primeiro líder do PS. Foi Primeiro-Ministro e Presidente da República.</p>
-          </div>
-        </div>
-        
-        <div class="card">
-          <img src="https://www.echo.net.au/wp-content/uploads/2023/06/United-Nations-Secretary-General-Antonio-Guterres-.jpg" alt="António Guterres">
-          <div class="card-content">
-            <h3 class="card-title">António Guterres</h3>
-            <p>Líder do PS entre 1992-2002 e Primeiro-Ministro por dois mandatos consecutivos.</p>
-          </div>
-        </div>
-        
-        <div class="card">
-          <img src="https://municipio.mondimdebasto.pt/images/stories/noticias/2017/pm-antonio-costa.jpg" alt="António Costa">
-          <div class="card-content">
-            <h3 class="card-title">António Costa</h3>
-            <p>Líder do PS desde 2014 e ex- Primeiro-Ministro.</p>
+            <div class="timeline-year">2025</div>
+            <h3>Consolidação</h3>
+            <p>Presente em todas as assembleias municipais do país e com representação no Parlamento Europeu.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-
-  <section id="presidente" class="section" style="background-color: var(--light-gray);">
+  <section id="lider" class="section" style="background-color: var(--light-gray);">
     <div class="container">
-      <h2 class="section-title">Secretário-Geral do PS</h2>
+      <h2 class="section-title">Presidente do CHEGA</h2>
       <div style="display: flex; gap: 40px; align-items: center; flex-wrap: wrap;">
-        <img src="https://www.iol.pt/multimedia/oratvi/multimedia/imagem/id/647f0628d34ea91b0aad469c/1024.jpg" alt="Pedro Nuno Santos" style="width: 300px; border-radius: 8px;">
+        <img src="https://www.antenalivre.pt/pic/850x460/_andre_ventura_5dd409665b977.jpg" alt="André Ventura" style="width: 300px; border-radius: 8px;">
         <div style="flex: 1; min-width: 300px;">
-          <h3>Pedro Nuno Santos</h3>
-          <p><strong>Secretário-Geral do PS desde 2024</strong></p>
-          <p>Pedro Nuno Santos nasceu em São João da Madeira em 13 de fevereiro de 1977. É licenciado em Economia e iniciou a sua carreira política no movimento estudantil. Foi Secretário de Estado dos Assuntos Parlamentares (2015-2019) e Ministro das Infraestruturas e Habitação (2019-2023).</p>
-          <p>Como líder do PS desde dezembro de 2024, tem defendido um socialismo moderno e reformista, focando na justiça social, transição ecológica e desenvolvimento económico sustentável.</p>
-          <p>Principais prioridades:</p>
+          <h3>André Ventura</h3>
+          <p><strong>Presidente desde 2019</strong></p>
+          <p>André Ventura (1983) é doutorado em Direito e foi comentador desportivo. Eleito deputado em 2019 e reeleito em 2024, lidera o crescimento do CHEGA como voz do conservadorismo nacional.</p>
+          <p>Principais bandeiras em 2025:</p>
           <ul>
-            <li>Reforço do Estado Social</li>
-            <li>Transição energética justa</li>
-            <li>Investimento em habitação acessível</li>
-            <li>Modernização das infraestruturas do país</li>
+            <li>Combate à imigração ilegal</li>
+            <li>Reforma do sistema judicial</li>
+            <li>Redução de impostos</li>
+            <li>Defesa da família tradicional</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
+<!-- Inserir esta seção antes da Juventude CHEGA -->
 
-
-
-  <section id="medidas" class="section" style="background-color: var(--white);">
+<section id="medidas" class="section" style="background-color: var(--white);">
     <div class="container">
-      <h2 class="section-title">Medidas e Propostas</h2>
+      <h2 class="section-title">Principais Medidas do CHEGA (2025)</h2>
+      
       <div class="card-container">
+        <!-- Medida 1 -->
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Economia">
+          <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca" alt="Imigração">
           <div class="card-content">
-            <h3 class="card-title">Economia e Finanças</h3>
+            <h3 class="card-title">Imigração e Segurança</h3>
             <ul>
-              <li>Reforço do Estado Social</li>
-              <li>Investimento público estratégico</li>
-              <li>Justiça fiscal progressiva</li>
-              <li>Promoção do emprego qualificado</li>
+              <li>Fim das regularizações automáticas de imigrantes</li>
+              <li>Expulsão imediata de estrangeiros com condenações</li>
+              <li>Contingentes máximos por nacionalidade</li>
+              <li>Reforço das fronteiras e controle migratório</li>
+              <li>Triplicação de efetivos policiais</li>
             </ul>
           </div>
         </div>
         
+        <!-- Medida 2 -->
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Saúde">
+          <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e" alt="Economia">
           <div class="card-content">
-            <h3 class="card-title">Saúde</h3>
+            <h3 class="card-title">Economia e Fiscalidade</h3>
             <ul>
-              <li>Reforço do Serviço Nacional de Saúde</li>
-              <li>Combate às listas de espera</li>
-              <li>Maior proximidade aos cidadãos</li>
-              <li>Valorização dos profissionais de saúde</li>
+              <li>IRS máximo de 15% para rendimentos até €50.000</li>
+              <li>IVA zero nos produtos essenciais</li>
+              <li>Fim dos apoios a partidos e sindicatos com dinheiro público</li>
+              <li>Corte na despesa do Estado em 20%</li>
+              <li>Revisão das PPP para reduzir custos</li>
             </ul>
           </div>
         </div>
         
+        <!-- Medida 3 -->
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Educação">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173" alt="Educação">
           <div class="card-content">
-            <h3 class="card-title">Educação</h3>
+            <h3 class="card-title">Educação e Família</h3>
             <ul>
-              <li>Escola pública de qualidade</li>
-              <li>Combate ao abandono escolar</li>
-              <li>Valorização dos professores</li>
-              <li>Democratização do acesso ao ensino superior</li>
+              <li>Educação sexual baseada em valores biológicos</li>
+              <li>Fim da "ideologia de género" nas escolas</li>
+              <li>Subsídio de €200/mês por filho até aos 18 anos</li>
+              <li>Revisão dos manuais escolares "doutrinários"</li>
+              <li>Defesa da família natural (pai+mãe)</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Medida 4 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1558002038-1055907df827" alt="Justiça">
+          <div class="card-content">
+            <h3 class="card-title">Justiça e Corrupção</h3>
+            <ul>
+              <li>Prisão perpétua para crimes hediondos</li>
+              <li>Fim das prescrições para crimes de corrupção</li>
+              <li>Confisco de bens de corruptos</li>
+              <li>Juízes especializados em corrupção</li>
+              <li>Transmissão em direto dos julgamentos</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Medida 5 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1500380804539-4e1e8c1e7118" alt="Saúde">
+          <div class="card-content">
+            <h3 class="card-title">Saúde e Demografia</h3>
+            <ul>
+              <li>Cheque-saúde para acesso ao privado</li>
+              <li>Prioridade a portugueses no SNS</li>
+              <li>Incentivos fiscais à natalidade</li>
+              <li>Programa "Portugal para os Portugueses"</li>
+              <li>Combate à desertificação do interior</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Medida 6 -->
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4" alt="Agricultura">
+          <div class="card-content">
+            <h3 class="card-title">Agricultura e Ambiente</h3>
+            <ul>
+              <li>Fim das eólicas que desfiguram a paisagem</li>
+              <li>Defesa da agricultura nacional</li>
+              <li>Combate aos incêndios com meios aéreos permanentes</li>
+              <li>Revisão das metas ambientais "irrealistas"</li>
+              <li>Incentivos à floresta autóctone</li>
             </ul>
           </div>
         </div>
       </div>
+      
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="https://partidochega.pt/programa/" target="_blank" style="background-color: var(--chega-blue); color: white; padding: 15px 30px; border-radius: 4px; text-decoration: none; font-weight: bold; display: inline-block;">
+          Ver Programa Completo
+        </a>
+      </div>
     </div>
   </section>
+  
+  <!-- Juventude -->
   <section id="juventude" class="youth-section section">
     <div class="container">
-      <h2 class="section-title">Juventude Socialista (JS)</h2>
-      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: white;">A JS é a organização juvenil do PS, fundada em 1974, dedicada a formar novos líderes e a defender os interesses dos jovens portugueses.</p>
+      <h2 class="section-title">Juventude CHEGA</h2>
+      <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: white;">A Juventude CHEGA representa os jovens nacionalistas portugueses, defendendo a soberania e valores tradicionais.</p>
       
       <div class="card-container">
         <div class="card">
           <div class="youth-card">
             <h3>Quem Somos</h3>
-            <p>A Juventude Socialista é a maior organização política juvenil de Portugal, com estruturas em todo o país. Defendemos os valores do socialismo democrático e a participação jovem na política.</p>
-            <a href="https://juventudesocialista.pt/quem-somos/" class="join-button" target="_blank">Saber Mais</a>
+            <p>Movimento jovem do CHEGA fundado em 2020. Ativos em universidades e redes sociais, formamos a nova geração de líderes nacionalistas.</p>
+            <a href="https://partidochega.pt/juventude/" class="join-button" target="_blank">Saber Mais</a>
           </div>
         </div>
         
@@ -599,76 +626,59 @@
           <div class="youth-card">
             <h3>Atividades</h3>
             <ul>
-              <li>Escolas de formação política</li>
-              <li>Fóruns e debates nacionais</li>
-              <li>Campanhas sobre emprego jovem</li>
-              <li>Projetos de intervenção local</li>
-              <li>Participação em eleições</li>
+              <li>Acampamentos nacionais</li>
+              <li>Debates universitários</li>
+              <li>Campanhas de ativismo</li>
+              <li>Formação política</li>
             </ul>
-            <a href="https://juventudesocialista.pt/atividades/" class="join-button" target="_blank">Ver Agenda</a>
+            <a href="https://partidochega.pt/eventos/" class="join-button" target="_blank">Agenda</a>
           </div>
         </div>
         
         <div class="card">
           <div class="youth-card">
-            <h3>Junte-se à JS</h3>
-            <p>Se tens entre 14 e 30 anos e queres fazer parte da mudança, a JS é o teu espaço. Participa na construção de um Portugal mais justo e solidário.</p>
-            <a href="https://juventudesocialista.pt/filia-te/" class="join-button" target="_blank">Filie-se Já</a>
+            <h3>Junte-se</h3>
+            <p>Se tens entre 16 e 30 anos e queres lutar por Portugal, a Juventude CHEGA é o teu movimento.</p>
+            <a href="https://partidochega.pt/filiar/" class="join-button" target="_blank">Filie-se</a>
           </div>
         </div>
       </div>
-
-      <div style="text-align: center; margin-top: 40px;">
-        <h3 style="color: white;">Visite também:</h3>
-        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-          <a href="https://juventudesocialista.pt" style="color: white; text-decoration: none; background-color: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 4px;" target="_blank">
-            <i class="fas fa-globe"></i> Site Oficial
-          </a>
-          <a href="https://facebook.com/juventudesocialista" style="color: white; text-decoration: none; background-color: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 4px;" target="_blank">
-            <i class="fab fa-facebook-f"></i> Facebook
-          </a>
-          <a href="https://instagram.com/juventudesocialista" style="color: white; text-decoration: none; background-color: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 4px;" target="_blank">
-            <i class="fab fa-instagram"></i> Instagram
-          </a>
-          <a href="https://twitter.com/JS_Nacional" style="color: white; text-decoration: none; background-color: rgba(255,255,255,0.2); padding: 10px 20px; border-radius: 4px;" target="_blank">
-            <i class="fab fa-twitter"></i> Twitter
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 
+  <!-- Contactos -->
   <section id="contactos" class="section">
     <div class="container">
-      <h2 class="section-title">Informações e Contactos</h2>
+      <h2 class="section-title">Contactos</h2>
       <div class="contact-info">
         <div class="contact-card">
           <h3>Sede Nacional</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Largo do Rato, 2<br>1269-143 Lisboa</p>
-          <p><i class="fas fa-phone"></i> +351 213 924 700</p>
-          <p><i class="fas fa-envelope"></i> geral@ps.pt</p>
+          <p><i class="fas fa-map-marker-alt"></i> Rua da Madalena 151, 1º<br>1100-340 Lisboa</p>
+          <p><i class="fas fa-phone"></i> +351 211 321 477</p>
+          <p><i class="fas fa-envelope"></i> geral@partidochega.pt</p>
         </div>
         
         <div class="contact-card">
-          <h3>Horário de Atendimento</h3>
-          <p><i class="fas fa-clock"></i> Segunda a Sexta-feira<br>09:30 - 13:00 | 14:00 - 18:00</p>
           <h3>Redes Sociais</h3>
           <p>
-            <a href="https://www.facebook.com/PS.Portugal" target="_blank" style="color: var(--ps-red); margin-right: 15px;"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/psocialista" target="_blank" style="color: var(--ps-red); margin-right: 15px;"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.instagram.com/partidosocialista/" target="_blank" style="color: var(--ps-red); margin-right: 15px;"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/user/PartidoSocialistaPT" target="_blank" style="color: var(--ps-red);"><i class="fab fa-youtube"></i></a>
+            <a href="https://facebook.com/partidochega" target="_blank" style="color: var(--chega-blue); margin-right: 15px;"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/partidochega" target="_blank" style="color: var(--chega-blue); margin-right: 15px;"><i class="fab fa-twitter"></i></a>
+            <a href="https://instagram.com/partidochega" target="_blank" style="color: var(--chega-blue); margin-right: 15px;"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com/partidochega" target="_blank" style="color: var(--chega-blue);"><i class="fab fa-youtube"></i></a>
           </p>
+          <h3>Horário</h3>
+          <p><i class="fas fa-clock"></i> Seg-Sex: 10h-18h</p>
         </div>
         
         <div class="contact-card">
-          <h3>Junte-se ao PS</h3>
-          <p>Quer tornar-se militante do Partido Socialista ou receber mais informações?</p>
-          <a href="https://www.ps.pt/filie-se/" target="_blank" style="background-color: var(--ps-red); color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block;">Torne-se Militante</a>
+          <h3>Filiar-se</h3>
+          <p>Junte-se ao movimento que está a mudar Portugal:</p>
+          <a href="https://partidochega.pt/filiar/" target="_blank" style="background-color: var(--chega-blue); color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; display: inline-block;">Quero Filiar-me</a>
         </div>
       </div>
     </div>
   </section>
+
   <footer>
     <div class="container">
       <div class="footer-links">
