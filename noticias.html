@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política 2025 - Portal de Notícias</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+  <script src="https://unpkg.com/lucide@latest"></script>
+   <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --primary-blue: #1a237e;
+      --secondary-blue: #303f9f;
+      --accent-blue: #3d5afe;
+      --light-blue: #e8eaf6;
+      --dark-gray: #212121;
+      --medium-gray: #757575;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .back-button {
+  background-color: #e0e0e0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: var(--dark-gray);
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #d5d5d5;
+}
+
+    .menu-dropdown {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #ffffff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      z-index: 999;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-dropdown.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .menu-dropdown a {
+      padding: 10px 0;
+      text-decoration: none;
+      color: var(--dark-gray);
+      border-bottom: 1px solid var(--medium-gray);
+      transition: transform 0.2s;
+    }
+
+    .menu-dropdown a:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-dropdown a.submenu {
+      padding-left: 15px;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      display: none;
+    }
+
+    .menu-overlay.show {
+      display: block;
+    }
+    /* Main Content */
+    .hero {
+  background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(48, 63, 159, 0.8)), 
+              url('https://images.unsplash.com/photo-1508780709619-79562169bc64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+  padding: 5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+  min-height: 400px;
+}
+.hero-content {
+  max-width: 1200px;
+  width: 100%;
+}
+
+   .hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+  .hero p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+   
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
+ .filter-btn {
+  background-color: var(--white);
+  color: var(--primary-blue);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.filter-btn:hover {
+  background-color: var(--accent-blue);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+    .filter-btn.active {
+      background-color: var(--accent-blue);
+      color: var(--white);
+    }
+
+    .cards-section {
+      padding: 2rem;
+    }
+.card-highlights {
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.card-highlights h4 {
+  color: var(--primary-blue);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.card-highlights ul {
+  padding-left: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--medium-gray);
+}
+
+.card-highlights li {
+  margin-bottom: 0.3rem;
+}
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--primary-blue);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background-color: var(--accent-blue);
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--accent-blue);
+      color: var(--white);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+
+    .card-img-container {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary-blue);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    .card-meta i {
+      color: var(--accent-blue);
+    }
+
+    .card-text {
+      color: var(--medium-gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .read-more {
+      display: inline-block;
+      color: var(--accent-blue);
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      border-bottom: 2px solid transparent;
+    }
+
+    .read-more:hover {
+      border-bottom-color: var(--accent-blue);
+    }
+
+    /* News Ticker */
+    .news-ticker {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      padding: 0.75rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    
+
+    @keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-content {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%; /* Cria espaço para a animação */
+  animation: ticker 30s linear infinite;
+}
+
+    .ticker-label {
+      background-color: var(--accent-blue);
+      padding: 0.25rem 1rem;
+      border-radius: 4px;
+      margin-right: 1rem;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-gray);
+      color: var(--white);
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-blue);
+    }
+
+    .footer-text {
+      text-align: center;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .cards-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 3rem 1rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      nav ul {
+        gap: 1rem;
+      }
+      
+      .menu-dropdown {
+        width: 250px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .main-nav {
+        padding: 1rem;
+      }
+      
+      .logo-container img {
+        height: 40px;
+      }
+      
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .filter-bar {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="main-nav">
+      <div class="container">
+        <nav class="nav-left">
+          <ul>
+            <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+          </ul>
+        </nav>
+
+        <div class="logo-container">
+          <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+        </div>
+
+        <nav class="nav-right">
+          <ul>
+            <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+            <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+            <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="news-ticker">
+  <div class="ticker-container">
+    <div class="ticker-content">
+      <span class="ticker-label">ÚLTIMA HORA</span>
+      <span>Presidente da República convoca Conselho de Estado para analisar situação política • Novo partido "Aliança Democrática" surge nas sondagens • Debate sobre reforma da Constituição marcado para próxima semana</span>
+    </div>
+  </div>
+</div>
+<div class="hero">
+  <div class="hero-content">
+    <h1>Portal Político 2025</h1>
+    <p>Todas as notícias, debates e análises sobre a política portuguesa em tempo real</p>
+    <div class="filter-bar">
+      <button class="filter-btn active"><i class="fas fa-newspaper"></i> Todas</button>
+      <button class="filter-btn"><i class="fas fa-landmark"></i> Assembleia</button>
+      <button class="filter-btn"><i class="fas fa-user-tie"></i> Presidente</button>
+      <button class="filter-btn"><i class="fas fa-gavel"></i> Governo</button>
+      <button class="filter-btn"><i class="fas fa-balance-scale"></i> Constituição</button>
+    </div>
+  </div>
+</div>
+
+  <div class="cards-section">
+    <div class="container">
+      <h2 class="section-title">Notícias em Destaque</h2>
+      
+      <div class="cards-container">
+       <!-- Notícia 1 - Atualizada com conteúdo sobre voto antecipado -->
+<div class="card">
+  <span class="card-badge">Eleições</span>
+  <div class="card-img-container">
+    <img src="https://cdn-images.rtp.pt/icm/noticias/images/e3/e3e1e836f02c9238ec8bcfdec71993de?w=860&q=90&rect=0,156,5232,2868" alt="Voto antecipado em Portugal" class="card-img">
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">Mais de 300 mil eleitores registados para o voto antecipado em Portugal</h3>
+    <div class="card-meta">
+      <span><i class="far fa-clock"></i> Há 1 dia</span>
+      <span><i class="far fa-eye"></i> 3.5K visualizações</span>
+    </div>
+    <p class="card-text">O número de eleitores inscritos para o voto antecipado nas próximas eleições legislativas ultrapassou já os 300 mil, um recorde histórico em Portugal. A procura tem superado todas as expectativas, com filas nos postos de registo.</p>
+    <div class="card-highlights">
+      <h4>Destaques:</h4>
+      <ul>
+        <li>Número recorde de inscrições para voto antecipado</li>
+        <li>Processo disponível até 48 horas antes do dia das eleições</li>
+        <li>Maior adesão nos distritos de Lisboa e Porto</li>
+      </ul>
+    </div>
+    <a href="https://www.msn.com/pt-pt/video/noticias/mais-de-300-mil-eleitores-registados-para-o-voto-antecipado-em-portugal/vi-AA1Ez2hx?ocid=BingNewsVerp" class="read-more">Ler mais <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+     <!-- Notícia 2 - Atualizada com conteúdo do Observador -->
+<div class="card">
+  <span class="card-badge">Presidência</span>
+  <div class="card-img-container">
+    <img src="https://media.assettype.com/dn%2F2025-01-28%2Fqlrjs586%2Fmarcelo.JPG?rect=0%2C0%2C6000%2C3375&w=1200&auto=format%2Ccompress&fit=max" alt="Presidente da República" class="card-img">
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">Presidente quer governo com certeza de viabilização parlamentar</h3>
+    <div class="card-meta">
+      <span><i class="far fa-clock"></i> Hoje</span>
+      <span><i class="far fa-eye"></i> 4.1K visualizações</span>
+    </div>
+    <p class="card-text">O Presidente da República afirmou hoje que só nomeará um governo que tenha garantias prévias de viabilização do seu programa no Parlamento, numa clara referência às negociações em curso.</p>
+    
+    <div class="card-highlights">
+      <h4>Pontos-chave:</h4>
+      <ul>
+        <li>Marcelo exige acordos prévios antes de nomear governo</li>
+        <li>Preocupação com estabilidade governativa</li>
+        <li>Reuniões com partidos marcadas para próxima semana</li>
+        <li>Possibilidade de eleições antecipadas não está descartada</li>
+      </ul>
+    </div>
+    
+    <a href="https://observador.pt/2025/05/08/presidente-da-republica-quer-nomear-governo-com-certeza-de-viabilizacao-do-seu-programa-no-parlamento/" class="read-more">Ler mais <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+        <!-- Notícia 3 - Atualizada com crítica aos partidos portugueses -->
+<div class="card">
+  <span class="card-badge">Análise</span>
+  <div class="card-img-container">
+    <img src="https://th.bing.com/th/id/OIP.p0RswvRsrZm9-nqxwUGa8QHaEK?rs=1&pid=ImgDetMain" alt="Crítica aos partidos portugueses" class="card-img">
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">50 anos após o 25 de Abril: "Partidos portugueses são cada vez mais porcos no lixo visual"</h3>
+    <div class="card-meta">
+      <span><i class="far fa-clock"></i> Hoje</span>
+      <span><i class="far fa-eye"></i> 5.8K visualizações</span>
+    </div>
+    <p class="card-text">O designer José de Pina critica a poluição visual na comunicação política portuguesa, destacando o excesso de cartazes mal concebidos que desfiguram as cidades em período eleitoral.</p>
+    
+    <div class="card-highlights">
+      <h4>Principais críticas:</h4>
+      <ul>
+        <li>Excesso de cartazes políticos mal concebidos</li>
+        <li>Falta de preocupação estética e ambiental</li>
+        <li>Poluição visual que persiste após as eleições</li>
+        <li>Comparação negativa com outros países europeus</li>
+      </ul>
+    </div>
+    
+    <a href="https://www.msn.com/pt-pt/noticias/ultimas/50-anos-depois-do-25-de-abril-prova-se-que-os-partidos-portugueses-s%C3%A3o-cada-vez-mais-porcos-no-lixo-visual-diz-jos%C3%A9-de-pina/ar-AA1EuNaV?ocid=BingNewsVerp" class="read-more">Ler mais <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+        
+        <!-- Notícia 4 -->
+        <div class="card">
+  <span class="card-badge">Política Partidária</span>
+  <div class="card-img-container">
+    <img src="https://recordeuropa.com/wp-content/uploads/2024/02/eleicoes-montenegro-volta-a-rejeitar-acordos-com-chega-e-ventura-acusa-o-de-irresponsabilidade.jpg" alt="Líder da Iniciativa Liberal" class="card-img">
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">Líder da Iniciativa Liberal nega mexericos sobre coligação com a AD após eleições</h3>
+    <div class="card-meta">
+      <span><i class="far fa-clock"></i> Hoje</span>
+      <span><i class="far fa-eye"></i> 5.6K visualizações</span>
+    </div>
+    <p class="card-text">O presidente da IL desmentiu rumores sobre possíveis acordos pós-eleitorais com a Aliança Democrática, afirmando que o partido manterá sua independência e programa liberal.</p>
+    
+    <div class="card-highlights">
+      <h4>Declarações principais:</h4>
+      <ul>
+        <li>Negociação pré-eleitoral com AD totalmente descartada</li>
+        <li>Compromisso com programa liberal sem concessões</li>
+        <li>Foco nas eleições europeias e autárquicas</li>
+        <li>Crítica a "política de corredores"</li>
+      </ul>
+    </div>
+    
+    <a href="https://www.msn.com/pt-pt/noticias/ultimas/l%C3%ADder-da-iniciativa-liberal-nega-mexericos-sobre-coliga%C3%A7%C3%A3o-com-a-ad-ap%C3%B3s-as-elei%C3%A7%C3%B5es/vi-AA1EDGo2?ocid=BingNewsSerp" class="read-more">Ler mais <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+<div class="card">
+  <span class="card-badge">Reforma Constitucional</span>
+  <div class="card-img-container">
+    <img src="https://zap.aeiou.pt/wp-content/uploads/2022/04/093b5ffb92457283cb7f208cc8a213af-1500x1000.jpg" alt="Reforma Constitucional" class="card-img">
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">IL quer rever Constituição e retirar menção a "caminho para sociedade socialista"</h3>
+    <div class="card-meta">
+      <span><i class="far fa-clock"></i> Hoje</span>
+      <span><i class="far fa-eye"></i> 4.3K visualizações</span>
+    </div>
+    <p class="card-text">A Iniciativa Liberal propõe alteração ao artigo 2º da Constituição, eliminando a referência ao "caminho para uma sociedade socialista", defendendo neutralidade ideológica do Estado.</p>
+    
+    <div class="card-highlights">
+      <h4>Pontos da proposta:</h4>
+      <ul>
+        <li>Eliminar referência ao socialismo na Constituição</li>
+        <li>Garantir neutralidade ideológica do Estado</li>
+        <li>Manter princípios democráticos fundamentais</li>
+        <li>Debate parlamentar marcado para junho</li>
+      </ul>
+    </div>
+    
+    <a href="https://www.msn.com/pt-pt/noticias/ultimas/il-quer-rever-constitui%C3%A7%C3%A3o-e-retirar-men%C3%A7%C3%A3o-de-caminho-para-sociedade-socialista/ar-AA1EdksD?ocid=BingNewsVerp" class="read-more">Ler mais <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+<div class="card">
+  <span class="card-badge">Política Partidária</span>
+  <div class="card-img-container">
+    <img src="https://cdn-images.rtp.pt/icm/images/0d/0d104ccd9175150db272c826636a0cd3_N.jpg?" alt="Líder da Iniciativa Liberal" class="card-img">
+  </div>
+  <div class="card-content">
+    <h3 class="card-title">Líder da Iniciativa Liberal nega mexericos sobre coligação com a AD após eleições</h3>
+    <div class="card-meta">
+      <span><i class="far fa-clock"></i> Hoje</span>
+      <span><i class="far fa-eye"></i> 5.6K visualizações</span>
+    </div>
+    <p class="card-text">O presidente da IL desmentiu rumores sobre possíveis acordos pós-eleitorais com a Aliança Democrática, afirmando que o partido manterá sua independência e programa liberal.</p>
+    
+    <div class="card-highlights">
+      <h4>Declarações principais:</h4>
+      <ul>
+        <li>Negociação pré-eleitoral com AD totalmente descartada</li>
+        <li>Compromisso com programa liberal sem concessões</li>
+        <li>Foco nas eleições europeias e autárquicas</li>
+        <li>Crítica a "política de corredores"</li>
+      </ul>
+    </div>
+    
+    <a href="https://www.msn.com/pt-pt/noticias/ultimas/l%C3%ADder-da-iniciativa-liberal-nega-mexericos-sobre-coliga%C3%A7%C3%A3o-com-a-ad-ap%C3%B3s-as-elei%C3%A7%C3%B5es/vi-AA1EDGo2?ocid=BingNewsSerp" class="read-more">Ler mais <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-dropdown" id="dropdownMenu"></div>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+   <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Acessibilidade</a>
+        <a href="#">Informação de Copyright</a>
+        <a href="#">Contactos</a>
+      </div>
+      <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+
+  <script>
+    lucide.createIcons();
+
+    const submenuData = {
+      1: [
+        { text: 'Deputados em funções', href: '#' },
+        { text: 'Agenda Parlamentar', href: '#' },
+        { text: 'Leis em Discussão', href: '#' },
+        { text: 'Contactar um deputado', href: '#' }
+      ],
+      2: [
+        { text: 'Próximas Eleições', href: '#' },
+        { text: 'Como votar', href: '#' },
+        { text: 'Resultados Eleitorais', href: '#' },
+        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
+      ],
+      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+      4: [
+        { text: 'Partidos', href: 'partidos.html' },
+        { text: 'Financiamento partidário', href: '#' },
+        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
+        { text: 'Comparador de Partidos', href: 'comparador.html' }
+      ],
+      5: [
+        { text: 'Texto da Constituição', href: 'constituicao.html' },
+        { text: 'Princípios Fundamentais', href: '#' },
+        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
+      ],
+           6: [
+    { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
+]
+    };
+
+    function renderMenuCategories() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.innerHTML = '';
+
+      // Add top-level "Voltar" button to close menu
+      const closeBtn = document.createElement('a');
+      closeBtn.href = "#";
+      closeBtn.className = 'back-button'; // AQUI
+      closeBtn.textContent = '← Voltar';
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        menu.classList.remove("show");
+        document.getElementById("menuOverlay").classList.remove("show");
+      });
+      menu.appendChild(closeBtn);
+
+      const categories = [
+        { id: 4, name: 'Partidos' },
+        { id: 1, name: 'Assembleia da República' },
+        { id: 2, name: 'Eleições' },
+        { id: 5, name: 'Constituição' },
+        { id: 3, name: 'Forum' },
+        { id: 6, name: 'Notícias'}
+
+      ];
+
+      categories.forEach(cat => {
+        const link = document.createElement('a');
+        link.href = "#";
+        link.textContent = cat.name;
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          renderSubmenu(cat.id);
+        });
+        menu.appendChild(link);
+      });
+    }
+
+    function renderSubmenu(id) {
+      const menu = document.getElementById("dropdownMenu");
+      const submenu = submenuData[id];
+      menu.innerHTML = '';
+
+      const back = document.createElement('a');
+      back.textContent = '← Voltar';
+      back.href = "#";
+      back.className = 'back-button';
+      back.addEventListener('click', (e) => {
+        e.preventDefault();
+        renderMenuCategories();
+      });
+      menu.appendChild(back);
+
+      submenu.forEach(item => {
+        const sublink = document.createElement('a');
+        sublink.href = item.href;
+        sublink.textContent = item.text;
+        sublink.classList.add("submenu");
+        menu.appendChild(sublink);
+      });
+    }
+
+    document.getElementById("admin-btn").addEventListener("click", function (event) {
+      event.preventDefault();
+      const menu = document.getElementById("dropdownMenu");
+      const overlay = document.getElementById("menuOverlay");
+
+      menu.classList.toggle("show");
+      overlay.classList.toggle("show");
+
+      if (menu.classList.contains("show")) {
+        renderMenuCategories();
+      }
+    });
+
+    document.getElementById("menuOverlay").addEventListener("click", () => {
+      document.getElementById("dropdownMenu").classList.remove("show");
+      document.getElementById("menuOverlay").classList.remove("show");
+    });
+  </script>
+</body>
+</html>
