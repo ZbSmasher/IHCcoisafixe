@@ -418,3 +418,76 @@ footer {
 .hero-carousel button.next {
     right: 20px;
 }
+
+
+
+    .menu-dropdown {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #ffffff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      z-index: 999;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-dropdown.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .menu-dropdown a {
+      padding: 10px 0;
+      text-decoration: none;
+      color: var(--dark-gray);
+      border-bottom: 1px solid var(--medium-gray);
+      transition: transform 0.2s;
+    }
+
+    .menu-dropdown a:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-dropdown a.submenu {
+      padding-left: 15px;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      display: none;
+    }
+
+    .menu-overlay.show {
+      display: block;
+    }
+
+    .logo-container a {
+  display: inline-block;
+}
+
+    .logo {
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 1000; /* make sure it's on top if needed */
+    position: relative; /* needed if there's overlapping */
+    }
+
+    #admin-btn {
+  z-index: 10; /* low enough to be hidden by the menu */
+  position: relative;
+}

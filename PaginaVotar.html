@@ -68,35 +68,38 @@
 </head>
 
 <body>
+  <header>
+    <div class="main-nav">
+      <div class="container">
+        <nav class="nav-left">
+          <ul>
+            <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+          </ul>
+        </nav>
 
-    <header>
-        <div class="main-nav">
-            <div class="container">
-                <nav class="nav-left">
-                    <ul>
-                        
-                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo" >MenuImage</a>            
-                    
-                    </ul>
-                </nav>
-                </nav>
-        
-                <div class="logo-container">
-                    <a href="PaginaInicial.html">
-                        <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
-                    </a>
-                </div>
-        
-                <nav class="nav-right">
-                    <ul>
-                        <li><a href="#" data-lucide="languages" class="sbtn" >Notícias</a></li>
-                        <li><a href="#" class="sbtn" data-lucide="search" >Search</a></li>
-                    </ul>
-                </nav>
-            </div>
+        <div class="logo-container">
+        <img
+        src="photos/assembleia-logo.png"
+        alt="Assembleia da República"
+        class="logo"
+        style="cursor: pointer"
+        onclick="window.location.href='PaginaInicial.html'"
+        >
         </div>
-    </header>
 
+        <nav class="nav-right">
+          <ul>
+            <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+            <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+            <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-dropdown" id="dropdownMenu"></div>
+  <div class="menu-overlay" id="menuOverlay"></div>
     <main>
         <section class="hero" style="background: var(--light-gray); height: auto; padding: 60px 20px; text-align: center;">
             <div class="container fade-in">
@@ -206,14 +209,119 @@
 
 <script>
     lucide.createIcons();
-</script>
 
-<script>
-    document.getElementById("admin-btn").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent default link behavior (optional)
-        window.location.href = "Menu.html"; // Change this to your desired page
+    const submenuData = {
+      1: [
+        { text: 'Deputados em funções', href: '#' },
+        { text: 'Agenda Parlamentar', href: '#' },
+        { text: 'Leis em Discussão', href: '#' },
+        { text: 'Contactar um deputado', href: '#' }
+      ],
+      2: [
+        { text: 'Próximas Eleições', href: '#' },
+        { text: 'Como votar', href: '#' },
+        { text: 'Resultados Eleitorais', href: '#' },
+        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
+      ],
+      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+      4: [
+        { text: 'Partidos', href: 'partidos.html' },
+        { text: 'Financiamento partidário', href: '#' },
+        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
+        { text: 'Comparador de Partidos', href: 'comparador.html' }
+      ],
+      5: [
+        { text: 'Texto da Constituição', href: 'constituicao.html' },
+        { text: 'Princípios Fundamentais', href: '#' },
+        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
+      ],
+           6: [
+    { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
+]
+    };
+
+    function renderMenuCategories() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.innerHTML = '';
+
+      // Add top-level "Voltar" button to close menu
+      const closeBtn = document.createElement('a');
+      closeBtn.href = "#";
+      closeBtn.className = 'back-button'; // AQUI
+      closeBtn.textContent = '← Voltar';
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        menu.classList.remove("show");
+        document.getElementById("menuOverlay").classList.remove("show");
+      });
+      menu.appendChild(closeBtn);
+
+      const categories = [
+        { id: 4, name: 'Partidos' },
+        { id: 1, name: 'Assembleia da República' },
+        { id: 2, name: 'Eleições' },
+        { id: 5, name: 'Constituição' },
+        { id: 3, name: 'Forum' },
+        { id: 6, name: 'Notícias'}
+
+      ];
+
+      categories.forEach(cat => {
+        const link = document.createElement('a');
+        link.href = "#";
+        link.textContent = cat.name;
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          renderSubmenu(cat.id);
+        });
+        menu.appendChild(link);
+      });
+    }
+
+    function renderSubmenu(id) {
+      const menu = document.getElementById("dropdownMenu");
+      const submenu = submenuData[id];
+      menu.innerHTML = '';
+
+      const back = document.createElement('a');
+      back.textContent = '← Voltar';
+      back.href = "#";
+      back.className = 'back-button';
+      back.addEventListener('click', (e) => {
+        e.preventDefault();
+        renderMenuCategories();
+      });
+      menu.appendChild(back);
+
+      submenu.forEach(item => {
+        const sublink = document.createElement('a');
+        sublink.href = item.href;
+        sublink.textContent = item.text;
+        sublink.classList.add("submenu");
+        menu.appendChild(sublink);
+      });
+    }
+
+    document.getElementById("admin-btn").addEventListener("click", function (event) {
+      event.preventDefault();
+      const menu = document.getElementById("dropdownMenu");
+      const overlay = document.getElementById("menuOverlay");
+
+      menu.classList.toggle("show");
+      overlay.classList.toggle("show");
+
+      if (menu.classList.contains("show")) {
+        renderMenuCategories();
+      }
+    });
+
+    document.getElementById("menuOverlay").addEventListener("click", () => {
+      document.getElementById("dropdownMenu").classList.remove("show");
+      document.getElementById("menuOverlay").classList.remove("show");
     });
 </script>
+
+
 
 </body>
 </html>

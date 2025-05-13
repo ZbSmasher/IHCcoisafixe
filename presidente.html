@@ -384,30 +384,39 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="main-nav">
-            <div class="container">
-                <nav class="nav-left">
-                    <a href="#" id="admin-btn" class="logo">
-                        <i class="fas fa-bars"></i> <!-- Ícone de três traços (hambúrguer) -->
-                    </a>
-                </nav>
-        
-                <div class="logo-container">
-                    <a href="PaginaInicial.html"> <!-- Substitua "index.html" pela URL desejada -->
-                        <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
-                    </a>
-                </div>
-        
-                <nav class="nav-right">
-                    <ul>
-                        <li><a href="#" data-lucide="languages" >Notícias</a></li>
-                        <li><a href="#" data-lucide="search" >Search</a></li>
-                    </ul>
-                </nav>
-            </div>
+  <header>
+    <div class="main-nav">
+      <div class="container">
+        <nav class="nav-left">
+          <ul>
+            <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+          </ul>
+        </nav>
+
+        <div class="logo-container">
+        <img
+        src="photos/assembleia-logo.png"
+        alt="Assembleia da República"
+        class="logo"
+        style="cursor: pointer"
+        onclick="window.location.href='PaginaInicial.html'"
+        >
         </div>
-    </header>
+
+        <nav class="nav-right">
+          <ul>
+            <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+            <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+            <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-dropdown" id="dropdownMenu"></div>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
 
     <!-- Menu Lateral -->
     <div class="menu" id="menu" style="display: none;">

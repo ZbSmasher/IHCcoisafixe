@@ -180,30 +180,38 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="main-nav">
-            <div class="container">
-                <nav class="nav-left">
-                    <ul>
-                        
-                        <a href="Menu.html" id="admin-btn" data-lucide="menu" class="sbtn" class="logo" >MenuImage</a>            
-                    
-                    </ul>
-                </nav>
-        
-                <div class="logo-container">
-                    <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
-                </div>
-        
-                <nav class="nav-right">
-                    <ul>
-                        <li><a href="#" data-lucide="languages" class="sbtn" >Notícias</a></li>
-                        <li><a href="#" class="sbtn" data-lucide="search" >Search</a></li>
-                    </ul>
-                </nav>
-            </div>
+  <header>
+    <div class="main-nav">
+      <div class="container">
+        <nav class="nav-left">
+          <ul>
+            <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+          </ul>
+        </nav>
+
+        <div class="logo-container">
+        <img
+        src="photos/assembleia-logo.png"
+        alt="Assembleia da República"
+        class="logo"
+        style="cursor: pointer"
+        onclick="window.location.href='PaginaInicial.html'"
+        >
         </div>
-    </header>
+
+        <nav class="nav-right">
+          <ul>
+            <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+            <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+            <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-dropdown" id="dropdownMenu"></div>
+  <div class="menu-overlay" id="menuOverlay"></div>
     <section class="hondt-hero">
         <div class="container">
             <h1>Método de Hondt</h1>
