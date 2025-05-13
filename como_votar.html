@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presidência da República</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+   :root {
+      --dark-gray: #525252;
+      --medium-gray: #999;
+      --light-gray: #f4f4f4;
+      --white: #fff;
+      --blue: #007bff;
+      --primary-blue: #1a237e;
+      --secondary-blue: #303f9f;
+      --accent-blue: #3d5afe;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .back-button {
+  background-color: #e0e0e0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: var(--dark-gray);
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #d5d5d5;
+}
+
+    .menu-dropdown {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100%;
+      background-color: #ffffff;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      z-index: 999;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+
+      transform: translateX(-100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-dropdown.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .menu-dropdown a {
+      padding: 10px 0;
+      text-decoration: none;
+      color: var(--dark-gray);
+      border-bottom: 1px solid var(--medium-gray);
+      transition: transform 0.2s;
+    }
+
+    .menu-dropdown a:hover {
+      transform: scale(1.05);
+    }
+
+    .menu-dropdown a.submenu {
+      padding-left: 15px;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 998;
+      display: none;
+    }
+
+    .menu-overlay.show {
+      display: block;
+    }
+
+    .cards-section {
+      padding: 40px 0 60px 0;
+      background-color: var(--light-gray);
+      margin-top: -20px;
+    }
+
+    .cards-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 300px;
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      vertical-align: top;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--dark-gray);
+    }
+
+    .card-subtitle {
+      font-size: 1rem;
+      color: var(--blue);
+      margin-bottom: 15px;
+    }
+
+    .card-text {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .cards-container {
+        flex-direction: column;
+      }
+
+      .card {
+        min-width: 100%;
+      }
+    } /* Conteúdo principal da página */
+    .voting-guide {
+      padding: 2rem 0;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .page-header h1 {
+      color: var(--primary-blue);
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: var(--medium-gray);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .guide-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .guide-step {
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .guide-step:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .step-header {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .step-number {
+      background-color: var(--white);
+      color: var(--primary-blue);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .step-content {
+      padding: 1.5rem;
+    }
+
+    .step-content h3 {
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+    }
+
+    .step-content ul {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .step-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .important-note {
+      background-color: var(--light-blue);
+      border-left: 4px solid var(--accent-blue);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+
+    /* Footer - Mantido igual ao original */
+    footer {
+      background-color: var(--dark-gray);
+      color: var(--white);
+      padding: 3rem 2rem 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-blue);
+    }
+
+    .footer-text {
+      text-align: center;
+      color: var(--medium-gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .main-nav {
+        padding: 1rem;
+      }
+      
+      .menu-dropdown {
+        width: 250px;
+      }
+    }
+  </style>
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="main-nav">
+      <div class="container">
+        <nav class="nav-left">
+          <ul>
+            <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+          </ul>
+        </nav>
+
+        <div class="logo-container">
+          <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+        </div>
+
+        <nav class="nav-right">
+          <ul>
+            <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
+            <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+            <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-dropdown" id="dropdownMenu"></div>
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <!-- Conteúdo principal da página -->
+  <main class="voting-guide container">
+    <div class="page-header">
+      <h1>Como Votar em Portugal 2025</h1>
+      <p>Guia completo com todos os passos para exercer o seu direito de voto nas próximas eleições</p>
+    </div>
+
+    <div class="guide-container">
+      <!-- Passo 1 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <h2>Verifique o seu recenseamento</h2>
+        </div>
+        <div class="step-content">
+          <h3>Confirmar se está registado para votar</h3>
+          <ul>
+            <li>Acesse o <a href="https://www.recenseamento.mai.gov.pt/" target="_blank">portal do recenseamento</a></li>
+            <li>Insira o seu número de cartão de cidadão</li>
+            <li>Confira a sua mesa de voto e local de votação</li>
+          </ul>
+          <div class="important-note">
+            <p><strong>Prazos:</strong> O recenseamento automático é feito aos 17 anos. Verifique seus dados até 60 dias antes das eleições.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 2 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <h2>Documentos necessários</h2>
+        </div>
+        <div class="step-content">
+          <h3>O que levar no dia da votação</h3>
+          <ul>
+            <li>Cartão de Cidadão ou Bilhete de Identidade</li>
+            <li>Não é necessário o cartão de eleitor (desde 2018)</li>
+            <li>Máscara (se exigido por normas sanitárias)</li>
+          </ul>
+          <div class="important-note">
+            <p><strong>Documentos válidos:</strong> Mesmo que esteja caducado, o CC/BI é aceite para votação.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 3 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <h2>Local de votação</h2>
+        </div>
+        <div class="step-content">
+          <h3>Onde e quando votar</h3>
+          <ul>
+            <li>As eleições ocorrem em um domingo, das 8h às 19h</li>
+            <li>Locais de votação são geralmente escolas ou edifícios públicos</li>
+            <li>Eleitores no estrangeiro têm horários especiais</li>
+          </ul>
+          <div class="important-note">
+            <p><strong>Voto antecipado:</strong> Disponível para quem não pode votar no dia, mediante agendamento.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 4 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-number">4</div>
+          <h2>Processo de votação</h2>
+        </div>
+        <div class="step-content">
+          <h3>Como votar passo-a-passo</h3>
+          <ol>
+            <li>Dirija-se à sua mesa de voto</li>
+            <li>Apresente o documento de identificação</li>
+            <li>Receba o boletim de voto</li>
+            <li>Vá para a cabine de voto e marque sua preferência</li>
+            <li>Dobre o boletim e deposite na urna</li>
+          </ol>
+          <div class="important-note">
+            <p><strong>Sigilo:</strong> O voto é secreto e ninguém pode pressionar sua escolha.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 5 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-number">5</div>
+          <h2>Voto no estrangeiro</h2>
+        </div>
+        <div class="step-content">
+          <h3>Para eleitores residentes fora de Portugal</h3>
+          <ul>
+            <li>Recenseamento deve ser feito até 60 dias antes</li>
+            <li>Votação ocorre em consulados e embaixadas</li>
+            <li>Pode votar por correspondência (com requisitos)</li>
+          </ul>
+          <div class="important-note">
+            <p><strong>Prazos:</strong> Eleitores no estrangeiro devem confirmar datas específicas para seu país.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 6 -->
+      <div class="guide-step">
+        <div class="step-header">
+          <div class="step-number">6</div>
+          <h2>Acessibilidade</h2>
+        </div>
+        <div class="step-content">
+          <h3>Votação para pessoas com mobilidade reduzida</h3>
+          <ul>
+            <li>Locais de voto devem ser acessíveis</li>
+            <li>Possibilidade de voto antecipado em casa</li>
+            <li>Boletins em braille disponíveis sob pedido</li>
+          </ul>
+          <div class="important-note">
+            <p><strong>Assistência:</strong> Pode levar alguém para ajudar, ou solicitar auxílio da mesa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Acessibilidade</a>
+        <a href="#">Informação de Copyright</a>
+        <a href="#">Contactos</a>
+      </div>
+      <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    const submenuData = {
+      1: [
+        { text: 'Deputados em funções', href: '#' },
+        { text: 'Agenda Parlamentar', href: '#' },
+        { text: 'Leis em Discussão', href: '#' },
+        { text: 'Contactar um deputado', href: '#' }
+      ],
+      2: [
+        { text: 'Próximas Eleições', href: '#' },
+        { text: 'Como votar', href: 'como_votar.html' },
+        { text: 'Resultados Eleitorais', href: '#' },
+        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
+      ],
+      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+      4: [
+        { text: 'Partidos', href: 'partidos.html' },
+        { text: 'Financiamento partidário', href: '#' },
+        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
+        { text: 'Comparador de Partidos', href: 'comparador.html' }
+      ],
+      5: [
+        { text: 'Texto da Constituição', href: 'constituicao.html' },
+        { text: 'Princípios Fundamentais', href: '#' },
+        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
+      ],
+           6: [
+    { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
+]
+    };
+
+    function renderMenuCategories() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.innerHTML = '';
+
+      // Add top-level "Voltar" button to close menu
+      const closeBtn = document.createElement('a');
+      closeBtn.href = "#";
+      closeBtn.className = 'back-button'; // AQUI
+      closeBtn.textContent = '← Voltar';
+      closeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        menu.classList.remove("show");
+        document.getElementById("menuOverlay").classList.remove("show");
+      });
+      menu.appendChild(closeBtn);
+
+      const categories = [
+        { id: 4, name: 'Partidos' },
+        { id: 1, name: 'Assembleia da República' },
+        { id: 2, name: 'Eleições' },
+        { id: 5, name: 'Constituição' },
+        { id: 3, name: 'Forum' },
+        { id: 6, name: 'Notícias'}
+
+      ];
+
+      categories.forEach(cat => {
+        const link = document.createElement('a');
+        link.href = "#";
+        link.textContent = cat.name;
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          renderSubmenu(cat.id);
+        });
+        menu.appendChild(link);
+      });
+    }
+
+    function renderSubmenu(id) {
+      const menu = document.getElementById("dropdownMenu");
+      const submenu = submenuData[id];
+      menu.innerHTML = '';
+
+      const back = document.createElement('a');
+      back.textContent = '← Voltar';
+      back.href = "#";
+      back.className = 'back-button';
+      back.addEventListener('click', (e) => {
+        e.preventDefault();
+        renderMenuCategories();
+      });
+      menu.appendChild(back);
+
+      submenu.forEach(item => {
+        const sublink = document.createElement('a');
+        sublink.href = item.href;
+        sublink.textContent = item.text;
+        sublink.classList.add("submenu");
+        menu.appendChild(sublink);
+      });
+    }
+
+    document.getElementById("admin-btn").addEventListener("click", function (event) {
+      event.preventDefault();
+      const menu = document.getElementById("dropdownMenu");
+      const overlay = document.getElementById("menuOverlay");
+
+      menu.classList.toggle("show");
+      overlay.classList.toggle("show");
+
+      if (menu.classList.contains("show")) {
+        renderMenuCategories();
+      }
+    });
+
+    document.getElementById("menuOverlay").addEventListener("click", () => {
+      document.getElementById("dropdownMenu").classList.remove("show");
+      document.getElementById("menuOverlay").classList.remove("show");
+    });
+  </script>
+</body>
+</html>
