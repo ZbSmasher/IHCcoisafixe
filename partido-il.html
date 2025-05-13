@@ -7,7 +7,102 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
+ <style>
+  .header-icons {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .search-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #111;
+    font-size: 20px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .search-icon:hover {
+    transform: scale(1.1);
+  }
+
+  #search-input {
+    width: 0;
+    opacity: 0;
+    padding: 8px 15px;
+    margin-left: 5px;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #111;
+    outline: none;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-icons.active #search-input {
+    width: 200px;
+    opacity: 1;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+
+  #search-results {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    margin-top: 5px;
+  }
+
+  .search-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+
+  .search-result-item:hover {
+    background: #f5f5f5;
+  }
+
+  .search-result-type {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .search-result-title {
+    font-weight: bold;
+    margin-top: 3px;
+  }
+
+  .search-no-results {
+    padding: 15px;
+    text-align: center;
+    color: #666;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  .search-icon.animate {
+    animation: pulse 0.5s ease;
+  }
+</style> <style>
     :root {
       --dark-gray: #525252;
       --medium-gray: #999;
@@ -424,35 +519,39 @@
 </head>
 
 <body>
-  <header>
-    <div class="main-nav">
-      <div class="container">
-        <nav class="nav-left">
-          <ul>
-            <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
-          </ul>
-        </nav>
+<header>
+  <div class="main-nav">
+    <div class="container">
+      <nav class="nav-left">
+        <ul>
+          <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+        </ul>
+      </nav>
 
-        <div class="logo-container">
-        <img
-        src="photos/assembleia-logo.png"
-        alt="Assembleia da República"
-        class="logo"
-        style="cursor: pointer"
-        onclick="window.location.href='PaginaInicial.html'"
-        >
-        </div>
-
-        <nav class="nav-right">
-          <ul>
-            <li><a href="#" class="sbtn" data-lucide="search">Search</a></li>
-            <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
-            <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
-          </ul>
-        </nav>
+      <div class="logo-container">
+        <a href="PaginaInicial.html">
+          <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+        </a>
       </div>
+
+      <nav class="nav-right">
+        <ul>
+          <li>
+            <div class="header-icons" id="search-container">
+              <button id="toggle-search" class="search-icon" aria-label="Pesquisar">
+                <i data-lucide="search"></i>
+              </button>
+              <input type="text" id="search-input" placeholder="Pesquisar partidos, deputados..." />
+              <div id="search-results"></div>
+            </div>
+          </li>
+          <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+          <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+        </ul>
+      </nav>
     </div>
-  </header>
+  </div>
+</header>
 
   <div class="menu-dropdown" id="dropdownMenu"></div>
   <div class="menu-overlay" id="menuOverlay"></div>
@@ -757,6 +856,7 @@
     </div>
   </footer>
 
+  
   <script>
     lucide.createIcons();
 
@@ -784,7 +884,10 @@
         { text: 'Texto da Constituição', href: 'constituicao.html' },
         { text: 'Princípios Fundamentais', href: '#' },
         { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
-      ]
+      ],
+           6: [
+    { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
+]
     };
 
     function renderMenuCategories() {
@@ -794,7 +897,7 @@
       // Add top-level "Voltar" button to close menu
       const closeBtn = document.createElement('a');
       closeBtn.href = "#";
-      closeBtn.className = 'back-button';
+      closeBtn.className = 'back-button'; // AQUI
       closeBtn.textContent = '← Voltar';
       closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -808,7 +911,9 @@
         { id: 1, name: 'Assembleia da República' },
         { id: 2, name: 'Eleições' },
         { id: 5, name: 'Constituição' },
-        { id: 3, name: 'Forum' }
+        { id: 3, name: 'Forum' },
+        { id: 6, name: 'Notícias'}
+
       ];
 
       categories.forEach(cat => {
@@ -865,5 +970,177 @@
       document.getElementById("menuOverlay").classList.remove("show");
     });
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleSearch = document.getElementById('toggle-search');
+    const searchContainer = document.getElementById('search-container');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    const searchIcon = document.querySelector('.search-icon');
+
+    // Mostra a lupa preta por padrão
+    searchIcon.style.color = '#111';
+
+    // Alternar a caixa de pesquisa
+    toggleSearch.addEventListener('click', function(e) {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      
+      // Adiciona animação à lupa
+      searchIcon.classList.add('animate');
+      setTimeout(() => {
+        searchIcon.classList.remove('animate');
+      }, 500);
+
+      // Foca no input quando ativo
+      if (searchContainer.classList.contains('active')) {
+        setTimeout(() => {
+          searchInput.focus();
+        }, 300);
+      } else {
+        searchResults.style.display = 'none';
+      }
+    });
+
+    // Base de dados completa para busca
+    const searchDatabase = {
+      pages: [
+        { title: 'Método de Hondt', file: 'metodohondt.html', keywords: ['cálculo eleitoral', 'distribuição mandatos', 'sistema eleitoral'] },
+        { title: 'Como Votar', file: 'PaginaVotar.html', keywords: ['eleições', 'processo eleitoral', 'urnas', 'votar'] }, // Alterado para PaginaVotar.html
+        { title: 'Constituição', file: 'constituicao.html', keywords: ['lei fundamental', 'carta magna', 'documento constitucional'] },
+        { title: 'Direitos e Deveres', file: 'direitos-deveres.html', keywords: ['cidadania', 'direitos civis', 'obrigações'] },
+        { title: 'Partidos', file: 'partidos.html', keywords: ['formações políticas', 'legenda partidária', 'agremiações'] },
+        { title: 'Presidente', file: 'presidente.html', keywords: ['chefe de estado', 'PR', 'presidência'] },
+        { title: 'Notícias', file: 'noticias.html', keywords: ['actualidade', 'jornalismo', 'informação política'] },
+        { title: 'Comparador', file: 'comparador.html', keywords: ['comparação partidos', 'programas políticos', 'análise'] },
+        { title: 'Fórum', file: 'forum.html', keywords: ['discussão', 'debate', 'comunidade'] },
+        { title: 'Como Criar Partido', file: 'como_criar_partido.html', keywords: ['registar partido', 'legalização', 'requisitos'] },
+        { title: 'Página Inicial', file: 'PaginaInicial.html', keywords: ['home', 'início', 'principal'] }
+      ],
+      parties: [
+        { name: 'PS', fullName: 'Partido Socialista', file: 'partido-ps.html', leaders: ['Carlos César', 'António Costa'] },
+        { name: 'PSD', fullName: 'Partido Social Democrata', file: 'partido-psd.html', leaders: ['Luís Montenegro', 'Rui Rio'] },
+        { name: 'CHEGA', fullName: 'CHEGA', file: 'partido-chega.html', leaders: ['André Ventura'] },
+        { name: 'IL', fullName: 'Iniciativa Liberal', file: 'partido-il.html', leaders: ['Rui Rocha', 'João Cotrim Figueiredo'] },
+        { name: 'LIVRE', fullName: 'LIVRE', file: 'partido-livre.html', leaders: ['Rui Tavares'] },
+        { name: 'PCP', fullName: 'Partido Comunista Português', file: 'partido-pcp.html', leaders: ['Paulo Raimundo'] },
+        { name: 'PAN', fullName: 'Pessoas-Animais-Natureza', file: 'partido-pan.html', leaders: ['Inês Sousa Real'] }
+      ],
+      deputies: [
+        { name: 'Carlos César', party: 'PS', file: 'deputado-carlos-cesar.html' },
+        { name: 'António Costa', party: 'PS', file: 'deputado-antonio-ventura.html' }
+      ]
+    };
+
+    function normalize(str) {
+      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    }
+
+    function search(query) {
+      const normalizedQuery = normalize(query);
+      if (!normalizedQuery) return [];
+      
+      // Pesquisa em todas as categorias
+      const results = [];
+      
+      // Páginas principais
+      searchDatabase.pages.forEach(item => {
+        const score = 
+          normalize(item.title).includes(normalizedQuery) ? 3 :
+          item.keywords.some(kw => normalize(kw).includes(normalizedQuery)) ? 2 : 0;
+        if (score > 0) {
+          results.push({ type: 'Página', title: item.title, file: item.file, score });
+        }
+      });
+      
+      // Partidos políticos
+      searchDatabase.parties.forEach(party => {
+        const score = 
+          normalize(party.name).includes(normalizedQuery) ? 4 :
+          normalize(party.fullName).includes(normalizedQuery) ? 3 :
+          party.leaders.some(l => normalize(l).includes(normalizedQuery)) ? 2 : 0;
+        if (score > 0) {
+          results.push({ type: 'Partido', title: `${party.fullName} (${party.name})`, file: party.file, score });
+        }
+      });
+      
+      // Deputados
+      searchDatabase.deputies.forEach(deputy => {
+        if (normalize(deputy.name).includes(normalizedQuery)) {
+          results.push({ type: 'Deputado', title: `${deputy.name} (${deputy.party})`, file: deputy.file, score: 3 });
+        }
+      });
+      
+      // Ordenar por relevância
+      return results.sort((a, b) => b.score - a.score);
+    }
+
+    function showSearchResults(results) {
+      const resultsContainer = document.getElementById('search-results');
+      resultsContainer.innerHTML = '';
+      
+      if (results.length === 0) {
+        resultsContainer.innerHTML = '<div class="search-no-results">Nenhum resultado encontrado.</div>';
+        return;
+      }
+      
+      results.forEach(result => {
+        const resultElement = document.createElement('div');
+        resultElement.className = 'search-result-item';
+        resultElement.innerHTML = `
+          <div class="search-result-type">${result.type}</div>
+          <div class="search-result-title">${result.title}</div>
+        `;
+        resultElement.addEventListener('click', () => {
+          window.location.href = result.file;
+        });
+        resultsContainer.appendChild(resultElement);
+      });
+    }
+
+    // Pesquisa ao digitar
+    searchInput.addEventListener('input', function() {
+      const query = searchInput.value.trim();
+      if (query.length > 0) {
+        const results = search(query);
+        showSearchResults(results);
+        searchResults.style.display = 'block';
+      } else {
+        searchResults.style.display = 'none';
+      }
+    });
+
+    // Pesquisa ao pressionar Enter
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const query = searchInput.value.trim().toLowerCase();
+        
+        // Redirecionamento direto para "como votar"
+        if (query.includes('como votar') || query.includes('votar')) {
+          window.location.href = 'PaginaVotar.html';
+          return;
+        }
+        
+        const results = search(query);
+        if (results.length > 0) {
+          // Vai para o primeiro resultado se houver
+          window.location.href = results[0].file;
+        } else {
+          showSearchResults([]);
+        }
+      }
+    });
+
+    // Fechar ao clicar fora
+    document.addEventListener('click', function(e) {
+      if (!searchContainer.contains(e.target)) {
+        searchContainer.classList.remove('active');
+        searchResults.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+
 </body>
 </html>
