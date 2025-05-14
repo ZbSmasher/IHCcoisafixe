@@ -1265,19 +1265,20 @@
       </div>
 
       <nav class="nav-right">
-        <ul>
-          <li>
-            <div class="header-icons" id="search-container">
-              <button id="toggle-search" class="search-icon" aria-label="Pesquisar">
-                <i data-lucide="search"></i>
-              </button>
-              <input type="text" id="search-input" placeholder="Pesquisar partidos, deputados..." />
-              <div id="search-results"></div>
-            </div>
-          </li>
-          <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
-          <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
-        </ul>
+          <ul>
+              <li>
+                  <div class="header-icons" id="search-container">
+                      <button id="toggle-search" class="search-icon" aria-label="Pesquisar">
+                          <i data-lucide="search"></i>
+                      </button>
+                      <input type="text" id="search-input" placeholder="Pesquisar partidos, deputados..." />
+                      <div id="search-results"></div>
+                  </div>
+              </li>
+              <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
+              <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+              <li><button id="openLogin" class="sbtn" data-lucide="log-in">Entrar</button></li>
+          </ul>
       </nav>
     </div>
   </div>
@@ -1952,6 +1953,28 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function() {
+            const loginOverlay = document.getElementById('loginOverlay');
+            const openLoginBtn = document.getElementById('openLogin');
+
+            if (openLoginBtn && loginOverlay) {
+                openLoginBtn.addEventListener('click', function () {
+                    loginOverlay.classList.add('active');
+                });
+            }
+
+            loginOverlay.addEventListener('click', function (event) {
+                if (event.target === loginOverlay) {
+                    loginOverlay.classList.remove('active');
+                }
+            });
+
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert("Login efetuado!");
+                loginOverlay.classList.remove('active');
+            });
+
     // Tópicos do fórum e lógica de novo tópico (incluindo a declaração de topicsList)
     const topicItems = document.querySelectorAll('.topic-item');
     const forumMain = document.getElementById('forum-main');
@@ -2161,11 +2184,11 @@
         function formatDateAsTimeAgo() {
             return "há alguns segundos";
         }
-        
+
     </script>
 
+   
 
-
-    
+ 
 </body>
 </html>
