@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fórum Democrático | Presidência da República</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="js\script.js"></script>
      <style>
   .header-icons {
     display: flex;
@@ -103,18 +104,6 @@
     animation: pulse 0.5s ease;
   }
 </style> <style>
-        .menu-dropdown a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 15px;
-  transition: all 0.2s ease;
-}
-
-.menu-dropdown a i {
-  width: 18px;
-  height: 18px;
-}
 
 .back-button {
   background: #f5f5f5;
@@ -122,10 +111,7 @@
   font-weight: 500;
 }
 
-.menu-dropdown a:hover {
-  background: #f0f0f0;
-  transform: translateX(3px);
-}
+
   .header-icons {
     display: flex;
     align-items: center;
@@ -1263,7 +1249,7 @@
     </style>
 </head>
 <body>
-  <header>
+<header>
   <div class="main-nav">
     <div class="container">
       <nav class="nav-left">
@@ -1301,47 +1287,6 @@
   <div class="menu-overlay" id="menuOverlay"></div>
 
 
-    <div class="menu" id="menu" style="display: none;">
-
-        <div class="menu" id="menu">
-            <div class="main-menu">
-                <div class="menu-item" id="menu-item-1">
-                    <a href="#">Novidades</a>
-                    <div class="submenu">
-                        <a href="#">Subopção 1.1</a>
-                        <a href="#">Subopção 1.2</a>
-                        <a href="#">Subopção 1.3</a>
-                    </div>
-                </div>
-                <div class="menu-item" id="menu-item-2">
-                    <a href="#">Opção 2</a>
-                    <div class="submenu">
-                        <a href="#">Subopção 2.1</a>
-                        <a href="#">Subopção 2.2</a>
-                    </div>
-                </div>
-                <div class="menu-item" id="menu-item-3">
-                    <a href="#">Eleições</a>
-                    <div class="submenu">
-                        <a href="#">Próximas Eleições</a>
-                        <a href="#">Como votar</a>
-                        <a href="#">Resultados Eleitoriais</a>
-                        <a href="#">Mesa de Voto</a>
-                    </div>
-                </div>
-                <div class="menu-item" id="menu-item-4">
-                    <a href="#">Forum</a>
-
-                </div>
-            </div>
-    
-            <!-- Submenu à Direita -->
-            <div class="submenu-container" id="submenu-container">
-                <!-- Aqui vão as sub-opções que aparecem à direita -->
-            </div>
-        </div>
-
-    </div>
 
     
     <!-- Página principal do fórum -->
@@ -1828,284 +1773,43 @@
         </div>
     </footer>
 
-    <script>
-        // Modal de novo tópico
-        const newTopicBtn = document.getElementById('newTopicBtn');
-        const closeModal = document.getElementById('closeModal');
-        const cancelTopic = document.getElementById('cancelTopic');
-        const newTopicModal = document.getElementById('newTopicModal');
-        
-        newTopicBtn.addEventListener('click', () => {
-            newTopicModal.classList.add('active');
-        });
-        
-        closeModal.addEventListener('click', () => {
-            newTopicModal.classList.remove('active');
-        });
-        
-        cancelTopic.addEventListener('click', () => {
-            newTopicModal.classList.remove('active');
-        });
-        
-        // Fechar modal ao clicar fora
-        newTopicModal.addEventListener('click', (e) => {
-            if (e.target === newTopicModal) {
-                newTopicModal.classList.remove('active');
-            }
-        });
-        
-        // Submeter formulário
-        const submitTopic = document.getElementById('submitTopic');
-        const newTopicForm = document.getElementById('newTopicForm');
-        
-        submitTopic.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (newTopicForm.checkValidity()) {
-                alert('Tópico criado com sucesso!');
-                newTopicForm.reset();
-                newTopicModal.classList.remove('active');
-            } else {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-            }
-        });
-        
-        // Navegação entre tópicos
-        const topicTitles = document.querySelectorAll('.topic-title');
-        const forumMain = document.getElementById('forum-main');
-        const topicPage = document.getElementById('topic-page');
-        const backToForum = document.getElementById('backToForum');
-        
-        // Mostrar página de tópico quando clicar em um título
-        topicTitles.forEach(title => {
-            title.addEventListener('click', (e) => {
-                e.preventDefault();
-                forumMain.classList.add('hidden');
-                topicPage.classList.remove('hidden');
-                
-                // Rolagem suave para o topo da página de tópico
-                window.scrollTo({
-                    top: topicPage.offsetTop - 20,
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Voltar para a lista de tópicos
-        backToForum.addEventListener('click', () => {
-            topicPage.classList.add('hidden');
-            forumMain.classList.remove('hidden');
-            
-            // Rolagem suave para o topo do fórum
-            window.scrollTo({
-                top: forumMain.offsetTop - 20,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Efeitos de hover nos cards
-        const cards = document.querySelectorAll('.card');
-        
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-        const replyFormBtn = document.querySelector('.reply-form button');
-        const replyTextarea = document.querySelector('.reply-form textarea');
-        const repliesSection = document.querySelector('.replies-section');
-        const confirmationOverlay = document.getElementById('confirmationOverlay');
-        const closeConfirmation = document.getElementById('closeConfirmation');
-        
-        replyFormBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            if (replyTextarea.value.trim() !== '') {
-                // Criar nova resposta
-                const newReply = document.createElement('div');
-                newReply.className = 'reply new-reply';
-                newReply.innerHTML = `
-                    <div class="reply-avatar">TU</div>
-                    <div class="reply-content">
-                        <div class="reply-header">
-                            <span class="reply-author">Você</span>
-                            <span class="reply-date">Agora</span>
-                        </div>
-                        <div class="reply-text">
-                            <p>${replyTextarea.value}</p>
-                        </div>
-                        <div class="reply-actions">
-                            <div class="reply-action">
-                                <i class="fas fa-thumbs-up"></i> Útil (0)
-                            </div>
-                            <div class="reply-action">
-                                <i class="fas fa-reply"></i> Responder
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                // Adicionar a nova resposta no início da lista
-                const firstReply = document.querySelector('.reply');
-                if (firstReply) {
-                    repliesSection.insertBefore(newReply, firstReply);
-                } else {
-                    const repliesTitle = document.querySelector('.replies-title');
-                    repliesSection.insertBefore(newReply, repliesTitle.nextSibling);
-                }
-                
-                // Atualizar contador de respostas
-                const repliesTitle = document.querySelector('.replies-title');
-                const replyCount = document.querySelectorAll('.reply').length;
-                repliesTitle.textContent = `Respostas (${replyCount})`;
-                
-                // Mostrar overlay de confirmação
-                confirmationOverlay.classList.add('active');
-                
-                // Limpar o textarea
-                replyTextarea.value = '';
-                
-                // Rolar suavemente para a nova resposta
-                setTimeout(() => {
-                    newReply.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 100);
-            } else {
-                alert('Por favor, escreva uma resposta antes de enviar.');
-            }
-        });
-        
-        closeConfirmation.addEventListener('click', () => {
-            confirmationOverlay.classList.remove('active');
-        });
 
-        // Função para formatar a data como "há X minutos"
-        function formatDateAsTimeAgo() {
-            return "há alguns segundos";
-        }
-        
-    </script>
+  
+  <script>
+    lucide.createIcons();
 
-    
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleSearch = document.getElementById('toggle-search');
+    const searchContainer = document.getElementById('search-container');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    const searchIcon = document.querySelector('.search-icon');
 
-    <script>
-        lucide.createIcons();
+    // Mostra a lupa preta por padrão
+    searchIcon.style.color = '#111';
 
-        
-    const submenuData = {
-      1: [
-        { text: 'Deputados em funções', href: '#' },
-        { text: 'Agenda Parlamentar', href: '#' },
-        { text: 'Leis em Discussão', href: '#' },
-        { text: 'Contactar um deputado', href: '#' }
-      ],
-      2: [
-        { text: 'Próximas Eleições', href: '#' },
-        { text: 'Como votar', href: '#' },
-        { text: 'Resultados Eleitorais', href: '#' },
-        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
-      ],
-      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
-      4: [
-        { text: 'Partidos', href: 'partidos.html' },
-        { text: 'Financiamento partidário', href: '#' },
-        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
-        { text: 'Comparador de Partidos', href: 'comparador.html' }
-      ],
-      5: [
-        { text: 'Texto da Constituição', href: 'constituicao.html' },
-        { text: 'Princípios Fundamentais', href: '#' },
-        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
-      ],
-           6: [
-    { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
-]
-    };
+    // Alternar a caixa de pesquisa
+    toggleSearch.addEventListener('click', function(e) {
+      e.stopPropagation();
+      searchContainer.classList.toggle('active');
+      
+      // Adiciona animação à lupa
+      searchIcon.classList.add('animate');
+      setTimeout(() => {
+        searchIcon.classList.remove('animate');
+      }, 500);
 
-    function renderMenuCategories() {
-      const menu = document.getElementById("dropdownMenu");
-      menu.innerHTML = '';
-
-      // Add top-level "Voltar" button to close menu
-      const closeBtn = document.createElement('a');
-      closeBtn.href = "#";
-      closeBtn.className = 'back-button'; // AQUI
-      closeBtn.textContent = '← Voltar';
-      closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        menu.classList.remove("show");
-        document.getElementById("menuOverlay").classList.remove("show");
-      });
-      menu.appendChild(closeBtn);
-
-      const categories = [
-        { id: 4, name: 'Partidos' },
-        { id: 1, name: 'Assembleia da República' },
-        { id: 2, name: 'Eleições' },
-        { id: 5, name: 'Constituição' },
-        { id: 3, name: 'Forum' },
-        { id: 6, name: 'Notícias'}
-
-      ];
-
-      categories.forEach(cat => {
-        const link = document.createElement('a');
-        link.href = "#";
-        link.textContent = cat.name;
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          renderSubmenu(cat.id);
-        });
-        menu.appendChild(link);
-      });
-    }
-
-    function renderSubmenu(id) {
-      const menu = document.getElementById("dropdownMenu");
-      const submenu = submenuData[id];
-      menu.innerHTML = '';
-
-      const back = document.createElement('a');
-      back.textContent = '← Voltar';
-      back.href = "#";
-      back.className = 'back-button';
-      back.addEventListener('click', (e) => {
-        e.preventDefault();
-        renderMenuCategories();
-      });
-      menu.appendChild(back);
-
-      submenu.forEach(item => {
-        const sublink = document.createElement('a');
-        sublink.href = item.href;
-        sublink.textContent = item.text;
-        sublink.classList.add("submenu");
-        menu.appendChild(sublink);
-      });
-    }
-
-    document.getElementById("admin-btn").addEventListener("click", function (event) {
-      event.preventDefault();
-      const menu = document.getElementById("dropdownMenu");
-      const overlay = document.getElementById("menuOverlay");
-
-      menu.classList.toggle("show");
-      overlay.classList.toggle("show");
-
-      if (menu.classList.contains("show")) {
-        renderMenuCategories();
+      // Foca no input quando ativo
+      if (searchContainer.classList.contains('active')) {
+        setTimeout(() => {
+          searchInput.focus();
+        }, 300);
+      } else {
+        searchResults.style.display = 'none';
       }
     });
 
-    document.getElementById("menuOverlay").addEventListener("click", () => {
-      document.getElementById("dropdownMenu").classList.remove("show");
-      document.getElementById("menuOverlay").classList.remove("show");
-    });
-   </script>
-   <script>
+    // Base de dados completa para busca
     const searchDatabase = {
       pages: [
         { title: 'Método de Hondt', file: 'metodohondt.html', keywords: ['cálculo eleitoral', 'distribuição mandatos', 'sistema eleitoral'] },
@@ -2241,8 +1945,227 @@
         searchResults.style.display = 'none';
       }
     });
-  
+  });
+</script>
+
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+    // Tópicos do fórum e lógica de novo tópico (incluindo a declaração de topicsList)
+    const topicItems = document.querySelectorAll('.topic-item');
+    const forumMain = document.getElementById('forum-main');
+    const topicPage = document.getElementById('topic-page');
+    const backToForum = document.getElementById('backToForum');
+    const topicsList = document.querySelector('.topics-list'); // Mova esta linha para cá
+    const newTopicBtn = document.getElementById('newTopicBtn');
+    const newTopicModal = document.getElementById('newTopicModal');
+    const closeModal = document.getElementById('closeModal');
+    const cancelTopic = document.getElementById('cancelTopic');
+    const submitTopic = document.getElementById('submitTopic');
+    const newTopicForm = document.getElementById('newTopicForm');
+
+    topicItems.forEach(item => {
+        item.addEventListener('click', function() {
+            forumMain.classList.add('hidden');
+            topicPage.classList.remove('hidden');
+            topicPage.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    backToForum.addEventListener('click', function() {
+        topicPage.classList.add('hidden');
+        forumMain.classList.remove('hidden');
+        forumMain.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    newTopicBtn.addEventListener('click', function() {
+        newTopicModal.classList.add('active');
+    });
+
+    closeModal.addEventListener('click', function() {
+        newTopicModal.classList.remove('active');
+    });
+
+    cancelTopic.addEventListener('click', function() {
+        newTopicModal.classList.remove('active');
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target === newTopicModal) {
+            newTopicModal.classList.remove('active');
+        }
+    });
+
+    submitTopic.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (newTopicForm.checkValidity()) {
+            const novoTitulo = document.getElementById('topicTitle').value;
+            const novaCategoriaSelecionada = document.getElementById('topicCategory');
+            const novaCategoria = novaCategoriaSelecionada.options[novaCategoriaSelecionada.selectedIndex].text;
+            const novoConteudo = document.getElementById('topicContent').value;
+            const novoAutorNome = 'Você'; // Ou lógica para obter o nome do usuário
+            const novaData = new Date().toLocaleDateString();
+            const novoAutorAvatar = 'VC'; // Ou lógica para obter o avatar
+
+            const novoTopicoItem = document.createElement('li');
+            novoTopicoItem.classList.add('topic-item');
+            novoTopicoItem.setAttribute('data-topic-id', 'novo-' + Date.now());
+            novoTopicoItem.innerHTML = `
+                <div class="topic-header">
+                    <h3 class="topic-title">${novoTitulo}</h3>
+                    <span class="topic-category">${novaCategoria}</span>
+                </div>
+                <div class="topic-content">
+                    ${novoConteudo}
+                </div>
+                <div class="topic-footer">
+                    <div class="topic-author">
+                        <div class="author-avatar">${novoAutorAvatar}</div>
+                        <span>${novoAutorNome} - ${novaData}</span>
+                    </div>
+                    <div class="topic-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-eye"></i> 0
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-comment"></i> 0
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-thumbs-up"></i> 0
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            topicsList.prepend(novoTopicoItem); // Agora topicsList está definida neste escopo
+
+            alert('Tópico criado com sucesso!');
+            newTopicForm.reset();
+            newTopicModal.classList.remove('active');
+        } else {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+        }
+    });
+
+    // Confirmação de resposta (seu código existente)
+    const replyForm = document.querySelector('.reply-form');
+    const confirmationOverlay = document.getElementById('confirmationOverlay');
+    const closeConfirmation = document.getElementById('closeConfirmation');
+
+    replyForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        confirmationOverlay.style.display = 'flex';
+    });
+
+    closeConfirmation.addEventListener('click', function() {
+        confirmationOverlay.style.display = 'none';
+    });
+});
+        
+        
+        
+        // Voltar para a lista de tópicos
+        backToForum.addEventListener('click', () => {
+            topicPage.classList.add('hidden');
+            forumMain.classList.remove('hidden');
+            
+            // Rolagem suave para o topo do fórum
+            window.scrollTo({
+                top: forumMain.offsetTop - 20,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Efeitos de hover nos cards
+        const cards = document.querySelectorAll('.card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+        const replyFormBtn = document.querySelector('.reply-form button');
+        const replyTextarea = document.querySelector('.reply-form textarea');
+        const repliesSection = document.querySelector('.replies-section');
+        const confirmationOverlay = document.getElementById('confirmationOverlay');
+        const closeConfirmation = document.getElementById('closeConfirmation');
+        
+        replyFormBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (replyTextarea.value.trim() !== '') {
+                // Criar nova resposta
+                const newReply = document.createElement('div');
+                newReply.className = 'reply new-reply';
+                newReply.innerHTML = `
+                    <div class="reply-avatar">TU</div>
+                    <div class="reply-content">
+                        <div class="reply-header">
+                            <span class="reply-author">Você</span>
+                            <span class="reply-date">Agora</span>
+                        </div>
+                        <div class="reply-text">
+                            <p>${replyTextarea.value}</p>
+                        </div>
+                        <div class="reply-actions">
+                            <div class="reply-action">
+                                <i class="fas fa-thumbs-up"></i> Útil (0)
+                            </div>
+                            <div class="reply-action">
+                                <i class="fas fa-reply"></i> Responder
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Adicionar a nova resposta no início da lista
+                const firstReply = document.querySelector('.reply');
+                if (firstReply) {
+                    repliesSection.insertBefore(newReply, firstReply);
+                } else {
+                    const repliesTitle = document.querySelector('.replies-title');
+                    repliesSection.insertBefore(newReply, repliesTitle.nextSibling);
+                }
+                
+                // Atualizar contador de respostas
+                const repliesTitle = document.querySelector('.replies-title');
+                const replyCount = document.querySelectorAll('.reply').length;
+                repliesTitle.textContent = `Respostas (${replyCount})`;
+                
+                // Mostrar overlay de confirmação
+                confirmationOverlay.classList.add('active');
+                
+                // Limpar o textarea
+                replyTextarea.value = '';
+                
+                // Rolar suavemente para a nova resposta
+                setTimeout(() => {
+                    newReply.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            } else {
+                alert('Por favor, escreva uma resposta antes de enviar.');
+            }
+        });
+        
+        closeConfirmation.addEventListener('click', () => {
+            confirmationOverlay.classList.remove('active');
+        });
+
+        // Função para formatar a data como "há X minutos"
+        function formatDateAsTimeAgo() {
+            return "há alguns segundos";
+        }
+        
     </script>
+
+
+
     
 </body>
 </html>

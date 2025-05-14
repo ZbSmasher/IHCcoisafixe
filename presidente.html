@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presidente da República Portuguesa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">~
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -781,54 +781,7 @@
     </footer>
 
     <script src="js/script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const adminBtn = document.getElementById('admin-btn');
-            const menu = document.getElementById('menu');
-            const mainContent = document.getElementById('main-content');
 
-            adminBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (menu.style.display === 'flex') {
-                    menu.style.display = 'none';
-                } else {
-                    menu.style.display = 'flex';
-                }
-            });
-        });
-    </script>
 
-    <script>
-        // SCRIPTS DO MENU
-        document.addEventListener('DOMContentLoaded', function () {
-            const menuItems = document.querySelectorAll('.menu-item');
-            const submenuContainer = document.getElementById('submenu-container');
-
-            menuItems.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    // Verificar se o submenu já está visível
-                    const submenu = this.querySelector('.submenu');
-                    const subMenuLinks = submenu ? submenu.querySelectorAll('a') : [];
-                    
-                    // Adicionar ou remover a classe 'active' para exibir/ocultar o submenu
-                    if (submenu) {
-                        submenu.classList.toggle('active');
-                    }
-
-                    // Criar sub-menu à direita
-                    submenuContainer.innerHTML = ''; // Limpar conteúdo anterior
-                    subMenuLinks.forEach(function (link) {
-                        const submenuLink = document.createElement('a');
-                        submenuLink.href = '#';
-                        submenuLink.textContent = link.textContent;
-                        submenuContainer.appendChild(submenuLink);
-                    });
-
-                    // Tornar o submenu à direita visível
-                    submenuContainer.classList.add('open');
-                });
-            });
-        });
-    </script>
 </body>
 </html>
