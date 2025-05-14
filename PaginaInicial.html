@@ -342,6 +342,7 @@
               <h3 class="card-title">Marcelo Rebelo de Sousa</h3>
               <p class="card-subtitle">Presidente da República</p>
               <p class="card-text">20.º Presidente da República Portuguesa, no cargo desde 9 de março de 2016.</p>
+              <a href="presidente.html" class="btn">Ver Perfil Completo</a>
             </div>
           </div>
           <div class="card">
@@ -350,6 +351,7 @@
               <h3 class="card-title">Luís Montenegro</h3>
               <p class="card-subtitle">Primeiro-Ministro</p>
               <p class="card-text">Líder do PSD e atual Primeiro-Ministro desde abril de 2024.</p>
+              <a href="ministro.html" class="btn">Ver Perfil Completo</a>
             </div>
           </div>
           <div class="card">
@@ -357,6 +359,7 @@
             <div class="card-content">
               <h3 class="card-title">Partidos Políticos</h3>
               <p class="card-subtitle">Representação na Assembleia</p>
+              <a href="partidos.html" class="btn">Ver Todos</a>
             </div>
           </div>
         </div>
@@ -404,9 +407,9 @@
         { text: 'Princípios Fundamentais', href: '#' },
         { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
       ],
-           6: [
-    { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
-]
+      6: [
+        { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
+      ]
     };
 
     function renderMenuCategories() {
@@ -432,7 +435,6 @@
         { id: 5, name: 'Constituição' },
         { id: 3, name: 'Forum' },
         { id: 6, name: 'Notícias'}
-
       ];
 
       categories.forEach(cat => {
@@ -525,11 +527,12 @@
     const searchDatabase = {
       pages: [
         { title: 'Método de Hondt', file: 'metodohondt.html', keywords: ['cálculo eleitoral', 'distribuição mandatos', 'sistema eleitoral'] },
-        { title: 'Como Votar', file: 'PaginaVotar.html', keywords: ['eleições', 'processo eleitoral', 'urnas', 'votar'] }, // Alterado para PaginaVotar.html
+        { title: 'Como Votar', file: 'PaginaVotar.html', keywords: ['eleições', 'processo eleitoral', 'urnas', 'votar'] },
         { title: 'Constituição', file: 'constituicao.html', keywords: ['lei fundamental', 'carta magna', 'documento constitucional'] },
         { title: 'Direitos e Deveres', file: 'direitos-deveres.html', keywords: ['cidadania', 'direitos civis', 'obrigações'] },
         { title: 'Partidos', file: 'partidos.html', keywords: ['formações políticas', 'legenda partidária', 'agremiações'] },
-        { title: 'Presidente', file: 'presidente.html', keywords: ['chefe de estado', 'PR', 'presidência'] },
+        { title: 'Presidente da República', file: 'presidente.html', keywords: ['chefe de estado', 'PR', 'presidência', 'Marcelo Rebelo de Sousa'] },
+        { title: 'Primeiro-Ministro', file: 'ministro.html', keywords: ['chefe governo', 'Luís Montenegro', 'executivo'] },
         { title: 'Notícias', file: 'noticias.html', keywords: ['actualidade', 'jornalismo', 'informação política'] },
         { title: 'Comparador', file: 'comparador.html', keywords: ['comparação partidos', 'programas políticos', 'análise'] },
         { title: 'Fórum', file: 'forum.html', keywords: ['discussão', 'debate', 'comunidade'] },
@@ -547,7 +550,9 @@
       ],
       deputies: [
         { name: 'Carlos César', party: 'PS', file: 'deputado-carlos-cesar.html' },
-        { name: 'António Costa', party: 'PS', file: 'deputado-antonio-ventura.html' }
+        { name: 'António Costa', party: 'PS', file: 'deputado-antonio-ventura.html' },
+        { name: 'Marcelo Rebelo de Sousa', party: 'Independente', file: 'presidente.html' },
+        { name: 'Luís Montenegro', party: 'PSD', file: 'ministro.html' }
       ]
     };
 
@@ -637,6 +642,18 @@
         // Redirecionamento direto para "como votar"
         if (query.includes('como votar') || query.includes('votar')) {
           window.location.href = 'PaginaVotar.html';
+          return;
+        }
+        
+        // Redirecionamento direto para presidente
+        if (query.includes('presidente') || query.includes('marcelo')) {
+          window.location.href = 'presidente.html';
+          return;
+        }
+        
+        // Redirecionamento direto para primeiro-ministro
+        if (query.includes('primeiro ministro') || query.includes('luís montenegro') || query.includes('montenegro')) {
+          window.location.href = 'ministro.html';
           return;
         }
         
