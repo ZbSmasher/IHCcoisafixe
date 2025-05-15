@@ -255,6 +255,38 @@
         min-width: 100%;
       }
     }
+
+      .language-selector {
+          position: relative;
+      }
+
+      .language-menu {
+          display: none;
+          position: absolute;
+          right: 0;
+          background: white;
+          list-style: none;
+          margin: 0;
+          padding: 5px 0;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 4px;
+          z-index: 1000;
+          min-width: 120px;
+      }
+
+          .language-menu li {
+              padding: 10px;
+              cursor: pointer;
+              transition: background 0.3s;
+          }
+
+              .language-menu li:hover {
+                  background-color: #f0f0f0;
+              }
+
+      .language-selector.show .language-menu {
+          display: block;
+      }
   </style>
 </head>
 <body>
@@ -275,19 +307,27 @@
       </div>
 
       <nav class="nav-right">
-        <ul>
-          <li>
-            <div class="header-icons" id="search-container">
-              <button id="toggle-search" class="search-icon" aria-label="Pesquisar">
-                <i data-lucide="search"></i>
-              </button>
-              <input type="text" id="search-input" placeholder="Pesquisar partidos, deputados..." />
-              <div id="search-results"></div>
-            </div>
-          </li>
-          <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
-          <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
-        </ul>
+          <ul>
+              <li>
+                  <div class="header-icons" id="search-container">
+                      <button id="toggle-search" class="search-icon" aria-label="Pesquisar">
+                          <i data-lucide="search"></i>
+                      </button>
+                      <input type="text" id="search-input" placeholder="Pesquisar partidos, deputados..." />
+                      <div id="search-results"></div>
+                  </div>
+              </li>
+
+              <li class="language-selector">
+                  <button id="languageBtn" class="sbtn" data-lucide="languages">Língua</button>
+                  <ul id="languageMenu" class="language-menu">
+                      <li data-lang="pt">Português</li>
+                      <li data-lang="en">English</li>
+                  </ul>
+              </li>
+
+              <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          </ul>
       </nav>
     </div>
   </div>
@@ -674,6 +714,32 @@
         searchResults.style.display = 'none';
       }
     });
+
+      const languageBtn = document.getElementById("languageBtn");
+      const languageSelector = languageBtn?.parentElement;
+
+      if (languageBtn && languageSelector) {
+          languageBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              languageSelector.classList.toggle("show");
+          });
+
+          document.addEventListener("click", (e) => {
+              if (!languageSelector.contains(e.target)) {
+                  languageSelector.classList.remove("show");
+              }
+          });
+
+          const languageItems = languageSelector.querySelectorAll("li");
+          languageItems.forEach(item => {
+              item.addEventListener("click", () => {
+                  const lang = item.getAttribute("data-lang");
+                  alert("Idioma selecionado: " + lang);
+                  languageSelector.classList.remove("show");
+              });
+          });
+      }
+
   });
 </script>
 
