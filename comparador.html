@@ -1493,13 +1493,23 @@ domReady(function() {
         }
 
         // Adiciona botão de debate aleatório
-        function addRandomButton() {
-            const randomBtn = document.createElement('button');
-            randomBtn.className = 'compare-btn';
-            randomBtn.innerHTML = '<i class="fas fa-random"></i> Debate Aleatório';
-            randomBtn.onclick = randomDebate;
-            document.querySelector('.party-selector').appendChild(randomBtn);
-        }
+function addRandomButton() {
+    const randomBtn = document.createElement('button');
+    randomBtn.className = 'compare-btn';
+    randomBtn.innerHTML = '<i class="fas fa-random"></i> Debate Aleatório';
+    randomBtn.onclick = randomDebate;
+
+    // Cria uma nova div para o botão em uma linha separada
+    const newLineDiv = document.createElement('div');
+    newLineDiv.style.display = 'flex';
+    newLineDiv.style.justifyContent = 'center';
+    newLineDiv.style.alignItems = 'center';
+    newLineDiv.style.marginTop = '10px';
+    newLineDiv.style.width = '100%';
+
+    newLineDiv.appendChild(randomBtn);
+    document.querySelector('.party-selector').appendChild(newLineDiv);
+}
 
         // Gera um debate aleatório
         function randomDebate() {
