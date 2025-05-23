@@ -1140,6 +1140,13 @@
         .modal-btn.submit:hover {
             background: #1e40af;
         }
+
+        /*like*/
+        .reply-action.liked {
+  color: rgb(5, 130, 254);
+}
+
+
         
         /* Responsividade */
         @media (max-width: 768px) {
@@ -1568,7 +1575,11 @@
                     
                     <div class="replies-section">
                         <h3 class="replies-title"><i class="fas fa-comments"></i> Respostas (8)</h3>
-                        
+                         <div class="reply-form">
+                        <h3><i class="fas fa-reply"></i> Responder a este tópico</h3>
+                        <textarea placeholder="Escreva a sua resposta..."></textarea>
+                        <button><i class="fas fa-paper-plane"></i> Publicar Resposta</button>
+                    </div>
                         <!-- Resposta 1 -->
                         <div class="reply">
                             <div class="reply-avatar">AR</div>
@@ -1669,12 +1680,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="reply-form">
-                        <h3><i class="fas fa-reply"></i> Responder a este tópico</h3>
-                        <textarea placeholder="Escreva a sua resposta..."></textarea>
-                        <button><i class="fas fa-paper-plane"></i> Publicar Resposta</button>
                     </div>
                     <div class="confirmation-overlay" id="confirmationOverlay">
                         <div class="confirmation-box">
@@ -2161,6 +2166,24 @@
         function formatDateAsTimeAgo() {
             return "há alguns segundos";
         }
+        // Função para ativar likes vermelhos com contagem
+document.addEventListener('click', function(e) {
+  const likeBtn = e.target.closest('.reply-action');
+
+  if (likeBtn && likeBtn.innerHTML.includes('fa-thumbs-up')) {
+    const liked = likeBtn.classList.toggle('liked');
+    
+    // Obter número atual
+    const text = likeBtn.textContent.trim();
+    const match = text.match(/\d+/);
+    let count = match ? parseInt(match[0]) : 0;
+
+    // Atualizar contagem
+    count = liked ? count + 1 : count - 1;
+    likeBtn.innerHTML = `<i class="fas fa-thumbs-up"></i> Útil (${count})`;
+  }
+});
+
         
     </script>
 
