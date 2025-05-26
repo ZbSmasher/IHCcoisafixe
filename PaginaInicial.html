@@ -1,747 +1,757 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Presidência da República</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="scripts/script.js"></script>
-<style>
-  .header-icons {
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presidência da República</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="scripts/script.js"></script>
+    <style>
+        .header-icons {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
 
-  .search-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #111;
-    font-size: 20px;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-  }
+        .search-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #111;
+            font-size: 20px;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
 
-  .search-icon:hover {
-    transform: scale(1.1);
-  }
+            .search-icon:hover {
+                transform: scale(1.1);
+            }
 
-  #search-input {
-    width: 0;
-    opacity: 0;
-    padding: 8px 15px;
-    margin-left: 5px;
-    border: 2px solid transparent;
-    border-radius: 25px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #111;
-    outline: none;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
+        #search-input {
+            width: 0;
+            opacity: 0;
+            padding: 8px 15px;
+            margin-left: 5px;
+            border: 2px solid transparent;
+            border-radius: 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #111;
+            outline: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-  .header-icons.active #search-input {
-    width: 200px;
-    opacity: 1;
-    border-color: rgba(0, 0, 0, 0.2);
-  }
+        .header-icons.active #search-input {
+            width: 200px;
+            opacity: 1;
+            border-color: rgba(0, 0, 0, 0.2);
+        }
 
-  #search-results {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 300px;
-    max-height: 400px;
-    overflow-y: auto;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
-    margin-top: 5px;
-  }
+        #search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            margin-top: 5px;
+        }
 
-  .search-result-item {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-  }
+        .search-result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
 
-  .search-result-item:hover {
-    background: #f5f5f5;
-  }
+            .search-result-item:hover {
+                background: #f5f5f5;
+            }
 
-  .search-result-type {
-    font-size: 12px;
-    color: #666;
-  }
+        .search-result-type {
+            font-size: 12px;
+            color: #666;
+        }
 
-  .search-result-title {
-    font-weight: bold;
-    margin-top: 3px;
-  }
+        .search-result-title {
+            font-weight: bold;
+            margin-top: 3px;
+        }
 
-  .search-no-results {
-    padding: 15px;
-    text-align: center;
-    color: #666;
-  }
+        .search-no-results {
+            padding: 15px;
+            text-align: center;
+            color: #666;
+        }
 
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
 
-  .search-icon.animate {
-    animation: pulse 0.5s ease;
-  }
-</style>
-  <style>
-    :root {
-      --dark-gray: #525252;
-      --medium-gray: #999;
-      --light-gray: #f4f4f4;
-      --white: #fff;
-      --blue: #007bff;
-    }
+            50% {
+                transform: scale(1.2);
+            }
 
-    body {
-      margin: 0;
-      font-family: sans-serif;
-    }
+            100% {
+                transform: scale(1);
+            }
+        }
 
-    .back-button {
-  background-color: #e0e0e0;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  color: var(--dark-gray);
-  font-weight: bold;
-  display: inline-block;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
+        .search-icon.animate {
+            animation: pulse 0.5s ease;
+        }
+    </style>
+    <style>
+        :root {
+            --dark-gray: #525252;
+            --medium-gray: #999;
+            --light-gray: #f4f4f4;
+            --white: #fff;
+            --blue: #007bff;
+        }
 
-.back-button:hover {
-  background-color: #d5d5d5;
-}
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
 
-    .menu-dropdown {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 250px;
-      height: 100%;
-      background-color: #ffffff;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      z-index: 999;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
+        .back-button {
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            color: var(--dark-gray);
+            font-weight: bold;
+            display: inline-block;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
 
-      transform: translateX(-100%);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
+            .back-button:hover {
+                background-color: #d5d5d5;
+            }
 
-    .menu-dropdown.show {
-      transform: translateX(0);
-      opacity: 1;
-    }
+        .menu-dropdown {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 999;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(-100%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
 
-    .menu-dropdown a {
-      padding: 10px 0;
-      text-decoration: none;
-      color: var(--dark-gray);
-      border-bottom: 1px solid var(--medium-gray);
-      transition: transform 0.2s;
-    }
+            .menu-dropdown.show {
+                transform: translateX(0);
+                opacity: 1;
+            }
 
-    .menu-dropdown a:hover {
-      transform: scale(1.05);
-    }
+            .menu-dropdown a {
+                padding: 10px 0;
+                text-decoration: none;
+                color: var(--dark-gray);
+                border-bottom: 1px solid var(--medium-gray);
+                transition: transform 0.2s;
+            }
 
-    .menu-dropdown a.submenu {
-      padding-left: 15px;
-    }
+                .menu-dropdown a:hover {
+                    transform: scale(1.05);
+                }
 
-    .menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
-      z-index: 998;
-      display: none;
-    }
+                .menu-dropdown a.submenu {
+                    padding-left: 15px;
+                }
 
-    .menu-overlay.show {
-      display: block;
-    }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 998;
+            display: none;
+        }
 
-    .cards-section {
-      padding: 40px 0 60px 0;
-      background-color: var(--light-gray);
-      margin-top: -20px;
-    }
+            .menu-overlay.show {
+                display: block;
+            }
 
-    .cards-container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 30px;
-    }
+        .cards-section {
+            padding: 40px 0 60px 0;
+            background-color: var(--light-gray);
+            margin-top: -20px;
+        }
 
-    .card {
-      flex: 1;
-      min-width: 300px;
-      background: var(--white);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
+        .card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .card-img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      vertical-align: top;
-    }
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            }
 
-    .card-content {
-      padding: 20px;
-    }
+        .card-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            vertical-align: top;
+        }
 
-    .card-title {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      color: var(--dark-gray);
-    }
+        .card-content {
+            padding: 20px;
+        }
 
-    .card-subtitle {
-      font-size: 1rem;
-      color: var(--blue);
-      margin-bottom: 15px;
-    }
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
 
-    .card-text {
-      color: #555;
-      line-height: 1.6;
-    }
+        .card-subtitle {
+            font-size: 1rem;
+            color: var(--blue);
+            margin-bottom: 15px;
+        }
 
-    @media (max-width: 768px) {
-      .cards-container {
-        flex-direction: column;
-      }
+        .card-text {
+            color: #555;
+            line-height: 1.6;
+        }
 
-      .card {
-        min-width: 100%;
-      }
-    }
+        @media (max-width: 768px) {
+            .cards-container {
+                flex-direction: column;
+            }
 
-      .language-selector {
-          position: relative;
-      }
+            .card {
+                min-width: 100%;
+            }
+        }
 
-      .language-menu {
-          display: none;
-          position: absolute;
-          right: 0;
-          background: white;
-          list-style: none;
-          margin: 0;
-          padding: 5px 0;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          border-radius: 4px;
-          z-index: 1000;
-          min-width: 120px;
-      }
+        .language-selector {
+            position: relative;
+        }
 
-          .language-menu li {
-              padding: 10px;
-              cursor: pointer;
-              transition: background 0.3s;
-          }
+        .language-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            list-style: none;
+            margin: 0;
+            padding: 5px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            min-width: 120px;
+        }
 
-              .language-menu li:hover {
-                  background-color: #f0f0f0;
-              }
+            .language-menu li {
+                padding: 10px;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
 
-      .language-selector.show .language-menu {
-          display: block;
-      }
-  </style>
+                .language-menu li:hover {
+                    background-color: #f0f0f0;
+                }
+
+        .language-selector.show .language-menu {
+            display: block;
+        }
+    </style>
 </head>
 <body>
- 
-<header>
-  <div class="main-nav">
-    <div class="container">
-      <nav class="nav-left">
-        <ul>
-          <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
-        </ul>
-      </nav>
 
-      <div class="logo-container">
-        <a href="PaginaInicial.html">
-          <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
-        </a>
-      </div>
+    <header>
+        <div class="main-nav">
+            <div class="container">
+                <nav class="nav-left">
+                    <ul>
+                        <a href="#" id="admin-btn" data-lucide="menu" class="sbtn logo">MenuImage</a>
+                    </ul>
+                </nav>
 
-      <nav class="nav-right">
-          <ul>
-              <li>
-                  <div class="header-icons" id="search-container">
-                      <button id="toggle-search" class="search-icon" aria-label="Pesquisar">
-                          <i data-lucide="search"></i>
-                      </button>
-                      <input type="text" id="search-input" placeholder="Pesquisar partidos, deputados..." />
-                      <div id="search-results"></div>
-                  </div>
-              </li>
+                <div class="logo-container">
+                    <a href="PaginaInicial.html">
+                        <img src="photos/assembleia-logo.png" alt="Assembleia da República" class="logo">
+                    </a>
+                </div>
 
-              <li class="language-selector">
-                  <button id="languageBtn" class="sbtn" data-lucide="languages">Língua</button>
-                  <ul id="languageMenu" class="language-menu">
-                      <li data-lang="pt">Português</li>
-                      <li data-lang="en">English</li>
-                  </ul>
-              </li>
+                <nav class="nav-right">
+                    <ul>
+                        <li>
+                            <div class="header-icons" id="search-container">
+                                <button id="toggle-search" class="search-icon" aria-label="Pesquisar">
+                                    <i data-lucide="search"></i>
+                                </button>
+                                <input type="text" id="search-input" placeholder="Pesquisar partidos, deputados..." />
+                                <div id="search-results"></div>
+                            </div>
+                        </li>
 
-              <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
-          </ul>
-      </nav>
+                        <li class="language-selector">
+                            <button id="languageBtn" class="sbtn" data-lucide="languages">Língua</button>
+                            <ul id="languageMenu" class="language-menu">
+                                <li data-lang="pt">Português</li>
+                                <li data-lang="en">English</li>
+                            </ul>
+                        </li>
+                        <a href="./login.html">
+                            <li><p href="./login.html" class="sbtn" data-lucide="user-round">Perfil</p></li>
+                        </a>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="menu-dropdown" id="dropdownMenu"></div>
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <div id="main-content">
+        <section class="hero-carousel">
+            <div class="carousel">
+                <div class="slide active" style="background-image: url('photos/photo1.jpg');">
+                    <div class="hero-content">
+                        <h1>O Coração da Democracia</h1>
+                        <p>Onde as decisões que moldam o país ganham voz e forma</p>
+                        <a href="#" class="btn">Saber Mais</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('photos/photo2.jpg');">
+                    <div class="hero-content">
+                        <h1>Liderança e Representação</h1>
+                        <p>O papel dos nossos representantes na construção do futuro</p>
+                        <a href="#" class="btn">Ver Mais</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('photos/photo3.png');">
+                    <div class="hero-content">
+                        <h1>O Poder do Voto</h1>
+                        <p>A base da democracia começa na sua escolha</p>
+                        <a href="#" class="btn">Saiba como Votar</a>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('photos/photo4.jpg');">
+                    <div class="hero-content">
+                        <h1>Notícias</h1>
+                        <p>Fique a par dos acontecimentos mais relevantes</p>
+                        <a href="#" class="btn">Ver Mais</a>
+                    </div>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+        </section>
+
+        <section class="cards-section">
+            <div class="container">
+                <h2 class="section-title">Liderança Política</h2>
+                <div class="cards-container">
+                    <div class="card">
+                        <img src="photos/pres.jpg" alt="Marcelo Rebelo de Sousa" class="card-img">
+                        <div class="card-content">
+                            <h3 class="card-title">Marcelo Rebelo de Sousa</h3>
+                            <p class="card-subtitle">Presidente da República</p>
+                            <p class="card-text">20.º Presidente da República Portuguesa, no cargo desde 9 de março de 2016.</p>
+                            <a href="presidente.html" class="btn">Ver Perfil Completo</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="photos/ministro.jpg" alt="Primeiro-Ministro" class="card-img">
+                        <div class="card-content">
+                            <h3 class="card-title">Luís Montenegro</h3>
+                            <p class="card-subtitle">Primeiro-Ministro</p>
+                            <p class="card-text">Líder do PSD e atual Primeiro-Ministro desde abril de 2024.</p>
+                            <a href="ministro.html" class="btn">Ver Perfil Completo</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="photos/partidos.jpg" alt="Partidos Políticos" class="card-img">
+                        <div class="card-content">
+                            <h3 class="card-title">Partidos Políticos</h3>
+                            <p class="card-subtitle">Representação na Assembleia</p>
+                            <a href="partidos.html" class="btn">Ver Todos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-  </div>
-</header>
 
-  <div class="menu-dropdown" id="dropdownMenu"></div>
-  <div class="menu-overlay" id="menuOverlay"></div>
-
-  <div id="main-content">
-    <section class="hero-carousel">
-      <div class="carousel">
-        <div class="slide active" style="background-image: url('photos/photo1.jpg');">
-          <div class="hero-content">
-            <h1>O Coração da Democracia</h1>
-            <p>Onde as decisões que moldam o país ganham voz e forma</p>
-            <a href="#" class="btn">Saber Mais</a>
-          </div>
-        </div>
-        <div class="slide" style="background-image: url('photos/photo2.jpg');">
-          <div class="hero-content">
-            <h1>Liderança e Representação</h1>
-            <p>O papel dos nossos representantes na construção do futuro</p>
-            <a href="#" class="btn">Ver Mais</a>
-          </div>
-        </div>
-        <div class="slide" style="background-image: url('photos/photo3.png');">
-          <div class="hero-content">
-            <h1>O Poder do Voto</h1>
-            <p>A base da democracia começa na sua escolha</p>
-            <a href="#" class="btn">Saiba como Votar</a>
-          </div>
-        </div>
-        <div class="slide" style="background-image: url('photos/photo4.jpg');">
-          <div class="hero-content">
-            <h1>Notícias</h1>
-            <p>Fique a par dos acontecimentos mais relevantes</p>
-            <a href="#" class="btn">Ver Mais</a>
-          </div>
-        </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
-      </div>
-    </section>
-
-    <section class="cards-section">
-      <div class="container">
-        <h2 class="section-title">Liderança Política</h2>
-        <div class="cards-container">
-          <div class="card">
-            <img src="photos/pres.jpg" alt="Marcelo Rebelo de Sousa" class="card-img">
-            <div class="card-content">
-              <h3 class="card-title">Marcelo Rebelo de Sousa</h3>
-              <p class="card-subtitle">Presidente da República</p>
-              <p class="card-text">20.º Presidente da República Portuguesa, no cargo desde 9 de março de 2016.</p>
-              <a href="presidente.html" class="btn">Ver Perfil Completo</a>
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Acessibilidade</a>
+                <a href="#">Informação de Copyright</a>
+                <a href="#">Contactos</a>
             </div>
-          </div>
-          <div class="card">
-            <img src="photos/ministro.jpg" alt="Primeiro-Ministro" class="card-img">
-            <div class="card-content">
-              <h3 class="card-title">Luís Montenegro</h3>
-              <p class="card-subtitle">Primeiro-Ministro</p>
-              <p class="card-text">Líder do PSD e atual Primeiro-Ministro desde abril de 2024.</p>
-              <a href="ministro.html" class="btn">Ver Perfil Completo</a>
-            </div>
-          </div>
-          <div class="card">
-            <img src="photos/partidos.jpg" alt="Partidos Políticos" class="card-img">
-            <div class="card-content">
-              <h3 class="card-title">Partidos Políticos</h3>
-              <p class="card-subtitle">Representação na Assembleia</p>
-              <a href="partidos.html" class="btn">Ver Todos</a>
-            </div>
-          </div>
+            <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
         </div>
-      </div>
-    </section>
-  </div>
+    </footer>
 
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Acessibilidade</a>
-        <a href="#">Informação de Copyright</a>
-        <a href="#">Contactos</a>
-      </div>
-      <p>&copy; Projeto de IHC 2025. Todos os direitos reservados.</p>
-    </div>
-  </footer>
+    <script>
+        lucide.createIcons();
 
-  <script>
-    lucide.createIcons();
+        const submenuData = {
+            1: [
+                { text: 'Deputados em funções', href: '#' },
+                { text: 'Agenda Parlamentar', href: '#' },
+                { text: 'Leis em Discussão', href: '#' },
+                { text: 'Contactar um deputado', href: '#' }
+            ],
+            2: [
+                { text: 'Próximas Eleições', href: '#' },
+                { text: 'Como votar', href: '#' },
+                { text: 'Resultados Eleitorais', href: '#' },
+                { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
+            ],
+            3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+            4: [
+                { text: 'Partidos', href: 'partidos.html' },
+                { text: 'Financiamento partidário', href: '#' },
+                { text: 'Como criar um partido', href: 'como_criar_partido.html' },
+                { text: 'Comparador de Partidos', href: 'comparador.html' }
+            ],
+            5: [
+                { text: 'Texto da Constituição', href: 'constituicao.html' },
+                { text: 'Princípios Fundamentais', href: '#' },
+                { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
+            ],
+            6: [
+                { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
+            ]
+        };
 
-    const submenuData = {
-      1: [
-        { text: 'Deputados em funções', href: '#' },
-        { text: 'Agenda Parlamentar', href: '#' },
-        { text: 'Leis em Discussão', href: '#' },
-        { text: 'Contactar um deputado', href: '#' }
-      ],
-      2: [
-        { text: 'Próximas Eleições', href: '#' },
-        { text: 'Como votar', href: '#' },
-        { text: 'Resultados Eleitorais', href: '#' },
-        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
-      ],
-      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
-      4: [
-        { text: 'Partidos', href: 'partidos.html' },
-        { text: 'Financiamento partidário', href: '#' },
-        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
-        { text: 'Comparador de Partidos', href: 'comparador.html' }
-      ],
-      5: [
-        { text: 'Texto da Constituição', href: 'constituicao.html' },
-        { text: 'Princípios Fundamentais', href: '#' },
-        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
-      ],
-      6: [
-        { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
-      ]
-    };
+        function renderMenuCategories() {
+            const menu = document.getElementById("dropdownMenu");
+            menu.innerHTML = '';
 
-    function renderMenuCategories() {
-      const menu = document.getElementById("dropdownMenu");
-      menu.innerHTML = '';
+            // Add top-level "Voltar" button to close menu
+            const closeBtn = document.createElement('a');
+            closeBtn.href = "#";
+            closeBtn.className = 'back-button'; // AQUI
+            closeBtn.textContent = '← Voltar';
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                menu.classList.remove("show");
+                document.getElementById("menuOverlay").classList.remove("show");
+            });
+            menu.appendChild(closeBtn);
 
-      // Add top-level "Voltar" button to close menu
-      const closeBtn = document.createElement('a');
-      closeBtn.href = "#";
-      closeBtn.className = 'back-button'; // AQUI
-      closeBtn.textContent = '← Voltar';
-      closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        menu.classList.remove("show");
-        document.getElementById("menuOverlay").classList.remove("show");
-      });
-      menu.appendChild(closeBtn);
+            const categories = [
+                { id: 4, name: 'Partidos' },
+                { id: 1, name: 'Assembleia da República' },
+                { id: 2, name: 'Eleições' },
+                { id: 5, name: 'Constituição' },
+                { id: 3, name: 'Forum' },
+                { id: 6, name: 'Notícias' }
+            ];
 
-      const categories = [
-        { id: 4, name: 'Partidos' },
-        { id: 1, name: 'Assembleia da República' },
-        { id: 2, name: 'Eleições' },
-        { id: 5, name: 'Constituição' },
-        { id: 3, name: 'Forum' },
-        { id: 6, name: 'Notícias'}
-      ];
+            categories.forEach(cat => {
+                const link = document.createElement('a');
+                link.href = "#";
+                link.textContent = cat.name;
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    renderSubmenu(cat.id);
+                });
+                menu.appendChild(link);
+            });
+        }
 
-      categories.forEach(cat => {
-        const link = document.createElement('a');
-        link.href = "#";
-        link.textContent = cat.name;
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          renderSubmenu(cat.id);
+        function renderSubmenu(id) {
+            const menu = document.getElementById("dropdownMenu");
+            const submenu = submenuData[id];
+            menu.innerHTML = '';
+
+            const back = document.createElement('a');
+            back.textContent = '← Voltar';
+            back.href = "#";
+            back.className = 'back-button';
+            back.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderMenuCategories();
+            });
+            menu.appendChild(back);
+
+            submenu.forEach(item => {
+                const sublink = document.createElement('a');
+                sublink.href = item.href;
+                sublink.textContent = item.text;
+                sublink.classList.add("submenu");
+                menu.appendChild(sublink);
+            });
+        }
+       
+        document.getElementById("admin-btn").addEventListener("click", function (event) {
+            event.preventDefault();
+          
+            const menu = document.getElementById("dropdownMenu");
+            const overlay = document.getElementById("menuOverlay");
+
+            menu.classList.toggle("show");
+            overlay.classList.toggle("show");
+
+            if (menu.classList.contains("show")) {
+                renderMenuCategories();
+            }
         });
-        menu.appendChild(link);
-      });
-    }
 
-    function renderSubmenu(id) {
-      const menu = document.getElementById("dropdownMenu");
-      const submenu = submenuData[id];
-      menu.innerHTML = '';
-
-      const back = document.createElement('a');
-      back.textContent = '← Voltar';
-      back.href = "#";
-      back.className = 'back-button';
-      back.addEventListener('click', (e) => {
-        e.preventDefault();
-        renderMenuCategories();
-      });
-      menu.appendChild(back);
-
-      submenu.forEach(item => {
-        const sublink = document.createElement('a');
-        sublink.href = item.href;
-        sublink.textContent = item.text;
-        sublink.classList.add("submenu");
-        menu.appendChild(sublink);
-      });
-    }
-
-    document.getElementById("admin-btn").addEventListener("click", function (event) {
-      event.preventDefault();
-      const menu = document.getElementById("dropdownMenu");
-      const overlay = document.getElementById("menuOverlay");
-
-      menu.classList.toggle("show");
-      overlay.classList.toggle("show");
-
-      if (menu.classList.contains("show")) {
-        renderMenuCategories();
-      }
-    });
-
-    document.getElementById("menuOverlay").addEventListener("click", () => {
-      document.getElementById("dropdownMenu").classList.remove("show");
-      document.getElementById("menuOverlay").classList.remove("show");
-    });
-  </script>
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const toggleSearch = document.getElementById('toggle-search');
-    const searchContainer = document.getElementById('search-container');
-    const searchInput = document.getElementById('search-input');
-    const searchResults = document.getElementById('search-results');
-    const searchIcon = document.querySelector('.search-icon');
-
-    // Mostra a lupa preta por padrão
-    searchIcon.style.color = '#111';
-
-    // Alternar a caixa de pesquisa
-    toggleSearch.addEventListener('click', function(e) {
-      e.stopPropagation();
-      searchContainer.classList.toggle('active');
-      
-      // Adiciona animação à lupa
-      searchIcon.classList.add('animate');
-      setTimeout(() => {
-        searchIcon.classList.remove('animate');
-      }, 500);
-
-      // Foca no input quando ativo
-      if (searchContainer.classList.contains('active')) {
-        setTimeout(() => {
-          searchInput.focus();
-        }, 300);
-      } else {
-        searchResults.style.display = 'none';
-      }
-    });
-
-    // Base de dados completa para busca
-    const searchDatabase = {
-      pages: [
-        { title: 'Método de Hondt', file: 'metodohondt.html', keywords: ['cálculo eleitoral', 'distribuição mandatos', 'sistema eleitoral'] },
-        { title: 'Como Votar', file: 'PaginaVotar.html', keywords: ['eleições', 'processo eleitoral', 'urnas', 'votar'] },
-        { title: 'Constituição', file: 'constituicao.html', keywords: ['lei fundamental', 'carta magna', 'documento constitucional'] },
-        { title: 'Direitos e Deveres', file: 'direitos-deveres.html', keywords: ['cidadania', 'direitos civis', 'obrigações'] },
-        { title: 'Partidos', file: 'partidos.html', keywords: ['formações políticas', 'legenda partidária', 'agremiações'] },
-        { title: 'Presidente da República', file: 'presidente.html', keywords: ['chefe de estado', 'PR', 'presidência', 'Marcelo Rebelo de Sousa'] },
-        { title: 'Primeiro-Ministro', file: 'ministro.html', keywords: ['chefe governo', 'Luís Montenegro', 'executivo'] },
-        { title: 'Notícias', file: 'noticias.html', keywords: ['actualidade', 'jornalismo', 'informação política'] },
-        { title: 'Comparador', file: 'comparador.html', keywords: ['comparação partidos', 'programas políticos', 'análise'] },
-        { title: 'Fórum', file: 'forum.html', keywords: ['discussão', 'debate', 'comunidade'] },
-        { title: 'Como Criar Partido', file: 'como_criar_partido.html', keywords: ['registar partido', 'legalização', 'requisitos'] },
-        { title: 'Página Inicial', file: 'PaginaInicial.html', keywords: ['home', 'início', 'principal'] }
-      ],
-      parties: [
-        { name: 'PS', fullName: 'Partido Socialista', file: 'partido-ps.html', leaders: ['Carlos César', 'António Costa'] },
-        { name: 'PSD', fullName: 'Partido Social Democrata', file: 'partido-psd.html', leaders: ['Luís Montenegro', 'Rui Rio'] },
-        { name: 'CHEGA', fullName: 'CHEGA', file: 'partido-chega.html', leaders: ['André Ventura'] },
-        { name: 'IL', fullName: 'Iniciativa Liberal', file: 'partido-il.html', leaders: ['Rui Rocha', 'João Cotrim Figueiredo'] },
-        { name: 'LIVRE', fullName: 'LIVRE', file: 'partido-livre.html', leaders: ['Rui Tavares'] },
-        { name: 'PCP', fullName: 'Partido Comunista Português', file: 'partido-pcp.html', leaders: ['Paulo Raimundo'] },
-        { name: 'PAN', fullName: 'Pessoas-Animais-Natureza', file: 'partido-pan.html', leaders: ['Inês Sousa Real'] }
-      ],
-      deputies: [
-        { name: 'Carlos César', party: 'PS', file: 'deputado-carlos-cesar.html' },
-        { name: 'António Costa', party: 'PS', file: 'deputado-antonio-ventura.html' },
-        { name: 'Marcelo Rebelo de Sousa', party: 'Independente', file: 'presidente.html' },
-        { name: 'Luís Montenegro', party: 'PSD', file: 'ministro.html' }
-      ]
-    };
-
-    function normalize(str) {
-      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-    }
-
-    function search(query) {
-      const normalizedQuery = normalize(query);
-      if (!normalizedQuery) return [];
-      
-      // Pesquisa em todas as categorias
-      const results = [];
-      
-      // Páginas principais
-      searchDatabase.pages.forEach(item => {
-        const score = 
-          normalize(item.title).includes(normalizedQuery) ? 3 :
-          item.keywords.some(kw => normalize(kw).includes(normalizedQuery)) ? 2 : 0;
-        if (score > 0) {
-          results.push({ type: 'Página', title: item.title, file: item.file, score });
-        }
-      });
-      
-      // Partidos políticos
-      searchDatabase.parties.forEach(party => {
-        const score = 
-          normalize(party.name).includes(normalizedQuery) ? 4 :
-          normalize(party.fullName).includes(normalizedQuery) ? 3 :
-          party.leaders.some(l => normalize(l).includes(normalizedQuery)) ? 2 : 0;
-        if (score > 0) {
-          results.push({ type: 'Partido', title: `${party.fullName} (${party.name})`, file: party.file, score });
-        }
-      });
-      
-      // Deputados
-      searchDatabase.deputies.forEach(deputy => {
-        if (normalize(deputy.name).includes(normalizedQuery)) {
-          results.push({ type: 'Deputado', title: `${deputy.name} (${deputy.party})`, file: deputy.file, score: 3 });
-        }
-      });
-      
-      // Ordenar por relevância
-      return results.sort((a, b) => b.score - a.score);
-    }
-
-    function showSearchResults(results) {
-      const resultsContainer = document.getElementById('search-results');
-      resultsContainer.innerHTML = '';
-      
-      if (results.length === 0) {
-        resultsContainer.innerHTML = '<div class="search-no-results">Nenhum resultado encontrado.</div>';
-        return;
-      }
-      
-      results.forEach(result => {
-        const resultElement = document.createElement('div');
-        resultElement.className = 'search-result-item';
-        resultElement.innerHTML = `
-          <div class="search-result-type">${result.type}</div>
-          <div class="search-result-title">${result.title}</div>
-        `;
-        resultElement.addEventListener('click', () => {
-          window.location.href = result.file;
+        document.getElementById("menuOverlay").addEventListener("click", () => {
+            document.getElementById("dropdownMenu").classList.remove("show");
+            document.getElementById("menuOverlay").classList.remove("show");
         });
-        resultsContainer.appendChild(resultElement);
-      });
-    }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleSearch = document.getElementById('toggle-search');
+            const searchContainer = document.getElementById('search-container');
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+            const searchIcon = document.querySelector('.search-icon');
 
-    // Pesquisa ao digitar
-    searchInput.addEventListener('input', function() {
-      const query = searchInput.value.trim();
-      if (query.length > 0) {
-        const results = search(query);
-        showSearchResults(results);
-        searchResults.style.display = 'block';
-      } else {
-        searchResults.style.display = 'none';
-      }
-    });
+            // Mostra a lupa preta por padrão
+            searchIcon.style.color = '#111';
 
-    // Pesquisa ao pressionar Enter
-    searchInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const query = searchInput.value.trim().toLowerCase();
-        
-        // Redirecionamento direto para "como votar"
-        if (query.includes('como votar') || query.includes('votar')) {
-          window.location.href = 'PaginaVotar.html';
-          return;
-        }
-        
-        // Redirecionamento direto para presidente
-        if (query.includes('presidente') || query.includes('marcelo')) {
-          window.location.href = 'presidente.html';
-          return;
-        }
-        
-        // Redirecionamento direto para primeiro-ministro
-        if (query.includes('primeiro ministro') || query.includes('luís montenegro') || query.includes('montenegro')) {
-          window.location.href = 'ministro.html';
-          return;
-        }
-        
-        const results = search(query);
-        if (results.length > 0) {
-          // Vai para o primeiro resultado se houver
-          window.location.href = results[0].file;
-        } else {
-          showSearchResults([]);
-        }
-      }
-    });
+            // Alternar a caixa de pesquisa
+            toggleSearch.addEventListener('click', function (e) {
+                e.stopPropagation();
+                searchContainer.classList.toggle('active');
 
-    // Fechar ao clicar fora
-    document.addEventListener('click', function(e) {
-      if (!searchContainer.contains(e.target)) {
-        searchContainer.classList.remove('active');
-        searchResults.style.display = 'none';
-      }
-    });
+                // Adiciona animação à lupa
+                searchIcon.classList.add('animate');
+                setTimeout(() => {
+                    searchIcon.classList.remove('animate');
+                }, 500);
 
-      const languageBtn = document.getElementById("languageBtn");
-      const languageSelector = languageBtn?.parentElement;
+                // Foca no input quando ativo
+                if (searchContainer.classList.contains('active')) {
+                    setTimeout(() => {
+                        searchInput.focus();
+                    }, 300);
+                } else {
+                    searchResults.style.display = 'none';
+                }
+            });
 
-      if (languageBtn && languageSelector) {
-          languageBtn.addEventListener("click", (e) => {
-              e.stopPropagation();
-              languageSelector.classList.toggle("show");
-          });
+            // Base de dados completa para busca
+            const searchDatabase = {
+                pages: [
+                    { title: 'Método de Hondt', file: 'metodohondt.html', keywords: ['cálculo eleitoral', 'distribuição mandatos', 'sistema eleitoral'] },
+                    { title: 'Como Votar', file: 'PaginaVotar.html', keywords: ['eleições', 'processo eleitoral', 'urnas', 'votar'] },
+                    { title: 'Constituição', file: 'constituicao.html', keywords: ['lei fundamental', 'carta magna', 'documento constitucional'] },
+                    { title: 'Direitos e Deveres', file: 'direitos-deveres.html', keywords: ['cidadania', 'direitos civis', 'obrigações'] },
+                    { title: 'Partidos', file: 'partidos.html', keywords: ['formações políticas', 'legenda partidária', 'agremiações'] },
+                    { title: 'Presidente da República', file: 'presidente.html', keywords: ['chefe de estado', 'PR', 'presidência', 'Marcelo Rebelo de Sousa'] },
+                    { title: 'Primeiro-Ministro', file: 'ministro.html', keywords: ['chefe governo', 'Luís Montenegro', 'executivo'] },
+                    { title: 'Notícias', file: 'noticias.html', keywords: ['actualidade', 'jornalismo', 'informação política'] },
+                    { title: 'Comparador', file: 'comparador.html', keywords: ['comparação partidos', 'programas políticos', 'análise'] },
+                    { title: 'Fórum', file: 'forum.html', keywords: ['discussão', 'debate', 'comunidade'] },
+                    { title: 'Como Criar Partido', file: 'como_criar_partido.html', keywords: ['registar partido', 'legalização', 'requisitos'] },
+                    { title: 'Página Inicial', file: 'PaginaInicial.html', keywords: ['home', 'início', 'principal'] }
+                ],
+                parties: [
+                    { name: 'PS', fullName: 'Partido Socialista', file: 'partido-ps.html', leaders: ['Carlos César', 'António Costa'] },
+                    { name: 'PSD', fullName: 'Partido Social Democrata', file: 'partido-psd.html', leaders: ['Luís Montenegro', 'Rui Rio'] },
+                    { name: 'CHEGA', fullName: 'CHEGA', file: 'partido-chega.html', leaders: ['André Ventura'] },
+                    { name: 'IL', fullName: 'Iniciativa Liberal', file: 'partido-il.html', leaders: ['Rui Rocha', 'João Cotrim Figueiredo'] },
+                    { name: 'LIVRE', fullName: 'LIVRE', file: 'partido-livre.html', leaders: ['Rui Tavares'] },
+                    { name: 'PCP', fullName: 'Partido Comunista Português', file: 'partido-pcp.html', leaders: ['Paulo Raimundo'] },
+                    { name: 'PAN', fullName: 'Pessoas-Animais-Natureza', file: 'partido-pan.html', leaders: ['Inês Sousa Real'] }
+                ],
+                deputies: [
+                    { name: 'Carlos César', party: 'PS', file: 'deputado-carlos-cesar.html' },
+                    { name: 'António Costa', party: 'PS', file: 'deputado-antonio-ventura.html' },
+                    { name: 'Marcelo Rebelo de Sousa', party: 'Independente', file: 'presidente.html' },
+                    { name: 'Luís Montenegro', party: 'PSD', file: 'ministro.html' }
+                ]
+            };
 
-          document.addEventListener("click", (e) => {
-              if (!languageSelector.contains(e.target)) {
-                  languageSelector.classList.remove("show");
-              }
-          });
+            function normalize(str) {
+                return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            }
 
-          const languageItems = languageSelector.querySelectorAll("li");
-          languageItems.forEach(item => {
-              item.addEventListener("click", () => {
-                  const lang = item.getAttribute("data-lang");
-                  alert("Idioma selecionado: " + lang);
-                  languageSelector.classList.remove("show");
-              });
-          });
-      }
+            function search(query) {
+                const normalizedQuery = normalize(query);
+                if (!normalizedQuery) return [];
 
-  });
-</script>
+                // Pesquisa em todas as categorias
+                const results = [];
+
+                // Páginas principais
+                searchDatabase.pages.forEach(item => {
+                    const score =
+                        normalize(item.title).includes(normalizedQuery) ? 3 :
+                            item.keywords.some(kw => normalize(kw).includes(normalizedQuery)) ? 2 : 0;
+                    if (score > 0) {
+                        results.push({ type: 'Página', title: item.title, file: item.file, score });
+                    }
+                });
+
+                // Partidos políticos
+                searchDatabase.parties.forEach(party => {
+                    const score =
+                        normalize(party.name).includes(normalizedQuery) ? 4 :
+                            normalize(party.fullName).includes(normalizedQuery) ? 3 :
+                                party.leaders.some(l => normalize(l).includes(normalizedQuery)) ? 2 : 0;
+                    if (score > 0) {
+                        results.push({ type: 'Partido', title: `${party.fullName} (${party.name})`, file: party.file, score });
+                    }
+                });
+
+                // Deputados
+                searchDatabase.deputies.forEach(deputy => {
+                    if (normalize(deputy.name).includes(normalizedQuery)) {
+                        results.push({ type: 'Deputado', title: `${deputy.name} (${deputy.party})`, file: deputy.file, score: 3 });
+                    }
+                });
+
+                // Ordenar por relevância
+                return results.sort((a, b) => b.score - a.score);
+            }
+
+            function showSearchResults(results) {
+                const resultsContainer = document.getElementById('search-results');
+                resultsContainer.innerHTML = '';
+
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = '<div class="search-no-results">Nenhum resultado encontrado.</div>';
+                    return;
+                }
+
+                results.forEach(result => {
+                    const resultElement = document.createElement('div');
+                    resultElement.className = 'search-result-item';
+                    resultElement.innerHTML = `
+              <div class="search-result-type">${result.type}</div>
+              <div class="search-result-title">${result.title}</div>
+            `;
+                    resultElement.addEventListener('click', () => {
+                        window.location.href = result.file;
+                    });
+                    resultsContainer.appendChild(resultElement);
+                });
+            }
+
+            // Pesquisa ao digitar
+            searchInput.addEventListener('input', function () {
+                const query = searchInput.value.trim();
+                if (query.length > 0) {
+                    const results = search(query);
+                    showSearchResults(results);
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.style.display = 'none';
+                }
+            });
+
+            // Pesquisa ao pressionar Enter
+            searchInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    const query = searchInput.value.trim().toLowerCase();
+
+                    // Redirecionamento direto para "como votar"
+                    if (query.includes('como votar') || query.includes('votar')) {
+                        window.location.href = 'PaginaVotar.html';
+                        return;
+                    }
+
+                    // Redirecionamento direto para presidente
+                    if (query.includes('presidente') || query.includes('marcelo')) {
+                        window.location.href = 'presidente.html';
+                        return;
+                    }
+
+                    // Redirecionamento direto para primeiro-ministro
+                    if (query.includes('primeiro ministro') || query.includes('luís montenegro') || query.includes('montenegro')) {
+                        window.location.href = 'ministro.html';
+                        return;
+                    }
+
+                    const results = search(query);
+                    if (results.length > 0) {
+                        // Vai para o primeiro resultado se houver
+                        window.location.href = results[0].file;
+                    } else {
+                        showSearchResults([]);
+                    }
+                }
+            });
+
+            // Fechar ao clicar fora
+            document.addEventListener('click', function (e) {
+                if (!searchContainer.contains(e.target)) {
+                    searchContainer.classList.remove('active');
+                    searchResults.style.display = 'none';
+                }
+            });
+
+            const languageBtn = document.getElementById("languageBtn");
+            const languageSelector = languageBtn?.parentElement;
+
+            if (languageBtn && languageSelector) {
+                languageBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    languageSelector.classList.toggle("show");
+                });
+
+                document.addEventListener("click", (e) => {
+                    if (!languageSelector.contains(e.target)) {
+                        languageSelector.classList.remove("show");
+                    }
+                });
+
+                const languageItems = languageSelector.querySelectorAll("li");
+                languageItems.forEach(item => {
+                    item.addEventListener("click", () => {
+                        const lang = item.getAttribute("data-lang");
+                        alert("Idioma selecionado: " + lang);
+                        languageSelector.classList.remove("show");
+                    });
+                });
+            }
+
+
+        });
+    </script>
 
 </body>
 </html>

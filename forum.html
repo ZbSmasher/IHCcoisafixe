@@ -1276,8 +1276,10 @@
                   </div>
               </li>
               <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
-              <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
-              <li><button id="openLogin" class="sbtn" data-lucide="log-in">Entrar</button></li>
+              <li><a href="#" id="profileBtn" class="sbtn">
+                     <i data-lucide="user-round"></i>
+                  </a>
+              </li>
           </ul>
       </nav>
     </div>
@@ -2184,6 +2186,12 @@
         function formatDateAsTimeAgo() {
             return "há alguns segundos";
         }
+
+        document.getElementById('profileBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location.href = 'login.html';
+        });
+
 
     </script>
 

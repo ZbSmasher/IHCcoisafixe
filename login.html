@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .auth-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+            .auth-box h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .auth-box input {
+                width: 100%;
+                padding: 10px;
+                margin: 8px 0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .auth-box button {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                border: none;
+                color: white;
+                font-size: 16px;
+                margin-top: 10px;
+                cursor: pointer;
+                border-radius: 4px;
+            }
+
+                .auth-box button:hover {
+                    background-color: #0056b3;
+                }
+
+        .toggle {
+            text-align: center;
+            margin-top: 15px;
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-box">
+        <h2 id="form-title">Entrar</h2>
+        <form id="auth-form" action="autenticar.php" method="POST">
+            <input type="text" name="username" placeholder="Nome de utilizador" required>
+            <input type="password" name="password" placeholder="Palavra-passe" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <div class="toggle" id="toggle-link">Não tem conta? Criar Conta</div>
+    </div>
+
+    <script>
+        const form = document.getElementById('auth-form');
+        const toggle = document.getElementById('toggle-link');
+        const title = document.getElementById('form-title');
+        let isRegistering = false;
+
+        toggle.addEventListener('click', () => {
+            isRegistering = !isRegistering;
+
+            if (isRegistering) {
+                title.textContent = 'Criar Conta';
+                form.action = 'registar.php';
+
+                const emailInput = document.createElement('input');
+                emailInput.name = 'email';
+                emailInput.type = 'email';
+                emailInput.placeholder = 'Email';
+                emailInput.required = true;
+                form.insertBefore(emailInput, form.children[1]);
+
+                form.querySelector('button').textContent = 'Registar';
+                toggle.textContent = 'Já tem conta? Entrar';
+            } else {
+                title.textContent = 'Entrar';
+                form.action = 'autenticar.php';
+
+                const emailInput = form.querySelector('input[name="email"]');
+                if (emailInput) emailInput.remove();
+
+                form.querySelector('button').textContent = 'Entrar';
+                toggle.textContent = 'Não tem conta? Criar Conta';
+            }
+        });
+    </script>
+</body>
+</html>
