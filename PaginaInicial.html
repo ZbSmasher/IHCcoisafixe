@@ -255,6 +255,157 @@
         min-width: 100%;
       }
     }
+
+    
+  
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 70px;
+  right: 30px;
+  z-index: 999;
+  animation: fadeSlide 0.3s ease-out;
+}
+
+.modal.active {
+  display: block;
+}
+
+/* Modal content box */
+.modal-content {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  padding: 25px 20px;
+  border: 1px solid #eee;
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeSlide 0.3s ease-out;
+}
+
+/* Input styling */
+.modal-content input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 15px;
+  background-color: #f9f9f9;
+  transition: 0.2s;
+}
+.modal-content input:focus {
+  border-color: #007bff;
+  background: #fff;
+  outline: none;
+}
+
+/* Buttons */
+.modal-content button {
+  width: 100%;
+  padding: 11px;
+  margin-top: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#submitBtn {
+    background-color: var(--blue);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+#submitBtn:hover {
+  background-color: #0056b3;
+}
+
+.toggle-link {
+  background: none;
+  color: #007bff;
+  border: none;
+  text-decoration: underline;
+  margin-top: 8px;
+}
+
+.close-btn {
+  background: none;
+  color: #999;
+  font-size: 14px;
+  margin-top: 12px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+
+    color: white;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.note {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* Messages */
+#error, .error {
+  color: #d9534f;
+  font-size: 0.9em;
+  margin-top: 8px;
+}
+.success {
+  color: #28a745;
+  font-size: 0.9em;
+  margin-top: 8px;
+}
+
+/* Animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.modal-actions .toggle-link,
+.modal-actions .close-btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+
+
+.modal-actions .toggle-link:hover,
+.modal-actions .close-btn:hover {
+  background-color: #e2e2e2;
+}
   </style>
 </head>
 <body>
@@ -286,12 +437,32 @@
             </div>
           </li>
           <li><a href="#" data-lucide="languages" class="sbtn">Notícias</a></li>
-          <li><a href="#" class="sbtn" data-lucide="user-round">Perfil</a></li>
+          <li><a href="#" class="sbtn" onclick="toggleModal()" data-lucide="user-round">Perfil</a></li>
         </ul>
       </nav>
     </div>
   </div>
 </header>
+
+
+<!-- Modal de login/criação -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <h2 id="formTitle">Entrar</h2>
+    <input type="text" id="username" placeholder="Nome" />
+    <input type="password" id="password" placeholder="Palavra-passe" />
+    <div id="message"></div>
+
+<button onclick="submitForm()" id="submitBtn">Entrar</button>
+
+<div class="modal-actions">
+  <button class="toggle-link" onclick="toggleForm()" id="toggleBtn">Criar conta</button>
+  <button class="close-btn" onclick="toggleModal()">Fechar</button>
+</div>
+
+  </div>
+</div>
+
 
   <div class="menu-dropdown" id="dropdownMenu"></div>
   <div class="menu-overlay" id="menuOverlay"></div>
@@ -676,6 +847,58 @@
     });
   });
 </script>
+
+
+<script>
+  let showLogin = true;
+  const users = {
+    "Fernando Almeida": "fernando"
+  };
+
+  function toggleModal() {
+    const modal = document.getElementById('loginModal');
+    modal.classList.toggle('active');
+    document.getElementById('message').innerHTML = '';
+  }
+
+  function toggleForm() {
+    showLogin = !showLogin;
+    document.getElementById('formTitle').innerText = showLogin ? 'Entrar' : 'Criar Conta';
+    document.getElementById('submitBtn').innerText = showLogin ? 'Entrar' : 'Criar Conta';
+    document.getElementById('toggleBtn').innerText = showLogin ? 'Criar conta' : 'Já tenho conta';
+    document.getElementById('message').innerHTML = '';
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+  }
+
+  function submitForm() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const message = document.getElementById('message');
+
+    if (!username || !password) {
+      message.innerHTML = '<p class="error">Preencha todos os campos.</p>';
+      return;
+    }
+
+    if (showLogin) {
+      if (users[username] && users[username] === password) {
+        message.innerHTML = `<p class="success">Bem-vindo, ${username}!</p>`;
+      } else {
+        message.innerHTML = `<p class="error">Credenciais inválidas.</p>`;
+      }
+    } else {
+      if (users[username]) {
+        message.innerHTML = `<p class="error">Este nome já está registado.</p>`;
+      } else {
+        users[username] = password;
+        message.innerHTML = `<p class="success">Conta criada! Pode entrar agora.</p>`;
+        toggleForm(); // Volta ao login
+      }
+    }
+  }
+</script>
+
 
 </body>
 </html>
