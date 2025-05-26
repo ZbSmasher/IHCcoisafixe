@@ -406,6 +406,55 @@
 .modal-actions .close-btn:hover {
   background-color: #e2e2e2;
 }
+
+
+
+.fancy-links-section {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.fancy-button {
+  position: relative;
+  width: 300px;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.fancy-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fancy-button .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+  z-index: 1;
+}
+
+.fancy-button .button-text {
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 20px;
+}
   </style>
 </head>
 <body>
@@ -535,8 +584,24 @@
           </div>
         </div>
       </div>
+
+      <div class="fancy-links-section">
+  <a href="forum.html" class="fancy-button" style="background-image: url('https://www.gtechme.com/wp-content/uploads/2024/07/Top-Chatting-Apps-In-UAE-2024-Update-image-1024x576.jpg');">
+    <div class="overlay"></div>
+    <div class="button-text">Visita o Fórum</div>
+  </a>
+
+  <a href="PaginaVotar.html" class="fancy-button" style="background-image: url('https://imagens.publico.pt/imagens.aspx/1529645?tp=UH&db=IMAGENS&type=JPG');">
+    <div class="overlay"></div>
+    <div class="button-text">Participar na Mesa de Voto</div>
+  </a>
+</div>
     </section>
+
+    
   </div>
+
+  
 
   <footer>
     <div class="container">
@@ -899,6 +964,33 @@
   }
 </script>
 
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll(".slide");
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      if (i === index) slide.classList.add("active");
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  document.querySelector(".next").addEventListener("click", nextSlide);
+  document.querySelector(".prev").addEventListener("click", prevSlide);
+
+  setInterval(nextSlide, 5000); // Muda de slide a cada 5 segundos
+</script>
 
 </body>
 </html>
