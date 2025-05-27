@@ -846,189 +846,160 @@
 
     <script src="js/script.js"></script>
 
-    </script>
- <script>
+            <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const toggleSearch = document.getElementById('toggle-search');
-    const searchContainer = document.getElementById('search-container');
-    const searchInput = document.getElementById('search-input');
-    const searchResults = document.getElementById('search-results');
-    const searchIcon = document.querySelector('.search-icon');
+    lucide.createIcons();
 
-    // Mostra a lupa preta por padrão
-    searchIcon.style.color = '#111';
-
-    // Alternar a caixa de pesquisa
-    toggleSearch.addEventListener('click', function(e) {
-      e.stopPropagation();
-      searchContainer.classList.toggle('active');
-      
-      // Adiciona animação à lupa
-      searchIcon.classList.add('animate');
-      setTimeout(() => {
-        searchIcon.classList.remove('animate');
-      }, 500);
-
-      // Foca no input quando ativo
-      if (searchContainer.classList.contains('active')) {
-        setTimeout(() => {
-          searchInput.focus();
-        }, 300);
-      } else {
-        searchResults.style.display = 'none';
-      }
-    });
-
-    // Base de dados completa para busca
-    const searchDatabase = {
-      pages: [
-        { title: 'Método de Hondt', file: 'metodohondt.html', keywords: ['cálculo eleitoral', 'distribuição mandatos', 'sistema eleitoral'] },
-        { title: 'Como Votar', file: 'PaginaVotar.html', keywords: ['eleições', 'processo eleitoral', 'urnas', 'votar'] },
-        { title: 'Constituição', file: 'constituicao.html', keywords: ['lei fundamental', 'carta magna', 'documento constitucional'] },
-        { title: 'Direitos e Deveres', file: 'direitos-deveres.html', keywords: ['cidadania', 'direitos civis', 'obrigações'] },
-        { title: 'Partidos', file: 'partidos.html', keywords: ['formações políticas', 'legenda partidária', 'agremiações'] },
-        { title: 'Presidente da República', file: 'presidente.html', keywords: ['chefe de estado', 'PR', 'presidência', 'Marcelo Rebelo de Sousa'] },
-        { title: 'Primeiro-Ministro', file: 'ministro.html', keywords: ['chefe governo', 'Luís Montenegro', 'executivo'] },
-        { title: 'Notícias', file: 'noticias.html', keywords: ['actualidade', 'jornalismo', 'informação política'] },
-        { title: 'Comparador', file: 'comparador.html', keywords: ['comparação partidos', 'programas políticos', 'análise'] },
-        { title: 'Fórum', file: 'forum.html', keywords: ['discussão', 'debate', 'comunidade'] },
-        { title: 'Como Criar Partido', file: 'como_criar_partido.html', keywords: ['registar partido', 'legalização', 'requisitos'] },
-        { title: 'Página Inicial', file: 'PaginaInicial.html', keywords: ['home', 'início', 'principal'] }
+    const submenuData = {
+      1: [
+        { text: 'Deputados em funções', href: '#' },
+        { text: 'Agenda Parlamentar', href: '#' },
+        { text: 'Leis em Discussão', href: '#' },
+        { text: 'Contactar um deputado', href: '#' }
       ],
-      parties: [
-        { name: 'PS', fullName: 'Partido Socialista', file: 'partido-ps.html', leaders: ['Carlos César', 'António Costa'] },
-        { name: 'PSD', fullName: 'Partido Social Democrata', file: 'partido-psd.html', leaders: ['Luís Montenegro', 'Rui Rio'] },
-        { name: 'CHEGA', fullName: 'CHEGA', file: 'partido-chega.html', leaders: ['André Ventura'] },
-        { name: 'IL', fullName: 'Iniciativa Liberal', file: 'partido-il.html', leaders: ['Rui Rocha', 'João Cotrim Figueiredo'] },
-        { name: 'LIVRE', fullName: 'LIVRE', file: 'partido-livre.html', leaders: ['Rui Tavares'] },
-        { name: 'PCP', fullName: 'Partido Comunista Português', file: 'partido-pcp.html', leaders: ['Paulo Raimundo'] },
-        { name: 'PAN', fullName: 'Pessoas-Animais-Natureza', file: 'partido-pan.html', leaders: ['Inês Sousa Real'] }
+      2: [
+        { text: 'Próximas Eleições', href: '#' },
+        { text: 'Como votar', href: '#' },
+        { text: 'Resultados Eleitorais', href: '#' },
+        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
       ],
-      deputies: [
-        { name: 'Carlos César', party: 'PS', file: 'deputado-carlos-cesar.html' },
-        { name: 'António Costa', party: 'PS', file: 'deputado-antonio-ventura.html' },
-        { name: 'Marcelo Rebelo de Sousa', party: 'Independente', file: 'presidente.html' },
-        { name: 'Luís Montenegro', party: 'PSD', file: 'ministro.html' }
+      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+      4: [
+        { text: 'Partidos', href: 'partidos.html' },
+        { text: 'Financiamento partidário', href: '#' },
+        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
+        { text: 'Comparador de Partidos', href: 'comparador.html' }
+      ],
+      5: [
+        { text: 'Texto da Constituição', href: 'constituicao.html' },
+        { text: 'Princípios Fundamentais', href: '#' },
+        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
+      ],
+      6: [
+        { text: 'Notícias', href: 'noticias.html', icon: 'newspaper' }
       ]
     };
 
-    function normalize(str) {
-      return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-    }
+    function renderMenuCategories() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.innerHTML = '';
 
-    function search(query) {
-      const normalizedQuery = normalize(query);
-      if (!normalizedQuery) return [];
-      
-      // Pesquisa em todas as categorias
-      const results = [];
-      
-      // Páginas principais
-      searchDatabase.pages.forEach(item => {
-        const score = 
-          normalize(item.title).includes(normalizedQuery) ? 3 :
-          item.keywords.some(kw => normalize(kw).includes(normalizedQuery)) ? 2 : 0;
-        if (score > 0) {
-          results.push({ type: 'Página', title: item.title, file: item.file, score });
-        }
+      // Close (X) Button
+      const closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '×';
+      closeBtn.setAttribute('aria-label', 'Fechar Menu');
+      closeBtn.style.position = 'absolute';
+      closeBtn.style.top = '10px';
+      closeBtn.style.left = '10px';
+      closeBtn.style.border = 'none';
+      closeBtn.style.background = 'none';
+      closeBtn.style.fontSize = '20px';
+      closeBtn.style.cursor = 'pointer';
+      closeBtn.addEventListener('click', () => {
+        menu.classList.remove("show");
+        document.getElementById("menuOverlay").classList.remove("show");
       });
-      
-      // Partidos políticos
-      searchDatabase.parties.forEach(party => {
-        const score = 
-          normalize(party.name).includes(normalizedQuery) ? 4 :
-          normalize(party.fullName).includes(normalizedQuery) ? 3 :
-          party.leaders.some(l => normalize(l).includes(normalizedQuery)) ? 2 : 0;
-        if (score > 0) {
-          results.push({ type: 'Partido', title: `${party.fullName} (${party.name})`, file: party.file, score });
-        }
-      });
-      
-      // Deputados
-      searchDatabase.deputies.forEach(deputy => {
-        if (normalize(deputy.name).includes(normalizedQuery)) {
-          results.push({ type: 'Deputado', title: `${deputy.name} (${deputy.party})`, file: deputy.file, score: 3 });
-        }
-      });
-      
-      // Ordenar por relevância
-      return results.sort((a, b) => b.score - a.score);
-    }
+      menu.appendChild(closeBtn);
 
-    function showSearchResults(results) {
-      const resultsContainer = document.getElementById('search-results');
-      resultsContainer.innerHTML = '';
-      
-      if (results.length === 0) {
-        resultsContainer.innerHTML = '<div class="search-no-results">Nenhum resultado encontrado.</div>';
-        return;
-      }
-      
-      results.forEach(result => {
-        const resultElement = document.createElement('div');
-        resultElement.className = 'search-result-item';
-        resultElement.innerHTML = `
-          <div class="search-result-type">${result.type}</div>
-          <div class="search-result-title">${result.title}</div>
-        `;
-        resultElement.addEventListener('click', () => {
-          window.location.href = result.file;
+      // Voltar (history.back)
+      const backBtn = document.createElement('a');
+      backBtn.href = "#";
+      backBtn.className = 'back-button';
+      backBtn.textContent = '← Voltar';
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (window.history.length > 1) {
+          history.back();
+        }
+      });
+      menu.appendChild(backBtn);
+
+      // Página Principal
+      const homeBtn = document.createElement('a');
+      homeBtn.href = "PaginaInicial.html";
+      homeBtn.className = 'back-button';
+      homeBtn.textContent = 'Página Principal';
+      menu.appendChild(homeBtn);
+
+      const categories = [
+        { id: 4, name: 'Partidos' },
+        { id: 1, name: 'Assembleia da República' },
+        { id: 2, name: 'Eleições' },
+        { id: 5, name: 'Constituição' },
+        { id: 3, name: 'Forum' },
+        { id: 6, name: 'Notícias'}
+      ];
+
+      categories.forEach(cat => {
+        const link = document.createElement('a');
+        link.href = "#";
+        link.textContent = cat.name;
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          renderSubmenu(cat.id);
         });
-        resultsContainer.appendChild(resultElement);
+        menu.appendChild(link);
       });
     }
 
-    // Pesquisa ao digitar
-    searchInput.addEventListener('input', function() {
-      const query = searchInput.value.trim();
-      if (query.length > 0) {
-        const results = search(query);
-        showSearchResults(results);
-        searchResults.style.display = 'block';
-      } else {
-        searchResults.style.display = 'none';
+    function renderSubmenu(id) {
+      const menu = document.getElementById("dropdownMenu");
+      const submenu = submenuData[id];
+      menu.innerHTML = '';
+
+      // Close (X) Button
+      const closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '×';
+      closeBtn.setAttribute('aria-label', 'Fechar Menu');
+      closeBtn.style.position = 'absolute';
+      closeBtn.style.top = '10px';
+      closeBtn.style.left = '10px';
+      closeBtn.style.border = 'none';
+      closeBtn.style.background = 'none';
+      closeBtn.style.fontSize = '20px';
+      closeBtn.style.cursor = 'pointer';
+      closeBtn.addEventListener('click', () => {
+        menu.classList.remove("show");
+        document.getElementById("menuOverlay").classList.remove("show");
+      });
+      menu.appendChild(closeBtn);
+
+      // Voltar to main categories
+      const back = document.createElement('a');
+      back.textContent = '← Voltar';
+      back.href = "#";
+      back.className = 'back-button';
+      back.addEventListener('click', (e) => {
+        e.preventDefault();
+        renderMenuCategories();
+      });
+      menu.appendChild(back);
+
+      submenu.forEach(item => {
+        const sublink = document.createElement('a');
+        sublink.href = item.href;
+        sublink.textContent = item.text;
+        sublink.classList.add("submenu");
+        menu.appendChild(sublink);
+      });
+    }
+
+    document.getElementById("admin-btn").addEventListener("click", function (event) {
+      event.preventDefault();
+      const menu = document.getElementById("dropdownMenu");
+      const overlay = document.getElementById("menuOverlay");
+
+      menu.classList.toggle("show");
+      overlay.classList.toggle("show");
+
+      if (menu.classList.contains("show")) {
+        renderMenuCategories();
       }
     });
 
-    // Pesquisa ao pressionar Enter
-    searchInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const query = searchInput.value.trim().toLowerCase();
-        
-        // Redirecionamento direto para "como votar"
-        if (query.includes('como votar') || query.includes('votar')) {
-          window.location.href = 'PaginaVotar.html';
-          return;
-        }
-        
-        // Redirecionamento direto para presidente
-        if (query.includes('presidente') || query.includes('marcelo')) {
-          window.location.href = 'presidente.html';
-          return;
-        }
-        
-        // Redirecionamento direto para primeiro-ministro
-        if (query.includes('primeiro ministro') || query.includes('luís montenegro') || query.includes('montenegro')) {
-          window.location.href = 'ministro.html';
-          return;
-        }
-        
-        const results = search(query);
-        if (results.length > 0) {
-          // Vai para o primeiro resultado se houver
-          window.location.href = results[0].file;
-        } else {
-          showSearchResults([]);
-        }
-      }
-    });
-
-    // Fechar ao clicar fora
-    document.addEventListener('click', function(e) {
-      if (!searchContainer.contains(e.target)) {
-        searchContainer.classList.remove('active');
-        searchResults.style.display = 'none';
-      }
+    document.getElementById("menuOverlay").addEventListener("click", () => {
+      document.getElementById("dropdownMenu").classList.remove("show");
+      document.getElementById("menuOverlay").classList.remove("show");
     });
   });
 </script>

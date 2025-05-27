@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #0a1f3a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(to bottom right, #0a1f3a, #142d4c);
+        }
+
+        .auth-box {
+            background: white;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            border-top: 4px solid #c1121f;
+        }
+
+        .auth-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #0a1f3a;
+            font-weight: 600;
+        }
+
+        .auth-box input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .auth-box input:focus {
+            border-color: #0a1f3a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(10, 31, 58, 0.1);
+        }
+
+        .auth-box button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0a1f3a;
+            border: none;
+            color: white;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+
+        .auth-box button:hover {
+            background-color: #142d4c;
+        }
+
+        .toggle {
+            text-align: center;
+            margin-top: 20px;
+            color: #0a1f3a;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .toggle:hover {
+            color: #c1121f;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-box">
+        <h2 id="form-title">Entrar</h2>
+        <form id="auth-form" action="autenticar.php" method="POST">
+            <input type="text" name="username" placeholder="Nome de utilizador" required>
+            <input type="password" name="password" placeholder="Palavra-passe" required>
+            <button type="submit">Entrar no Portal</button>
+        </form>
+        <div class="toggle" id="toggle-link">Não tem conta? Criar Conta</div>
+    </div>
+
+    <script>
+        const form = document.getElementById('auth-form');
+        const toggle = document.getElementById('toggle-link');
+        const title = document.getElementById('form-title');
+        let isRegistering = false;
+
+        toggle.addEventListener('click', () => {
+            isRegistering = !isRegistering;
+
+            if (isRegistering) {
+                title.textContent = 'Criar Conta';
+                form.action = 'registar.php';
+
+                const emailInput = document.createElement('input');
+                emailInput.name = 'email';
+                emailInput.type = 'email';
+                emailInput.placeholder = 'Email';
+                emailInput.required = true;
+                form.insertBefore(emailInput, form.children[1]);
+
+                form.querySelector('button').textContent = 'Registar';
+                toggle.textContent = 'Já tem conta? Entrar';
+            } else {
+                title.textContent = 'Entrar';
+                form.action = 'autenticar.php';
+
+                const emailInput = form.querySelector('input[name="email"]');
+                if (emailInput) emailInput.remove();
+
+                form.querySelector('button').textContent = 'Entrar';
+                toggle.textContent = 'Não tem conta? Criar Conta';
+            }
+        });
+    </script>
+</body>
+</html>

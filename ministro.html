@@ -793,21 +793,143 @@
 
     <script src="js/script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const adminBtn = document.getElementById('admin-btn');
-            const menu = document.getElementById('menu');
-            const mainContent = document.getElementById('main-content');
-
-            adminBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (menu.style.display === 'flex') {
-                    menu.style.display = 'none';
-                } else {
-                    menu.style.display = 'flex';
-                }
-            });
-        });
+      
     </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    lucide.createIcons();
+
+    const adminBtn = document.getElementById('admin-btn');
+    const menu = document.getElementById('dropdownMenu');
+    const overlay = document.getElementById('menuOverlay');
+
+    const submenuData = {
+      1: [
+        { text: 'Deputados em funções', href: '#' },
+        { text: 'Agenda Parlamentar', href: '#' },
+        { text: 'Leis em Discussão', href: '#' },
+        { text: 'Contactar um deputado', href: '#' }
+      ],
+      2: [
+        { text: 'Próximas Eleições', href: '#' },
+        { text: 'Como votar', href: '#' },
+        { text: 'Resultados Eleitorais', href: '#' },
+        { text: 'Mesa de Voto', href: 'PaginaVotar.html' }
+      ],
+      3: [{ text: 'Entrar no Forum', href: 'forum.html' }],
+      4: [
+        { text: 'Partidos', href: 'partidos.html' },
+        { text: 'Financiamento partidário', href: '#' },
+        { text: 'Como criar um partido', href: 'como_criar_partido.html' },
+        { text: 'Comparador de Partidos', href: 'comparador.html' }
+      ],
+      5: [
+        { text: 'Texto da Constituição', href: 'constituicao.html' },
+        { text: 'Princípios Fundamentais', href: '#' },
+        { text: 'Direitos e Deveres', href: 'direitos-deveres.html' }
+      ],
+      6: [
+        { text: 'Notícias', href: 'noticias.html' }
+      ]
+    };
+
+    function renderCloseAndNavButtons(backCallback = null) {
+      // X button
+      const closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '×';
+      closeBtn.setAttribute('aria-label', 'Fechar Menu');
+      closeBtn.style.position = 'absolute';
+      closeBtn.style.top = '10px';
+      closeBtn.style.left = '10px';
+      closeBtn.style.border = 'none';
+      closeBtn.style.background = 'none';
+      closeBtn.style.fontSize = '20px';
+      closeBtn.style.cursor = 'pointer';
+      closeBtn.addEventListener('click', () => {
+        menu.classList.remove("show");
+        overlay.classList.remove("show");
+      });
+      menu.appendChild(closeBtn);
+
+      // Voltar
+      const backBtn = document.createElement('a');
+      backBtn.href = "#";
+      backBtn.className = 'back-button';
+      backBtn.textContent = '← Voltar';
+      backBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (backCallback) {
+          backCallback();
+        } else if (window.history.length > 1) {
+          history.back();
+        }
+      });
+      menu.appendChild(backBtn);
+
+      // Página Principal
+      const homeBtn = document.createElement('a');
+      homeBtn.href = "PaginaInicial.html";
+      homeBtn.className = 'back-button';
+      homeBtn.textContent = 'Página Principal';
+      menu.appendChild(homeBtn);
+    }
+
+    function renderMenuCategories() {
+      menu.innerHTML = '';
+      renderCloseAndNavButtons(); // Back = history.back()
+
+      const categories = [
+        { id: 4, name: 'Partidos' },
+        { id: 1, name: 'Assembleia da República' },
+        { id: 2, name: 'Eleições' },
+        { id: 5, name: 'Constituição' },
+        { id: 3, name: 'Forum' },
+        { id: 6, name: 'Notícias' }
+      ];
+
+      categories.forEach(cat => {
+        const link = document.createElement('a');
+        link.href = "#";
+        link.textContent = cat.name;
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          renderSubmenu(cat.id);
+        });
+        menu.appendChild(link);
+      });
+    }
+
+    function renderSubmenu(id) {
+      const submenu = submenuData[id];
+      menu.innerHTML = '';
+      renderCloseAndNavButtons(renderMenuCategories); // Back = back to categories
+
+      submenu.forEach(item => {
+        const sublink = document.createElement('a');
+        sublink.href = item.href;
+        sublink.textContent = item.text;
+        sublink.classList.add("submenu");
+        menu.appendChild(sublink);
+      });
+    }
+
+    adminBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      menu.classList.toggle("show");
+      overlay.classList.toggle("show");
+
+      if (menu.classList.contains("show")) {
+        renderMenuCategories();
+      }
+    });
+
+    overlay.addEventListener("click", () => {
+      menu.classList.remove("show");
+      overlay.classList.remove("show");
+    });
+  });
+</script>
+
  <script>
   document.addEventListener('DOMContentLoaded', function() {
     const toggleSearch = document.getElementById('toggle-search');

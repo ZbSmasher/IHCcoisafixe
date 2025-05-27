@@ -83,28 +83,30 @@ body {
     align-items: center;
     gap: 15px;
 }
+
 .nav-tools {
     margin-left: auto;
     gap: 10px;
     position: relative;
 }
 
-
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .logo {
     height: auto;
-    max-height: 60px; /* controla a altura máxima */
+    max-height: 60px;
     width: auto;
-    max-width: 100%; /* garante que nunca ultrapassa o container */
+    max-width: 100%;
     transition: transform 0.3s ease;
     display: block;
 }
+
 .logo-container {
-    max-width: 200px; /* ajusta conforme precisares */
+    max-width: 200px;
     flex-shrink: 0;
     display: flex;
     justify-content: center;
@@ -116,14 +118,9 @@ body {
 }
 
 .sbtn:hover {
-    
     transform: scale(1.2);
-    transition: transform 0.3s ease
+    transition: transform 0.3s ease;
 }
-
-
-
-
 
 nav ul {
     display: flex;
@@ -297,34 +294,36 @@ footer {
     .header-container {
         flex-direction: column;
     }
-    
+
     .logo {
         height: 60px;
         margin: 15px 0;
     }
-    
+
     .nav-left, .nav-right {
         width: 100%;
         justify-content: center;
         margin: 10px 0;
     }
-    
+
     nav ul li {
         margin: 0 10px;
     }
-    
+
     .hero {
         height: 40vh;
     }
-    
+
     .hero h1 {
         font-size: 2rem;
     }
-    
+
     .news-grid {
         grid-template-columns: 1fr;
     }
 }
+
+/* Hero Carousel */
 .hero-carousel {
     position: relative;
     overflow: hidden;
@@ -359,7 +358,6 @@ footer {
     z-index: 1;
 }
 
-/* Conteúdo */
 .hero-content {
     background: rgba(0, 0, 0, 0.4);
     padding: 20px 40px;
@@ -390,7 +388,7 @@ footer {
     background-color: #004b99;
 }
 
-/* Botões do carrossel */
+/* Carousel Controls */
 .hero-carousel button.prev,
 .hero-carousel button.next {
     position: absolute;
@@ -419,75 +417,75 @@ footer {
     right: 20px;
 }
 
+/* Menu */
+.menu-dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 999;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 
-
-    .menu-dropdown {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 250px;
-      height: 100%;
-      background-color: #ffffff;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      z-index: 999;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-
-      transform: translateX(-100%);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .menu-dropdown.show {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    .menu-dropdown a {
-      padding: 10px 0;
-      text-decoration: none;
-      color: var(--dark-gray);
-      border-bottom: 1px solid var(--medium-gray);
-      transition: transform 0.2s;
-    }
-
-    .menu-dropdown a:hover {
-      transform: scale(1.05);
-    }
-
-    .menu-dropdown a.submenu {
-      padding-left: 15px;
-    }
-
-    .menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.4);
-      z-index: 998;
-      display: none;
-    }
-
-    .menu-overlay.show {
-      display: block;
-    }
-
-    .logo-container a {
-  display: inline-block;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-    .logo {
+.menu-dropdown.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.menu-dropdown a {
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--dark-gray);
+    border-bottom: 1px solid var(--medium-gray);
+    transition: transform 0.2s;
+    margin-top: 10px;
+}
+
+.menu-dropdown a:hover {
+    transform: scale(1.05);
+}
+
+.menu-dropdown a.submenu {
+    padding-left: 15px;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    display: none;
+}
+
+.menu-overlay.show {
+    display: block;
+}
+
+.logo-container a {
+    display: inline-block;
+}
+
+.logo {
     cursor: pointer;
     pointer-events: auto;
-    z-index: 1000; /* make sure it's on top if needed */
-    position: relative; /* needed if there's overlapping */
-    }
+    z-index: 1000;
+    position: relative;
+}
 
-    #admin-btn {
-  z-index: 10; /* low enough to be hidden by the menu */
-  position: relative;
+#admin-btn {
+    z-index: 10;
+    position: relative;
 }
